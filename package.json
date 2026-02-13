@@ -1,0 +1,25 @@
+{
+    "name": "dr-deepika-gyno",
+    "private": true,
+    "version": "1.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "netlify dev",
+        "dev:vite": "vite",
+        "build": "vite build",
+        "preview": "vite preview"
+    },
+    "devDependencies": {
+        "autoprefixer": "^10.4.19",
+        "netlify-cli": "^23.15.1",
+        "postcss": "^8.4.38",
+        "tailwindcss": "^3.4.3",
+        "vite": "^5.2.11"
+    },
+    "dependencies": {
+        "alpinejs": "^3.13.10",
+        "dotenv": "^16.4.5",
+        "google-auth-library": "^9.10.0",
+        "google-spreadsheet": "^4.1.2"
+    }
+}

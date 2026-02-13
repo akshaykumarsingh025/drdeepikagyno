@@ -1,0 +1,10 @@
+# Robots.txt for Dr. Deepika Gyno Website
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://drdeepikagyno.com/sitemap.xml
+
+# Disallow admin/private areas
+Disallow: /api/
+Disallow: /.netlify/

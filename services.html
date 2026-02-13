@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/assets/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO Meta Tags -->
+    <title>Our Services | Dr. Deepika Singh - Gynecologist & Obstetrician</title>
+    <meta name="description"
+        content="Comprehensive women's healthcare services including pregnancy care, gynecological surgeries, infertility treatment, PCOS management, menopause care, and cancer screening by Dr. Deepika Singh.">
+    <meta name="keywords"
+        content="pregnancy care, gynecological surgery, infertility treatment, PCOS, menopause, cancer screening, women's health, Dr. Deepika Singh">
+    <meta name="author" content="Dr. Deepika Singh">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://drdeepikagyno.com/services.html">
+    <meta property="og:title" content="Our Services | Dr. Deepika Singh">
+    <meta property="og:description"
+        content="Comprehensive women's healthcare services including pregnancy care, gynecological surgeries, infertility treatment, and more.">
+    <meta property="og:image" content="/assets/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://drdeepikagyno.com/services.html">
+    <meta name="twitter:title" content="Our Services | Dr. Deepika Singh">
+    <meta name="twitter:description"
+        content="Comprehensive women's healthcare services including pregnancy care, gynecological surgeries, infertility treatment, and more.">
+    <meta name="twitter:image" content="/assets/og-image.jpg">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+</head>
+
+<body class="font-sans text-slate-800 bg-slate-50 antialiased" x-data="appData">
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content"
+        class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-white px-4 py-2 rounded-lg z-[100]">
+        Skip to main content
+    </a>
+
+    <div id="app">
+        <!-- Navigation -->
+        <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-lg border-b border-slate-100 shadow-sm transition-all duration-300"
+            role="navigation" aria-label="Main navigation">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between h-20 items-center">
+                    <a href="/" class="flex-shrink-0 flex items-center gap-3 group"
+                        aria-label="Dr. Deepika Singh - Home">
+                        <div class="w-20 h-20 md:w-24 md:h-24 relative">
+                            <img src="/assets/NewCroppedLogo.jpg" alt="Dr. Deepika Logo"
+                                class="w-full h-full object-contain drop-shadow-md group-hover:scale-105 transition-transform duration-300"
+                                loading="lazy">
+                        </div>
+                        <div>
+                            <span
+                                class="font-display font-bold text-2xl md:text-3xl text-slate-900 leading-tight block group-hover:text-primary transition-colors">
+                                Dr. Deepika Singh
+                            </span>
+                            <span class="text-xs md:text-sm text-primary font-bold tracking-wide uppercase">
+                                Gynecologist & Obstetrician
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- Desktop Menu -->
+                    <div class="hidden md:flex space-x-8 items-center">
+                        <a href="/" class="nav-link">Home</a>
+                        <a href="/about.html" class="nav-link">About</a>
+                        <a href="/services.html" class="nav-link active">Services</a>
+                        <a href="/testimonials.html" class="nav-link">Testimonials</a>
+                        <a href="/contact.html" class="nav-link">Contact</a>
+                        <a href="/contact.html" class="btn-primary shadow-primary/30 hover:shadow-primary/50">Book
+                            Appointment</a>
+                    </div>
+
+                    <!-- Mobile Menu Button -->
+                    <div class="flex items-center md:hidden">
+                        <button @click="mobileMenuOpen = !mobileMenuOpen"
+                            class="text-slate-600 hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary p-2 rounded-lg hover:bg-slate-50 transition-colors"
+                            :aria-expanded="mobileMenuOpen" aria-controls="mobile-menu"
+                            aria-label="Toggle navigation menu">
+                            <i class="fa-solid" :class="mobileMenuOpen ? 'fa-xmark text-2xl' : 'fa-bars text-2xl'"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div x-show="mobileMenuOpen" x-transition:enter="transition ease-out duration-200"
+                x-transition:enter-start="opacity-0 -translate-y-4" x-transition:enter-end="opacity-100 translate-y-0"
+                x-transition:leave="transition ease-in duration-150"
+                x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-4"
+                @click.away="mobileMenuOpen = false"
+                class="md:hidden bg-white/95 backdrop-blur-xl border-t border-slate-100 absolute w-full shadow-xl z-40"
+                id="mobile-menu" x-cloak>
+                <div class="px-4 pt-2 pb-6 space-y-1">
+                    <a href="/"
+                        class="block px-3 py-3 rounded-lg text-base font-medium text-slate-600 hover:text-primary hover:bg-slate-50 transition-colors">Home</a>
+                    <a href="/about.html"
+                        class="block px-3 py-3 rounded-lg text-base font-medium text-slate-600 hover:text-primary hover:bg-slate-50 transition-colors">About</a>
+                    <a href="/services.html"
+                        class="block px-3 py-3 rounded-lg text-base font-medium text-primary bg-teal-50">Services</a>
+                    <a href="/testimonials.html"
+                        class="block px-3 py-3 rounded-lg text-base font-medium text-slate-600 hover:text-primary hover:bg-slate-50 transition-colors">Testimonials</a>
+                    <a href="/contact.html"
+                        class="block px-3 py-3 rounded-lg text-base font-medium text-slate-600 hover:text-primary hover:bg-slate-50 transition-colors">Contact</a>
+                    <div class="pt-4 px-3">
+                        <a href="/contact.html"
+                            class="block w-full text-center px-6 py-3 bg-primary text-white font-medium rounded-xl shadow-lg shadow-primary/20">
+                            Book Appointment
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <main id="main-content" class="pt-20">
+            <!-- Services Hero -->
+            <section class="relative py-24 overflow-hidden bg-slate-50">
+                <div class="absolute inset-0 bg-gradient-to-br from-teal-50 via-white to-rose-50 z-0"></div>
+                <div
+                    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-5xl h-full max-h-[500px] bg-teal-100/20 blur-[120px] rounded-full">
+                </div>
+
+                <div class="max-w-7xl mx-auto px-4 relative z-10 text-center">
+                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-3 block">Comprehensive
+                        Care</span>
+                    <h1 id="services-heading" class="text-4xl md:text-6xl font-display font-bold text-slate-900 mb-6">
+                        Our Services</h1>
+                    <p class="text-xl text-slate-600 max-w-2xl mx-auto font-light leading-relaxed">Advanced medical
+                        solutions tailored for every stage of a woman's life, delivered with compassion.</p>
+                </div>
+            </section>
+
+            <!-- Services Grid -->
+            <section class="py-20 bg-white" aria-label="Services list">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
+                        <!-- Pregnancy Care -->
+                        <article
+                            class="glass-card p-8 rounded-2xl group flex flex-col h-full border border-slate-100 hover:border-primary/30 bg-white/60 shadow-lg hover:shadow-xl transition-all duration-300">
+                            <div class="w-16 h-16 shrink-0 rounded-2xl bg-teal-50 text-primary flex items-center justify-center text-2xl mb-6 shadow-sm group-hover:bg-primary group-hover:text-white transition-all duration-300 transform group-hover:scale-110"
+                                aria-hidden="true">
+                                <i class="fa-solid fa-baby-carriage"></i>
+                            </div>
+                            <h3
+                                class="text-2xl font-bold font-display text-slate-900 mb-4 group-hover:text-primary transition-colors">
+                                Pregnancy Care</h3>
+                            <p class="text-slate-600 leading-relaxed flex-grow text-base">Comprehensive antenatal care
+                                for a healthy journey from conception to delivery, including high-risk pregnancy
+                                management.</p>
+                        </article>
+
+                        <!-- Gynaecological Surgeries -->
+                        <article
+                            class="glass-card p-8 rounded-2xl group flex flex-col h-full border border-slate-100 hover:border-primary/30 bg-white/60 shadow-lg hover:shadow-xl transition-all duration-300">
+                            <div class="w-16 h-16 shrink-0 rounded-2xl bg-teal-50 text-primary flex items-center justify-center text-2xl mb-6 shadow-sm group-hover:bg-primary group-hover:text-white transition-all duration-300 transform group-hover:scale-110"
+                                aria-hidden="true">
+                                <i class="fa-solid fa-hospital-user"></i>
+                            </div>
+                            <h3
+                                class="text-2xl font-bold font-display text-slate-900 mb-4 group-hover:text-primary transition-colors">
+                                Gynaecological Surgeries</h3>
+                            <p class="text-slate-600 leading-relaxed flex-grow text-base">Advanced surgical solutions
+                                including laparoscopic and hysteroscopic procedures with minimal recovery time.</p>
+                        </article>
+
+                        <!-- Infertility Treatment -->
+                        <article
+                            class="glass-card p-8 rounded-2xl group flex flex-col h-full border border-slate-100 hover:border-primary/30 bg-white/60 shadow-lg hover:shadow-xl transition-all duration-300">
+                            <div class="w-16 h-16 shrink-0 rounded-2xl bg-teal-50 text-primary flex items-center justify-center text-2xl mb-6 shadow-sm group-hover:bg-primary group-hover:text-white transition-all duration-300 transform group-hover:scale-110"
+                                aria-hidden="true">
+                                <i class="fa-solid fa-seedling"></i>
+                            </div>
+                            <h3
+                                class="text-2xl font-bold font-display text-slate-900 mb-4 group-hover:text-primary transition-colors">
+                                Infertility Treatment</h3>
+                            <p class="text-slate-600 leading-relaxed flex-grow text-base">Expert evaluation and
+                                treatment options to help you start your family, including IVF consultation and support.
+                            </p>
+                        </article>
+
+                        <!-- PCOS/PCOD Management -->
+                        <article
+                            class="glass-card p-8 rounded-2xl group flex flex-col h-full border border-slate-100 hover:border-primary/30 bg-white/60 shadow-lg hover:shadow-xl transition-all duration-300">
+                            <div class="w-16 h-16 shrink-0 rounded-2xl bg-teal-50 text-primary flex items-center justify-center text-2xl mb-6 shadow-sm group-hover:bg-primary group-hover:text-white transition-all duration-300 transform group-hover:scale-110"
+                                aria-hidden="true">
+                                <i class="fa-solid fa-venus"></i>
+                            </div>
+                            <h3
+                                class="text-2xl font-bold font-display text-slate-900 mb-4 group-hover:text-primary transition-colors">
+                                PCOS/PCOD Management</h3>
+                            <p class="text-slate-600 leading-relaxed flex-grow text-base">Comprehensive management of
+                                PCOS, thyroid disorders, and other hormonal imbalances affecting women's health.</p>
+                        </article>
+
+                        <!-- Menopause Clinic -->
+                        <article
+                            class="glass-card p-8 rounded-2xl group flex flex-col h-full border border-slate-100 hover:border-primary/30 bg-white/60 shadow-lg hover:shadow-xl transition-all duration-300">
+                            <div class="w-16 h-16 shrink-0 rounded-2xl bg-teal-50 text-primary flex items-center justify-center text-2xl mb-6 shadow-sm group-hover:bg-primary group-hover:text-white transition-all duration-300 transform group-hover:scale-110"
+                                aria-hidden="true">
+                                <i class="fa-solid fa-person-dress"></i>
+                            </div>
+                            <h3
+                                class="text-2xl font-bold font-display text-slate-900 mb-4 group-hover:text-primary transition-colors">
+                                Menopause Clinic</h3>
+                            <p class="text-slate-600 leading-relaxed flex-grow text-base">Support and treatment for a
+                                smooth transition through menopause, addressing symptoms and long-term health.</p>
+                        </article>
+
+                        <!-- Cancer Screening -->
+                        <article
+                            class="glass-card p-8 rounded-2xl group flex flex-col h-full border border-slate-100 hover:border-primary/30 bg-white/60 shadow-lg hover:shadow-xl transition-all duration-300">
+                            <div class="w-16 h-16 shrink-0 rounded-2xl bg-teal-50 text-primary flex items-center justify-center text-2xl mb-6 shadow-sm group-hover:bg-primary group-hover:text-white transition-all duration-300 transform group-hover:scale-110"
+                                aria-hidden="true">
+                                <i class="fa-solid fa-ribbon"></i>
+                            </div>
+                            <h3
+                                class="text-2xl font-bold font-display text-slate-900 mb-4 group-hover:text-primary transition-colors">
+                                Cancer Screening</h3>
+                            <p class="text-slate-600 leading-relaxed flex-grow text-base">Pap smears, mammograms, and
+                                preventive screenings for early detection and prevention of women's cancers.</p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA Section -->
+            <section class="py-20 bg-slate-50 relative overflow-hidden mb-16">
+                <div class="max-w-4xl mx-auto px-4 text-center relative z-10 pt-24">
+                    <h2 class="text-3xl md:text-4xl font-display font-bold text-slate-900 mb-6">Ready to Prioritize Your
+                        Health?</h2>
+                    <p class="text-lg text-slate-600 mb-10 leading-relaxed">Schedule your consultation with Dr. Deepika
+                        Singh today and experience compassionate, expert care.</p>
+                    <a href="/contact.html"
+                        class="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-primary rounded-full hover:bg-teal-700 hover:shadow-lg transform hover:-translate-y-1">
+                        Book Appointment
+                    </a>
+                </div>
+                <!-- Decorative background -->
+                <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+                    <div
+                        class="absolute -top-24 -right-24 w-64 h-64 bg-teal-100 rounded-full mix-blend-multiply filter blur-3xl opacity-50">
+                    </div>
+                    <div
+                        class="absolute -bottom-24 -left-24 w-64 h-64 bg-rose-100 rounded-full mix-blend-multiply filter blur-3xl opacity-50">
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-slate-900 text-slate-300 py-12 border-t border-slate-800" role="contentinfo">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div
+                            class="w-16 h-16 rounded-full overflow-hidden ring-2 ring-teal-500 shadow-lg shadow-teal-500/30">
+                            <img src="/assets/DrdeepikaPics_drdeepikaInsari.jpg" alt="Dr. Deepika Singh"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <span class="font-display font-bold text-xl text-white">Dr. Deepika Singh</span>
+                            <p class="text-teal-400 text-sm font-medium">Gynecologist & Obstetrician</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-400 max-w-sm leading-relaxed">Offering expert care in gynecology and obstetrics
+                        with a patient-centric approach.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="/" class="hover:text-primary transition-colors">Home</a></li>
+                        <li><a href="/about.html" class="hover:text-primary transition-colors">About</a></li>
+                        <li><a href="/services.html" class="hover:text-primary transition-colors">Services</a></li>
+                        <li><a href="/contact.html" class="hover:text-primary transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-6">Clinic Hours</h4>
+                    <ul class="space-y-3 text-slate-400">
+                        <li>Mon - Fri: 10:00 AM - 08:00 PM</li>
+                        <li>Saturday: 10:00 AM - 05:00 PM</li>
+                        <li>Sunday: Closed</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="max-w-7xl mx-auto px-4 border-t border-slate-800 mt-12 pt-8 text-center text-sm text-slate-500">
+                <p>&copy; 2026 Dr. Deepika Singh. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
