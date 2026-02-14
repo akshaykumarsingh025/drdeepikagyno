@@ -58,14 +58,14 @@
                 <div class="flex justify-between h-20 items-center">
                     <a href="/" class="flex-shrink-0 flex items-center gap-3 group"
                         aria-label="Dr. Deepika Singh - Home">
-                        <div class="w-20 h-20 md:w-24 md:h-24 relative">
+                        <div class="w-14 h-14 sm:w-20 sm:h-20 md:w-24 md:h-24 relative flex-shrink-0">
                             <img src="/assets/NewCroppedLogo.jpg" alt="Dr. Deepika Logo"
                                 class="w-full h-full object-contain drop-shadow-md group-hover:scale-105 transition-transform duration-300"
                                 loading="lazy">
                         </div>
-                        <div>
+                        <div class="min-w-0">
                             <span
-                                class="font-display font-bold text-2xl md:text-3xl text-slate-900 leading-tight block group-hover:text-primary transition-colors">
+                                class="font-display font-bold text-lg sm:text-2xl md:text-3xl text-slate-900 leading-tight block group-hover:text-primary transition-colors">
                                 Dr. Deepika Singh
                             </span>
                             <span class="text-xs md:text-sm text-primary font-bold tracking-wide uppercase">
@@ -153,7 +153,7 @@
                         </div>
 
                         <h1 id="hero-heading"
-                            class="text-5xl md:text-7xl font-display font-bold text-slate-900 leading-[1.1] tracking-tight">
+                            class="text-3xl sm:text-5xl md:text-7xl font-display font-bold text-slate-900 leading-[1.1] tracking-tight">
                             Compassionate Care for <br /> <span class="text-gradient">Every Woman</span>
                         </h1>
 
@@ -176,9 +176,9 @@
                         </div>
                     </div>
 
-                    <div class="relative hidden md:block">
-                        <div class="relative z-10 rounded-[2rem] overflow-hidden shadow-2xl ring-8 ring-white/30">
-                            <div class="aspect-[4/5] bg-slate-200 relative group overflow-hidden">
+                    <div class="relative">
+                        <div class="relative z-10 rounded-2xl md:rounded-[2rem] overflow-hidden shadow-2xl ring-4 md:ring-8 ring-white/30 max-w-xs mx-auto md:max-w-none">
+                            <div class="aspect-[3/4] md:aspect-[4/5] bg-slate-200 relative group overflow-hidden">
                                 <img src="/assets/DrdeepikaNew.jpg"
                                     alt="Dr. Deepika Singh - Senior Consultant Gynecologist"
                                     class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
@@ -186,19 +186,20 @@
                                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent"
                                     aria-hidden="true"></div>
                                 <div
-                                    class="absolute bottom-8 left-8 text-white backdrop-blur-md bg-white/10 p-6 rounded-2xl border border-white/10">
-                                    <p class="font-display font-bold text-3xl mb-1">Dr. Deepika Singh</p>
-                                    <p class="text-teal-200 font-medium tracking-wide text-sm uppercase">Senior
+                                    class="absolute bottom-4 left-4 md:bottom-8 md:left-8 text-white backdrop-blur-md bg-white/10 p-3 md:p-6 rounded-xl md:rounded-2xl border border-white/10">
+                                    <p class="font-display font-bold text-lg md:text-3xl mb-0.5 md:mb-1">Dr. Deepika Singh</p>
+                                    <p class="text-teal-200 font-medium tracking-wide text-xs md:text-sm uppercase">Senior
                                         Consultant</p>
                                 </div>
                             </div>
                         </div>
 
+                        <!-- Decorative blobs (desktop only) -->
                         <div
-                            class="absolute -bottom-10 -right-10 w-64 h-64 bg-teal-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70">
+                            class="hidden md:block absolute -bottom-10 -right-10 w-64 h-64 bg-teal-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70">
                         </div>
                         <div
-                            class="absolute -top-10 -left-10 w-64 h-64 bg-rose-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70">
+                            class="hidden md:block absolute -top-10 -left-10 w-64 h-64 bg-rose-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70">
                         </div>
                     </div>
                 </div>
@@ -206,11 +207,11 @@
 
             <!-- Video Section (Split Layout) -->
             <section class="bg-slate-900 text-white overflow-hidden" aria-labelledby="facility-heading">
-                <div class="grid md:grid-cols-2 h-screen max-h-[800px]">
+                <div class="grid md:grid-cols-2 min-h-[50vh] md:h-screen max-h-[800px]">
                     <!-- Text Side -->
-                    <div class="p-12 md:p-20 flex flex-col justify-center relative z-10">
+                    <div class="p-6 sm:p-12 md:p-20 flex flex-col justify-center relative z-10">
                         <span class="uppercase tracking-wider text-teal-400 font-bold text-sm mb-4">A Look Inside</span>
-                        <h2 id="facility-heading" class="text-4xl md:text-6xl font-display font-bold mb-6">
+                        <h2 id="facility-heading" class="text-2xl sm:text-4xl md:text-6xl font-display font-bold mb-6">
                             State-of-the-Art Facility</h2>
                         <p class="text-slate-300 text-lg leading-relaxed mb-8">
                             Experience a clinic designed for your comfort, privacy, and safety. Equipped with modern
@@ -226,7 +227,7 @@
                         </div>
                     </div>
                     <!-- Video Side -->
-                    <div class="relative h-full w-full p-2">
+                    <div class="relative min-h-[250px] sm:min-h-[350px] md:min-h-0 md:h-full w-full p-2">
                         <div
                             class="relative h-full w-full rounded-2xl overflow-hidden shadow-2xl ring-4 ring-white/20 bg-slate-800">
                             <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover"
@@ -244,7 +245,7 @@
             </section>
 
             <!-- Services Teaser -->
-            <section class="py-24 bg-white relative overflow-hidden" aria-labelledby="services-heading">
+            <section class="py-12 md:py-24 bg-white relative overflow-hidden" aria-labelledby="services-heading">
                 <!-- Background Decoration -->
                 <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
                     <div class="absolute top-20 left-10 w-64 h-64 bg-teal-50 rounded-full blur-3xl opacity-60"></div>
@@ -253,16 +254,16 @@
                 </div>
 
                 <div class="max-w-7xl mx-auto px-4 relative z-10">
-                    <div class="text-center mb-16">
+                    <div class="text-center mb-8 md:mb-16">
                         <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Our
                             Expertise</span>
-                        <h2 id="services-heading" class="text-4xl font-display font-bold text-slate-900">Expert Care For
+                        <h2 id="services-heading" class="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-slate-900">Expert Care For
                             You</h2>
                     </div>
 
                     <div class="grid md:grid-cols-3 gap-8">
                         <a href="/services.html"
-                            class="glass-card p-8 rounded-2xl group border border-slate-100/50 hover:border-primary/20">
+                            class="glass-card p-5 sm:p-8 rounded-2xl group border border-slate-100/50 hover:border-primary/20">
                             <div
                                 class="w-16 h-16 bg-teal-50 text-primary rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-primary group-hover:text-white transition-all duration-300 shadow-sm group-hover:shadow-primary/30">
                                 <i class="fa-solid fa-baby-carriage"></i>
@@ -275,7 +276,7 @@
                                 Learn more <i class="fa-solid fa-arrow-right ml-2"></i></div>
                         </a>
                         <a href="/services.html"
-                            class="glass-card p-8 rounded-2xl group border border-slate-100/50 hover:border-primary/20">
+                            class="glass-card p-5 sm:p-8 rounded-2xl group border border-slate-100/50 hover:border-primary/20">
                             <div
                                 class="w-16 h-16 bg-teal-50 text-primary rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-primary group-hover:text-white transition-all duration-300 shadow-sm group-hover:shadow-primary/30">
                                 <i class="fa-solid fa-hospital-user"></i>
@@ -288,7 +289,7 @@
                                 Learn more <i class="fa-solid fa-arrow-right ml-2"></i></div>
                         </a>
                         <a href="/services.html"
-                            class="glass-card p-8 rounded-2xl group border border-slate-100/50 hover:border-primary/20">
+                            class="glass-card p-5 sm:p-8 rounded-2xl group border border-slate-100/50 hover:border-primary/20">
                             <div
                                 class="w-16 h-16 bg-teal-50 text-primary rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-primary group-hover:text-white transition-all duration-300 shadow-sm group-hover:shadow-primary/30">
                                 <i class="fa-solid fa-seedling"></i>
@@ -302,7 +303,7 @@
                         </a>
                     </div>
 
-                    <div class="mt-16 text-center">
+                    <div class="mt-8 md:mt-16 text-center">
                         <a href="/services.html" class="btn-secondary px-10 py-3 hover:bg-slate-50">View All
                             Services</a>
                     </div>
@@ -310,16 +311,16 @@
             </section>
 
             <!-- Testimonials Section -->
-            <section class="py-24 bg-slate-50 relative overflow-hidden mb-16">
+            <section class="py-12 md:py-24 bg-slate-50 relative overflow-hidden mb-8 md:mb-16">
                 <div class="max-w-7xl mx-auto px-4 relative z-10">
-                    <div class="text-center mb-16">
+                    <div class="text-center mb-8 md:mb-16">
                         <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Patient
                             Stories</span>
-                        <h2 class="text-4xl font-display font-bold text-slate-900">What Our Patients Say</h2>
+                        <h2 class="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-slate-900">What Our Patients Say</h2>
                     </div>
 
-                    <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-10">
-                        <div class="glass-card p-8 rounded-2xl relative">
+                    <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-6 md:gap-10">
+                        <div class="glass-card p-5 sm:p-8 rounded-2xl relative">
                             <i class="fa-solid fa-quote-right absolute top-8 right-8 text-4xl text-teal-100 -z-10"></i>
                             <div class="flex items-center gap-4 mb-6">
                                 <div class="w-14 h-14 rounded-full overflow-hidden ring-4 ring-white shadow-md">
@@ -341,7 +342,7 @@
                                 through my high-risk pregnancy with so much care and patience. I am forever grateful for
                                 her expertise and compassion."</p>
                         </div>
-                        <div class="glass-card p-8 rounded-2xl relative">
+                        <div class="glass-card p-5 sm:p-8 rounded-2xl relative">
                             <i class="fa-solid fa-quote-right absolute top-8 right-8 text-4xl text-teal-100 -z-10"></i>
                             <div class="flex items-center gap-4 mb-6">
                                 <div class="w-14 h-14 rounded-full overflow-hidden ring-4 ring-white shadow-md">
@@ -376,8 +377,8 @@
 
         <!-- Footer -->
         <footer class="bg-slate-900 text-slate-300 py-12 border-t border-slate-800" role="contentinfo">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-5 gap-8">
-                <div class="col-span-1 md:col-span-2">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6 md:gap-8">
+                <div class="col-span-1 sm:col-span-2 md:col-span-2">
                     <div class="flex items-center gap-4 mb-6">
                         <div
                             class="w-16 h-16 rounded-full overflow-hidden ring-2 ring-teal-500 shadow-lg shadow-teal-500/30">
@@ -434,6 +435,7 @@
     </div>
 
     <script type="module" src="/src/main.js"></script>
+    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "7f7fd67afcde4273818aa68e565f4f61"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 
 </html>

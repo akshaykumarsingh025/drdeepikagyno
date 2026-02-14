@@ -103,3 +103,27 @@
     @apply bg-white/60 backdrop-blur-md border border-white/30 shadow-lg hover:shadow-2xl hover:bg-white/80 transition-all duration-300;
   }
 }
+
+/* Mobile touch-friendly improvements */
+@media (max-width: 767px) {
+  /* Ensure tap targets are at least 44px */
+  a, button {
+    min-height: 44px;
+  }
+
+  /* Better spacing for footer on mobile */
+  footer .grid {
+    gap: 1.5rem;
+  }
+
+  /* Prevent horizontal overflow */
+  body {
+    overflow-x: hidden;
+  }
+
+  /* Safe area insets for notch phones */
+  .fixed {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+}
