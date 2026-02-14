@@ -52,12 +52,12 @@ document.addEventListener('alpine:init', () => {
             {
                 name: 'Priya Sharma',
                 text: 'Dr. Deepika is an angel. She guided me through my high-risk pregnancy with so much care and patience. I am forever grateful for her expertise and compassion.',
-                image: '/assets/HappySatisfiedPatients_IMG_1437.jpg'
+                image: '/assets/patient.jpg'
             },
             {
                 name: 'Anjali Verma',
                 text: 'The best gynecologist in town. She listens to your problems and gives the best advice. Highly recommended for anyone seeking quality women\'s healthcare!',
-                image: '/assets/HappySatisfiedPatients_IMG_1438.jpg'
+                image: '/assets/HappySatisfiedPatients_IMG_1437.jpg'
             },
             {
                 name: 'Meera Singh',
