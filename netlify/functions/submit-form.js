@@ -58,6 +58,11 @@ function validateAppointment(data) {
         }
     }
 
+    // Email: required, valid format
+    if (!data.email || typeof data.email !== 'string' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email.trim())) {
+        errors.push('A valid email address is required.');
+    }
+
     // Date: required, valid format
     if (!data.date || typeof data.date !== 'string') {
         errors.push('Date is required.');
@@ -178,17 +183,22 @@ export const handler = async function (event, context) {
         if (type === 'appointment') {
             let sheet = doc.sheetsByTitle['Appointments'];
             if (!sheet) {
-                sheet = await doc.addSheet({ title: 'Appointments', headerValues: ['Name', 'Phone Number', 'Date', 'Time', 'Reason', 'Submitted At'] });
+                sheet = await doc.addSheet({ title: 'Appointments', headerValues: ['Name', 'Phone Number', 'Email', 'Date', 'Time', 'Reason', 'Submitted At'] });
             } else {
-                await sheet.loadHeaderRow();
+                try {
+                    await sheet.loadHeaderRow();
+                } catch (e) {
+                    console.log('No header row found, creating one');
+                }
                 if (!sheet.headerValues || sheet.headerValues.length === 0) {
-                    await sheet.setHeaderRow(['Name', 'Phone Number', 'Date', 'Time', 'Reason', 'Submitted At']);
+                    await sheet.setHeaderRow(['Name', 'Phone Number', 'Email', 'Date', 'Time', 'Reason', 'Submitted At']);
                 }
             }
 
             await sheet.addRow({
                 Name: sanitize(data.name),
                 'Phone Number': sanitize(data.phone),
+                Email: sanitize(data.email),
                 Date: sanitize(data.date),
                 Time: sanitize(data.time),
                 Reason: sanitize(data.reason || ''),
@@ -200,7 +210,11 @@ export const handler = async function (event, context) {
             if (!sheet) {
                 sheet = await doc.addSheet({ title: 'Contacts', headerValues: ['Name', 'Email', 'Message', 'Submitted At'] });
             } else {
-                await sheet.loadHeaderRow();
+                try {
+                    await sheet.loadHeaderRow();
+                } catch (e) {
+                    console.log('No header row found, creating one');
+                }
                 if (!sheet.headerValues || sheet.headerValues.length === 0) {
                     await sheet.setHeaderRow(['Name', 'Email', 'Message', 'Submitted At']);
                 }

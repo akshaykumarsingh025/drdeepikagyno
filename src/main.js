@@ -75,6 +75,7 @@ document.addEventListener('alpine:init', () => {
         appointmentForm: {
             name: '',
             phone: '',
+            email: '',
             date: '',
             time: '',
             reason: '',
@@ -83,6 +84,7 @@ document.addEventListener('alpine:init', () => {
         appointmentErrors: {
             name: '',
             phone: '',
+            email: '',
             date: '',
             time: '',
             reason: ''
@@ -90,6 +92,7 @@ document.addEventListener('alpine:init', () => {
         appointmentTouched: {
             name: false,
             phone: false,
+            email: false,
             date: false,
             time: false,
             reason: false
@@ -125,6 +128,14 @@ document.addEventListener('alpine:init', () => {
                         } else if (digits.length === 10 && !/^[6-9]/.test(digits)) {
                             error = 'Indian phone numbers must start with 6-9.';
                         }
+                    }
+                    break;
+
+                case 'email':
+                    if (!value || !value.trim()) {
+                        error = 'Email is required.';
+                    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim())) {
+                        error = 'Please enter a valid email address.';
                     }
                     break;
 
@@ -173,7 +184,7 @@ document.addEventListener('alpine:init', () => {
         },
 
         validateAllFields() {
-            const fields = ['name', 'phone', 'date', 'time'];
+            const fields = ['name', 'phone', 'email', 'date', 'time'];
             let allValid = true;
             fields.forEach(field => {
                 this.appointmentTouched[field] = true;
@@ -227,13 +238,14 @@ document.addEventListener('alpine:init', () => {
                 this.appointmentForm = {
                     name: '',
                     phone: '',
+                    email: '',
                     date: '',
                     time: '',
                     reason: '',
                     _honey: ''
                 };
-                this.appointmentErrors = { name: '', phone: '', date: '', time: '', reason: '' };
-                this.appointmentTouched = { name: false, phone: false, date: false, time: false, reason: false };
+                this.appointmentErrors = { name: '', phone: '', email: '', date: '', time: '', reason: '' };
+                this.appointmentTouched = { name: false, phone: false, email: false, date: false, time: false, reason: false };
                 setTimeout(() => this.appointmentStatus.message = '', 5000);
 
             } catch (error) {
