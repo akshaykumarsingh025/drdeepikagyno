@@ -73,7 +73,8 @@
 
   /* Medical pattern background */
   .bg-medical-pattern {
-    background-image: url('https://www.transparenttextures.com/patterns/medical-icons.png');
+    background-image: radial-gradient(circle, currentColor 1px, transparent 1px);
+    background-size: 24px 24px;
   }
 }
 
@@ -106,8 +107,10 @@
 
 /* Mobile touch-friendly improvements */
 @media (max-width: 767px) {
+
   /* Ensure tap targets are at least 44px */
-  a, button {
+  a,
+  button {
     min-height: 44px;
   }
 

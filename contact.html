@@ -179,19 +179,32 @@
                 </div>
 
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                    <div class="grid lg:grid-cols-5 gap-8 lg:gap-12">
-
-                        <!-- Contact Form (takes 3 of 5 columns) -->
-                        <!-- Contact Info (Left Sidebar) -->
-                        <div class="lg:col-span-2 space-y-6">
-                            <!-- Contact Info Card -->
+                    <div class="flex flex-col gap-6">
+                        <!-- Row 1: Flat grid — mobile: Doctor→Form→GetInTouch | Desktop: Left(Doctor+GetInTouch) Right(Form) -->
+                        <div class="grid lg:grid-cols-5 gap-6 items-stretch">
+                            <!-- Doctor Profile Card — 1st on mobile, top-left on desktop -->
                             <div
-                                class="glass-card p-5 sm:p-8 rounded-3xl border border-white/50 shadow-xl relative overflow-hidden">
-                                <div
-                                    class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-primary to-secondary">
+                                class="order-1 lg:col-span-2 lg:row-start-1 glass-card rounded-2xl border border-white/50 shadow-xl overflow-hidden">
+                                <div class="aspect-[4/3] overflow-hidden">
+                                    <img src="/assets/IMG_2499.jpg"
+                                        alt="Dr. Deepika Singh - Gynecologist &amp; Obstetrician"
+                                        class="w-full h-full object-cover object-top" loading="lazy">
                                 </div>
-                                <h3 class="font-bold text-xl font-display mb-6 text-slate-900">Get in Touch</h3>
-                                <div class="space-y-5">
+                                <div class="p-6 text-center">
+                                    <h3 class="font-bold text-lg font-display text-slate-900">Dr. Deepika Singh</h3>
+                                    <p class="text-primary text-sm font-medium">MD (AIIMS) · FCLS · MCCOG</p>
+                                    <p class="text-slate-500 text-xs mt-1">Unit Head, Sarvodaya Hospital</p>
+                                </div>
+                            </div>
+
+                            <!-- Get in Touch Card — 3rd on mobile, bottom-left on desktop -->
+                            <div
+                                class="order-3 lg:order-none lg:col-span-2 lg:row-start-2 glass-card p-6 rounded-2xl border border-white/50 shadow-xl relative overflow-hidden">
+                                <div
+                                    class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-primary to-secondary">
+                                </div>
+                                <h3 class="font-bold text-xl font-display mb-5 text-slate-900">Get in Touch</h3>
+                                <div class="space-y-4">
                                     <div class="flex items-start gap-4">
                                         <div class="w-11 h-11 rounded-xl bg-teal-50 flex items-center justify-center text-primary shrink-0 shadow-sm"
                                             aria-hidden="true">
@@ -231,13 +244,190 @@
                                 </div>
                             </div>
 
+                            <!-- Booking Form — 2nd on mobile, right column spanning both rows on desktop -->
+                            <div
+                                class="order-2 lg:order-none lg:col-span-3 lg:col-start-3 lg:row-start-1 lg:row-span-2 glass-card p-6 sm:p-8 rounded-2xl border border-white/50 shadow-xl relative overflow-hidden flex flex-col">
+                                <div
+                                    class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-primary to-secondary">
+                                </div>
+                                <h2 class="text-2xl font-bold font-display text-slate-900 mb-6">Schedule a Visit</h2>
+
+                                <form @submit.prevent="submitAppointment" class="flex flex-col gap-5">
+                                    <!-- Honeypot field - hidden from real users, bots will fill it -->
+                                    <div style="position:absolute;left:-9999px" aria-hidden="true">
+                                        <input type="text" name="_honey" x-model="appointmentForm._honey" tabindex="-1"
+                                            autocomplete="off">
+                                    </div>
+                                    <div class="grid sm:grid-cols-2 gap-5">
+                                        <div class="space-y-1.5">
+                                            <label for="name"
+                                                class="text-sm font-semibold text-slate-700 ml-1 flex items-center gap-1.5">
+                                                <i class="fa-solid fa-user text-primary text-xs" aria-hidden="true"></i>
+                                                Full Name <span class="text-red-400">*</span>
+                                            </label>
+                                            <input type="text" id="name" x-model="appointmentForm.name" required
+                                                @blur="touchField('name')" @input="onFieldInput('name')"
+                                                :class="{'border-red-400 focus:border-red-400 focus:ring-red-100': appointmentErrors.name && appointmentTouched.name, 'border-slate-200 focus:border-primary focus:ring-primary/10': !(appointmentErrors.name && appointmentTouched.name)}"
+                                                class="w-full px-4 py-3 rounded-xl border focus:ring-4 transition-all bg-white/70 backdrop-blur-sm placeholder:text-slate-400"
+                                                placeholder="Jane Doe" :disabled="appointmentStatus.loading">
+                                            <p x-show="appointmentErrors.name && appointmentTouched.name"
+                                                x-text="appointmentErrors.name"
+                                                class="text-red-500 text-xs font-medium ml-1" x-transition></p>
+                                        </div>
+                                        <div class="space-y-1.5">
+                                            <label for="phone"
+                                                class="text-sm font-semibold text-slate-700 ml-1 flex items-center gap-1.5">
+                                                <i class="fa-solid fa-phone text-primary text-xs"
+                                                    aria-hidden="true"></i>
+                                                Phone Number <span class="text-red-400">*</span>
+                                            </label>
+                                            <input type="tel" id="phone" x-model="appointmentForm.phone" required
+                                                @blur="touchField('phone')" @input="onFieldInput('phone')"
+                                                :class="{'border-red-400 focus:border-red-400 focus:ring-red-100': appointmentErrors.phone && appointmentTouched.phone, 'border-slate-200 focus:border-primary focus:ring-primary/10': !(appointmentErrors.phone && appointmentTouched.phone)}"
+                                                class="w-full px-4 py-3 rounded-xl border focus:ring-4 transition-all bg-white/70 backdrop-blur-sm placeholder:text-slate-400"
+                                                placeholder="+91 85959 54095" :disabled="appointmentStatus.loading">
+                                            <p x-show="appointmentErrors.phone && appointmentTouched.phone"
+                                                x-text="appointmentErrors.phone"
+                                                class="text-red-500 text-xs font-medium ml-1" x-transition></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="space-y-1.5">
+                                        <label for="email"
+                                            class="text-sm font-semibold text-slate-700 ml-1 flex items-center gap-1.5">
+                                            <i class="fa-solid fa-envelope text-primary text-xs" aria-hidden="true"></i>
+                                            Email Address <span class="text-red-400">*</span>
+                                        </label>
+                                        <input type="email" id="email" x-model="appointmentForm.email" required
+                                            @blur="touchField('email')" @input="onFieldInput('email')"
+                                            :class="{'border-red-400 focus:border-red-400 focus:ring-red-100': appointmentErrors.email && appointmentTouched.email, 'border-slate-200 focus:border-primary focus:ring-primary/10': !(appointmentErrors.email && appointmentTouched.email)}"
+                                            class="w-full px-4 py-3 rounded-xl border focus:ring-4 transition-all bg-white/70 backdrop-blur-sm placeholder:text-slate-400"
+                                            placeholder="jane@example.com" :disabled="appointmentStatus.loading">
+                                        <p x-show="appointmentErrors.email && appointmentTouched.email"
+                                            x-text="appointmentErrors.email"
+                                            class="text-red-500 text-xs font-medium ml-1" x-transition></p>
+                                    </div>
+
+                                    <div class="grid sm:grid-cols-2 gap-5">
+                                        <div class="space-y-1.5">
+                                            <label for="date"
+                                                class="text-sm font-semibold text-slate-700 ml-1 flex items-center gap-1.5">
+                                                <i class="fa-solid fa-calendar text-primary text-xs"
+                                                    aria-hidden="true"></i>
+                                                Preferred Date <span class="text-red-400">*</span>
+                                            </label>
+                                            <input type="date" id="date" x-model="appointmentForm.date" required
+                                                @blur="touchField('date')" @change="touchField('date')"
+                                                :class="{'border-red-400 focus:border-red-400 focus:ring-red-100': appointmentErrors.date && appointmentTouched.date, 'border-slate-200 focus:border-primary focus:ring-primary/10': !(appointmentErrors.date && appointmentTouched.date)}"
+                                                class="w-full px-4 py-3 rounded-xl border focus:ring-4 transition-all bg-white/70 backdrop-blur-sm"
+                                                :disabled="appointmentStatus.loading">
+                                            <p x-show="appointmentErrors.date && appointmentTouched.date"
+                                                x-text="appointmentErrors.date"
+                                                class="text-red-500 text-xs font-medium ml-1" x-transition></p>
+                                        </div>
+                                        <div class="space-y-1.5">
+                                            <label for="time"
+                                                class="text-sm font-semibold text-slate-700 ml-1 flex items-center gap-1.5">
+                                                <i class="fa-solid fa-clock text-primary text-xs"
+                                                    aria-hidden="true"></i>
+                                                Preferred Time <span class="text-red-400">*</span>
+                                            </label>
+                                            <select id="time" x-model="appointmentForm.time" required
+                                                @blur="touchField('time')" @change="touchField('time')"
+                                                :class="{'border-red-400 focus:border-red-400 focus:ring-red-100': appointmentErrors.time && appointmentTouched.time, 'border-slate-200 focus:border-primary focus:ring-primary/10': !(appointmentErrors.time && appointmentTouched.time)}"
+                                                class="w-full px-4 py-3 rounded-xl border focus:ring-4 transition-all bg-white/70 backdrop-blur-sm"
+                                                :disabled="appointmentStatus.loading">
+                                                <option value="">Select a time</option>
+                                                <option value="Morning (9:00 AM - 12:00 PM)">Morning (9:00 AM - 12:00
+                                                    PM)
+                                                </option>
+                                                <option value="Afternoon (12:00 PM - 4:00 PM)">Afternoon (12:00 PM -
+                                                    4:00
+                                                    PM)</option>
+                                                <option value="Evening (4:00 PM - 8:00 PM)">Evening (4:00 PM - 8:00 PM)
+                                                </option>
+                                            </select>
+                                            <p x-show="appointmentErrors.time && appointmentTouched.time"
+                                                x-text="appointmentErrors.time"
+                                                class="text-red-500 text-xs font-medium ml-1" x-transition></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="space-y-1.5">
+                                        <label for="reason"
+                                            class="text-sm font-semibold text-slate-700 ml-1 flex items-center gap-1.5">
+                                            <i class="fa-solid fa-notes-medical text-primary text-xs"
+                                                aria-hidden="true"></i>
+                                            Reason for Visit / Additional Info
+                                        </label>
+                                        <textarea id="reason" x-model="appointmentForm.reason" rows="3"
+                                            @blur="touchField('reason')" @input="onFieldInput('reason')"
+                                            :class="{'border-red-400 focus:border-red-400 focus:ring-red-100': appointmentErrors.reason && appointmentTouched.reason, 'border-slate-200 focus:border-primary focus:ring-primary/10': !(appointmentErrors.reason && appointmentTouched.reason)}"
+                                            class="w-full px-4 py-3 rounded-xl border focus:ring-4 transition-all bg-white/70 backdrop-blur-sm resize-none placeholder:text-slate-400"
+                                            placeholder="Briefly describe your symptoms or share any relevant info."
+                                            :disabled="appointmentStatus.loading"></textarea>
+                                        <p x-show="appointmentErrors.reason && appointmentTouched.reason"
+                                            x-text="appointmentErrors.reason"
+                                            class="text-red-500 text-xs font-medium ml-1" x-transition></p>
+                                    </div>
+
+                                    <!-- Status Messages -->
+                                    <div x-show="appointmentStatus.message" x-transition
+                                        :class="{'bg-green-50 text-green-800 border-green-200': appointmentStatus.type === 'success', 'bg-red-50 text-red-800 border-red-200': appointmentStatus.type === 'error'}"
+                                        class="p-4 rounded-xl border text-sm font-medium">
+                                        <p x-text="appointmentStatus.message"></p>
+                                    </div>
+
+                                    <!-- Submit Button -->
+                                    <button type="submit" :disabled="appointmentStatus.loading"
+                                        class="w-full px-8 py-4 bg-gradient-to-r from-primary to-teal-500 text-white font-bold text-lg rounded-xl shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-3 disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:translate-y-0">
+                                        <i class="fa-solid"
+                                            :class="{'fa-spinner fa-spin': appointmentStatus.loading, 'fa-calendar-check': !appointmentStatus.loading}"></i>
+                                        <span
+                                            x-text="appointmentStatus.loading ? 'Booking...' : 'Book Appointment'">Book
+                                            Appointment</span>
+                                    </button>
+
+                                    <!-- Patient Trust Badges -->
+                                    <div class="mt-2 pt-5 border-t border-slate-100">
+                                        <div
+                                            class="flex justify-around items-center bg-teal-50/60 rounded-xl px-4 py-4">
+                                            <div class="text-center">
+                                                <div class="text-2xl sm:text-3xl mb-1">🏥</div>
+                                                <div class="font-bold text-primary text-base sm:text-lg leading-tight">
+                                                    15+</div>
+                                                <div class="text-slate-500 text-[0.65rem] sm:text-xs mt-0.5">Years
+                                                    Experience</div>
+                                            </div>
+                                            <div class="text-center">
+                                                <div class="text-2xl sm:text-3xl mb-1">👩‍⚕️</div>
+                                                <div class="font-bold text-primary text-base sm:text-lg leading-tight">
+                                                    10,000+</div>
+                                                <div class="text-slate-500 text-[0.65rem] sm:text-xs mt-0.5">Patients
+                                                    Treated</div>
+                                            </div>
+                                            <div class="text-center">
+                                                <div class="text-2xl sm:text-3xl mb-1">⭐</div>
+                                                <div class="font-bold text-primary text-base sm:text-lg leading-tight">
+                                                    4.9</div>
+                                                <div class="text-slate-500 text-[0.65rem] sm:text-xs mt-0.5">Rating on
+                                                    Google</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Row 2: Clinic Hours + Need Urgent Help (side by side, equal height) -->
+                        <div class="grid grid-cols-1 sm:grid-cols-[1fr_1fr] gap-6 items-stretch">
                             <!-- Clinic Hours Card -->
                             <div
-                                class="glass-card p-5 sm:p-8 rounded-3xl border border-white/50 shadow-xl relative overflow-hidden">
+                                class="glass-card p-6 rounded-2xl border border-white/50 shadow-xl relative overflow-hidden">
                                 <div
-                                    class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-rose-400 to-secondary">
+                                    class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-rose-400 to-secondary">
                                 </div>
-                                <h3 class="font-bold text-xl font-display mb-6 text-slate-900 flex items-center gap-2">
+                                <h3 class="font-bold text-xl font-display mb-5 text-slate-900 flex items-center gap-2">
                                     <i class="fa-solid fa-clock text-primary" aria-hidden="true"></i>
                                     Clinic Hours
                                 </h3>
@@ -264,9 +454,9 @@
                                 </div>
                             </div>
 
-                            <!-- Quick Action Card -->
+                            <!-- Need Urgent Help Card -->
                             <div
-                                class="bg-gradient-to-br from-primary to-teal-600 p-5 sm:p-8 rounded-3xl shadow-xl text-white relative overflow-hidden">
+                                class="bg-gradient-to-br from-primary to-teal-600 p-6 rounded-2xl shadow-xl text-white relative overflow-hidden flex flex-col justify-center">
                                 <div
                                     class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2">
                                 </div>
@@ -274,7 +464,7 @@
                                     class="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full translate-y-1/2 -translate-x-1/2">
                                 </div>
                                 <div class="relative z-10">
-                                    <h3 class="font-bold text-xl font-display mb-3">Need Urgent Help?</h3>
+                                    <h3 class="font-bold text-xl font-display mb-2">Need Urgent Help?</h3>
                                     <p class="text-teal-100 text-sm leading-relaxed mb-5">For emergencies or urgent
                                         consultations, please call us directly.</p>
                                     <a href="tel:+918595954095"
@@ -285,157 +475,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Contact Form (Right Side) -->
-                        <div
-                            class="lg:col-span-3 glass-card p-8 md:p-10 rounded-3xl border border-white/50 shadow-xl relative overflow-hidden">
-                            <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-primary to-secondary">
-                            </div>
-                            <h2 class="text-2xl font-bold font-display text-slate-900 mb-8">Schedule a Visit</h2>
-
-                            <form @submit.prevent="submitAppointment" class="space-y-6">
-                                <!-- Honeypot field - hidden from real users, bots will fill it -->
-                                <div style="position:absolute;left:-9999px" aria-hidden="true">
-                                    <input type="text" name="_honey" x-model="appointmentForm._honey" tabindex="-1"
-                                        autocomplete="off">
-                                </div>
-                                <div class="grid sm:grid-cols-2 gap-5">
-                                    <div class="space-y-2">
-                                        <label for="name"
-                                            class="text-sm font-semibold text-slate-700 ml-1 flex items-center gap-1.5">
-                                            <i class="fa-solid fa-user text-primary text-xs" aria-hidden="true"></i>
-                                            Full Name <span class="text-red-400">*</span>
-                                        </label>
-                                        <input type="text" id="name" x-model="appointmentForm.name" required
-                                            @blur="touchField('name')" @input="onFieldInput('name')"
-                                            :class="{'border-red-400 focus:border-red-400 focus:ring-red-100': appointmentErrors.name && appointmentTouched.name, 'border-slate-200 focus:border-primary focus:ring-primary/10': !(appointmentErrors.name && appointmentTouched.name)}"
-                                            class="w-full px-4 py-3.5 rounded-xl border focus:ring-4 transition-all bg-white/70 backdrop-blur-sm placeholder:text-slate-400"
-                                            placeholder="Jane Doe" :disabled="appointmentStatus.loading">
-                                        <p x-show="appointmentErrors.name && appointmentTouched.name"
-                                            x-text="appointmentErrors.name"
-                                            class="text-red-500 text-xs font-medium ml-1" x-transition></p>
-                                    </div>
-                                    <div class="space-y-2">
-                                        <label for="phone"
-                                            class="text-sm font-semibold text-slate-700 ml-1 flex items-center gap-1.5">
-                                            <i class="fa-solid fa-phone text-primary text-xs" aria-hidden="true"></i>
-                                            Phone Number <span class="text-red-400">*</span>
-                                        </label>
-                                        <input type="tel" id="phone" x-model="appointmentForm.phone" required
-                                            @blur="touchField('phone')" @input="onFieldInput('phone')"
-                                            :class="{'border-red-400 focus:border-red-400 focus:ring-red-100': appointmentErrors.phone && appointmentTouched.phone, 'border-slate-200 focus:border-primary focus:ring-primary/10': !(appointmentErrors.phone && appointmentTouched.phone)}"
-                                            class="w-full px-4 py-3.5 rounded-xl border focus:ring-4 transition-all bg-white/70 backdrop-blur-sm placeholder:text-slate-400"
-                                            placeholder="+91 85959 54095" :disabled="appointmentStatus.loading">
-                                        <p x-show="appointmentErrors.phone && appointmentTouched.phone"
-                                            x-text="appointmentErrors.phone"
-                                            class="text-red-500 text-xs font-medium ml-1" x-transition></p>
-                                    </div>
-                                </div>
-
-                                <div class="space-y-2">
-                                    <label for="email"
-                                        class="text-sm font-semibold text-slate-700 ml-1 flex items-center gap-1.5">
-                                        <i class="fa-solid fa-envelope text-primary text-xs" aria-hidden="true"></i>
-                                        Email Address <span class="text-red-400">*</span>
-                                    </label>
-                                    <input type="email" id="email" x-model="appointmentForm.email" required
-                                        @blur="touchField('email')" @input="onFieldInput('email')"
-                                        :class="{'border-red-400 focus:border-red-400 focus:ring-red-100': appointmentErrors.email && appointmentTouched.email, 'border-slate-200 focus:border-primary focus:ring-primary/10': !(appointmentErrors.email && appointmentTouched.email)}"
-                                        class="w-full px-4 py-3.5 rounded-xl border focus:ring-4 transition-all bg-white/70 backdrop-blur-sm placeholder:text-slate-400"
-                                        placeholder="jane@example.com" :disabled="appointmentStatus.loading">
-                                    <p x-show="appointmentErrors.email && appointmentTouched.email"
-                                        x-text="appointmentErrors.email" class="text-red-500 text-xs font-medium ml-1"
-                                        x-transition></p>
-                                </div>
-
-                                <div class="grid sm:grid-cols-2 gap-5">
-                                    <div class="space-y-2">
-                                        <label for="date"
-                                            class="text-sm font-semibold text-slate-700 ml-1 flex items-center gap-1.5">
-                                            <i class="fa-solid fa-calendar text-primary text-xs" aria-hidden="true"></i>
-                                            Preferred Date <span class="text-red-400">*</span>
-                                        </label>
-                                        <input type="date" id="date" x-model="appointmentForm.date" required
-                                            @blur="touchField('date')" @change="touchField('date')"
-                                            :class="{'border-red-400 focus:border-red-400 focus:ring-red-100': appointmentErrors.date && appointmentTouched.date, 'border-slate-200 focus:border-primary focus:ring-primary/10': !(appointmentErrors.date && appointmentTouched.date)}"
-                                            class="w-full px-4 py-3.5 rounded-xl border focus:ring-4 transition-all bg-white/70 backdrop-blur-sm"
-                                            :disabled="appointmentStatus.loading">
-                                        <p x-show="appointmentErrors.date && appointmentTouched.date"
-                                            x-text="appointmentErrors.date"
-                                            class="text-red-500 text-xs font-medium ml-1" x-transition></p>
-                                    </div>
-                                    <div class="space-y-2">
-                                        <label for="time"
-                                            class="text-sm font-semibold text-slate-700 ml-1 flex items-center gap-1.5">
-                                            <i class="fa-solid fa-clock text-primary text-xs" aria-hidden="true"></i>
-                                            Preferred Time <span class="text-red-400">*</span>
-                                        </label>
-                                        <select id="time" x-model="appointmentForm.time" required
-                                            @blur="touchField('time')" @change="touchField('time')"
-                                            :class="{'border-red-400 focus:border-red-400 focus:ring-red-100': appointmentErrors.time && appointmentTouched.time, 'border-slate-200 focus:border-primary focus:ring-primary/10': !(appointmentErrors.time && appointmentTouched.time)}"
-                                            class="w-full px-4 py-3.5 rounded-xl border focus:ring-4 transition-all bg-white/70 backdrop-blur-sm"
-                                            :disabled="appointmentStatus.loading">
-                                            <option value="">Select a time</option>
-                                            <option value="Morning (9:00 AM - 12:00 PM)">Morning (9:00 AM - 12:00 PM)
-                                            </option>
-                                            <option value="Afternoon (12:00 PM - 4:00 PM)">Afternoon (12:00 PM - 4:00
-                                                PM)</option>
-                                            <option value="Evening (4:00 PM - 8:00 PM)">Evening (4:00 PM - 8:00 PM)
-                                            </option>
-                                        </select>
-                                        <p x-show="appointmentErrors.time && appointmentTouched.time"
-                                            x-text="appointmentErrors.time"
-                                            class="text-red-500 text-xs font-medium ml-1" x-transition></p>
-                                    </div>
-                                </div>
-
-                                <div class="space-y-2">
-                                    <label for="reason"
-                                        class="text-sm font-semibold text-slate-700 ml-1 flex items-center gap-1.5">
-                                        <i class="fa-solid fa-notes-medical text-primary text-xs"
-                                            aria-hidden="true"></i>
-                                        Reason for Visit / Additional Info
-                                    </label>
-                                    <textarea id="reason" x-model="appointmentForm.reason" rows="4"
-                                        @blur="touchField('reason')" @input="onFieldInput('reason')"
-                                        :class="{'border-red-400 focus:border-red-400 focus:ring-red-100': appointmentErrors.reason && appointmentTouched.reason, 'border-slate-200 focus:border-primary focus:ring-primary/10': !(appointmentErrors.reason && appointmentTouched.reason)}"
-                                        class="w-full px-4 py-3.5 rounded-xl border focus:ring-4 transition-all bg-white/70 backdrop-blur-sm resize-none placeholder:text-slate-400"
-                                        placeholder="Please briefly describe your symptoms or share any other relevant information."
-                                        :disabled="appointmentStatus.loading"></textarea>
-                                    <p x-show="appointmentErrors.reason && appointmentTouched.reason"
-                                        x-text="appointmentErrors.reason" class="text-red-500 text-xs font-medium ml-1"
-                                        x-transition></p>
-                                </div>
-
-                                <!-- Status Messages -->
-                                <div x-show="appointmentStatus.message" x-transition
-                                    :class="{'bg-green-50 text-green-800 border-green-200': appointmentStatus.type === 'success', 'bg-red-50 text-red-800 border-red-200': appointmentStatus.type === 'error'}"
-                                    class="p-4 rounded-xl border text-sm font-medium">
-                                    <p x-text="appointmentStatus.message"></p>
-                                </div>
-
-                                <!-- Submit Button -->
-                                <button type="submit" :disabled="appointmentStatus.loading"
-                                    class="w-full px-8 py-4 bg-gradient-to-r from-primary to-teal-500 text-white font-bold text-lg rounded-xl shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-3 disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:translate-y-0">
-                                    <i class="fa-solid"
-                                        :class="{'fa-spinner fa-spin': appointmentStatus.loading, 'fa-calendar-check': !appointmentStatus.loading}"></i>
-                                    <span x-text="appointmentStatus.loading ? 'Booking...' : 'Book Appointment'">Book
-                                        Appointment</span>
-                                </button>
-                            </form>
-
-                            <!-- Alternative: Direct contact info -->
-                            <div class="mt-8 p-4 bg-teal-50/80 rounded-xl border border-teal-100">
-                                <p class="text-sm text-teal-800 text-center">
-                                    <i class="fa-solid fa-phone mr-2"></i>Or call us directly: <a
-                                        href="tel:+918595954095" class="font-bold text-primary hover:underline">+91
-                                        85959 54095</a>
-                                </p>
-                            </div>
-                        </div>
-
-
-
                     </div>
                 </div>
             </section>
