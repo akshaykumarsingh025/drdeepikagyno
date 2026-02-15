@@ -13,6 +13,8 @@
     <meta name="keywords"
         content="patient testimonials, reviews, Dr. Deepika Singh, gynecologist reviews, women's health testimonials">
     <meta name="author" content="Dr. Deepika Singh">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://drdeepikagyno.com/testimonials.html">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
@@ -20,7 +22,7 @@
     <meta property="og:title" content="Patient Testimonials | Dr. Deepika Singh">
     <meta property="og:description"
         content="Read real patient stories and testimonials about Dr. Deepika Singh's compassionate gynecological care.">
-    <meta property="og:image" content="/assets/og-image.jpg">
+    <meta property="og:image" content="https://drdeepikagyno.com/assets/og-image.jpg">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
@@ -28,7 +30,7 @@
     <meta name="twitter:title" content="Patient Testimonials | Dr. Deepika Singh">
     <meta name="twitter:description"
         content="Read real patient stories and testimonials about Dr. Deepika Singh's compassionate gynecological care.">
-    <meta name="twitter:image" content="/assets/og-image.jpg">
+    <meta name="twitter:image" content="https://drdeepikagyno.com/assets/og-image.jpg">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,6 +41,50 @@
 
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+    <!-- Structured Data - JSON-LD -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Physician",
+        "name": "Dr. Deepika Singh",
+        "url": "https://drdeepikagyno.com",
+        "image": "https://drdeepikagyno.com/assets/DrdeepikaNew.jpg",
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5",
+            "bestRating": "5",
+            "ratingCount": "4",
+            "reviewCount": "4"
+        },
+        "review": [
+            {
+                "@type": "Review",
+                "author": { "@type": "Person", "name": "Priya Sharma" },
+                "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+                "reviewBody": "Dr. Deepika is an angel. She guided me through my high-risk pregnancy with so much care and patience. I am forever grateful for her expertise and compassion."
+            },
+            {
+                "@type": "Review",
+                "author": { "@type": "Person", "name": "Anjali Verma" },
+                "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+                "reviewBody": "The best gynecologist in town. She listens to your problems and gives the best advice. Highly recommended for anyone seeking quality women's healthcare!"
+            },
+            {
+                "@type": "Review",
+                "author": { "@type": "Person", "name": "Meera Singh" },
+                "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+                "reviewBody": "Very professional and kind. The clinic environment is so positive and clean. My laparoscopic surgery went perfectly, and the recovery was quick."
+            },
+            {
+                "@type": "Review",
+                "author": { "@type": "Person", "name": "Kavita Patel" },
+                "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+                "reviewBody": "Dr. Deepika helped me manage my PCOS effectively. Her personalized approach and follow-up care made all the difference in my treatment journey."
+            }
+        ]
+    }
+    </script>
 </head>
 
 <body class="font-sans text-slate-800 bg-slate-50 antialiased" x-data="appData">
@@ -136,7 +182,8 @@
                     <span class="text-primary font-bold tracking-wider uppercase text-sm mb-3 block">Patient
                         Stories</span>
                     <h1 id="testimonials-heading"
-                        class="text-3xl sm:text-4xl md:text-6xl font-display font-bold text-slate-900 mb-6">Real Experiences</h1>
+                        class="text-3xl sm:text-4xl md:text-6xl font-display font-bold text-slate-900 mb-6">Real
+                        Experiences</h1>
                     <p class="text-xl text-slate-600 max-w-2xl mx-auto font-light leading-relaxed">Hear from the women
                         we've had the privilege to care for on their journey to better health.</p>
                 </div>
@@ -276,9 +323,11 @@
             <!-- CTA Section -->
             <section class="py-12 md:py-20 bg-slate-50 relative overflow-hidden mb-8 md:mb-16">
                 <div class="max-w-4xl mx-auto px-4 text-center relative z-10 pt-8 md:pt-24">
-                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-slate-900 mb-6">Ready to Start Your
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-slate-900 mb-6">Ready to
+                        Start Your
                         Journey?</h2>
-                    <p class="text-lg text-slate-600 mb-6 md:mb-10 leading-relaxed">Join hundreds of satisfied patients who
+                    <p class="text-lg text-slate-600 mb-6 md:mb-10 leading-relaxed">Join hundreds of satisfied patients
+                        who
                         trust Dr. Deepika Singh for their women's health needs.</p>
                     <a href="/contact.html"
                         class="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-primary rounded-full hover:bg-teal-700 hover:shadow-lg transform hover:-translate-y-1">
@@ -299,7 +348,8 @@
 
         <!-- Footer -->
         <footer class="bg-slate-900 text-slate-300 py-12 border-t border-slate-800" role="contentinfo">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6 md:gap-8">
+            <div
+                class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6 md:gap-8">
                 <div class="col-span-1 sm:col-span-2 md:col-span-2">
                     <div class="flex items-center gap-4 mb-6">
                         <div
@@ -335,11 +385,13 @@
                 <div>
                     <h4 class="text-white font-bold mb-6">Follow Us</h4>
                     <div class="flex gap-4">
-                        <a href="https://www.instagram.com/dr.deepikasinghgynecologist/" target="_blank" rel="noopener noreferrer"
+                        <a href="https://www.instagram.com/dr.deepikasinghgynecologist/" target="_blank"
+                            rel="noopener noreferrer"
                             class="w-10 h-10 rounded-full bg-slate-800 hover:bg-pink-600 transition-colors flex items-center justify-center">
                             <i class="fa-brands fa-instagram text-xl text-white"></i>
                         </a>
-                        <a href="https://www.facebook.com/profile.php?id=100094918847959" target="_blank" rel="noopener noreferrer"
+                        <a href="https://www.facebook.com/profile.php?id=100094918847959" target="_blank"
+                            rel="noopener noreferrer"
                             class="w-10 h-10 rounded-full bg-slate-800 hover:bg-blue-600 transition-colors flex items-center justify-center">
                             <i class="fa-brands fa-facebook text-xl text-white"></i>
                         </a>
@@ -356,7 +408,9 @@
         </footer>
     </div>
     <script type="module" src="/src/main.js"></script>
-    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "7f7fd67afcde4273818aa68e565f4f61"}'></script><!-- End Cloudflare Web Analytics -->
+    <!-- Cloudflare Web Analytics -->
+    <script defer src='https://static.cloudflareinsights.com/beacon.min.js'
+        data-cf-beacon='{"token": "7f7fd67afcde4273818aa68e565f4f61"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 
 </html>
