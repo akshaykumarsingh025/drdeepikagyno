@@ -103,6 +103,18 @@ document.addEventListener('alpine:init', () => {
             type: '' // 'error' or 'success'
         },
 
+        // Quick Appointment Form (Hero)
+        quickForm: {
+            name: '',
+            phone: '',
+            message: ''
+        },
+        quickStatus: {
+            loading: false,
+            message: '',
+            type: ''
+        },
+
         validateField(field) {
             const value = this.appointmentForm[field];
             let error = '';
@@ -250,6 +262,59 @@ document.addEventListener('alpine:init', () => {
                 this.appointmentStatus.message = error.message || 'Something went wrong. Please try again.';
             } finally {
                 this.appointmentStatus.loading = false;
+            }
+        },
+
+        async submitQuickAppointment() {
+            if (!this.quickForm.name.trim() || !this.quickForm.phone.trim()) {
+                this.quickStatus.type = 'error';
+                this.quickStatus.message = 'Please fill in your name and phone number.';
+                return;
+            }
+
+            const digits = this.quickForm.phone.replace(/[\s\-\(\)\+]/g, '');
+            if (!/^\d{10,12}$/.test(digits)) {
+                this.quickStatus.type = 'error';
+                this.quickStatus.message = 'Please enter a valid phone number.';
+                return;
+            }
+
+            this.quickStatus.loading = true;
+            this.quickStatus.message = '';
+
+            try {
+                const response = await fetch('/api/submit-form', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        type: 'quick_appointment',
+                        data: this.quickForm
+                    })
+                });
+
+                const contentType = response.headers.get('content-type') || '';
+                let result;
+                if (contentType.includes('application/json')) {
+                    result = await response.json();
+                } else {
+                    const text = await response.text();
+                    throw new Error(response.ok ? 'Unexpected server response.' : 'Server is not available. Please try again later.');
+                }
+
+                if (!response.ok) {
+                    throw new Error(result.message || 'Failed to submit request');
+                }
+
+                this.quickStatus.type = 'success';
+                this.quickStatus.message = 'Request submitted! We will call you shortly.';
+                this.quickForm = { name: '', phone: '', message: '' };
+                setTimeout(() => this.quickStatus.message = '', 5000);
+
+            } catch (error) {
+                this.quickStatus.type = 'error';
+                this.quickStatus.message = error.message || 'Something went wrong. Please try again.';
+            } finally {
+                this.quickStatus.loading = false;
             }
         },
 

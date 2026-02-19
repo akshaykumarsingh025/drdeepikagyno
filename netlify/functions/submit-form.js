@@ -109,6 +109,38 @@ function validateContact(data) {
     return errors;
 }
 
+function validateQuickAppointment(data) {
+    const errors = [];
+
+    if (!data || typeof data !== 'object') {
+        return ['Invalid request data.'];
+    }
+
+    // Name: required, 2-100 chars
+    if (!data.name || typeof data.name !== 'string' || data.name.trim().length < 2) {
+        errors.push('Name is required (minimum 2 characters).');
+    } else if (data.name.trim().length > 100) {
+        errors.push('Name must be under 100 characters.');
+    }
+
+    // Phone: required, 10-12 digits
+    if (!data.phone || typeof data.phone !== 'string') {
+        errors.push('Phone number is required.');
+    } else {
+        const digits = data.phone.replace(/[\s\-\(\)\+]/g, '');
+        if (!/^\d{10,12}$/.test(digits)) {
+            errors.push('Enter a valid phone number (10-12 digits).');
+        }
+    }
+
+    // Message: optional, max 500 chars
+    if (data.message && typeof data.message === 'string' && data.message.trim().length > 500) {
+        errors.push('Message must be under 500 characters.');
+    }
+
+    return errors;
+}
+
 export const handler = async function (event, context) {
     const headers = getCorsHeaders(event);
 
@@ -135,7 +167,7 @@ export const handler = async function (event, context) {
         }
 
         // Validate type
-        if (!type || !['appointment', 'contact'].includes(type)) {
+        if (!type || !['appointment', 'contact', 'quick_appointment'].includes(type)) {
             return {
                 statusCode: 400,
                 headers,
@@ -146,7 +178,9 @@ export const handler = async function (event, context) {
         // Server-side validation
         const validationErrors = type === 'appointment'
             ? validateAppointment(data)
-            : validateContact(data);
+            : type === 'contact'
+                ? validateContact(data)
+                : validateQuickAppointment(data);
 
         if (validationErrors.length > 0) {
             return {
@@ -223,6 +257,35 @@ export const handler = async function (event, context) {
                 Name: sanitize(data.name),
                 Email: sanitize(data.email),
                 Message: sanitize(data.message),
+                'Submitted At': new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
+            });
+        } else if (type === 'quick_appointment') {
+            // Use the same sheet as the main appointment form
+            let sheet = doc.sheetsByTitle['Appointments'];
+
+            // If the sheet doesn't exist, create it with the standard headers (same as successful appointment)
+            if (!sheet) {
+                sheet = await doc.addSheet({ title: 'Appointments', headerValues: ['Name', 'Phone Number', 'Email', 'Date', 'Time', 'Reason', 'Submitted At'] });
+            } else {
+                // Ensure headers exist
+                try {
+                    await sheet.loadHeaderRow();
+                } catch (e) {
+                    console.log('No header row found, creating one');
+                }
+                if (!sheet.headerValues || sheet.headerValues.length === 0) {
+                    await sheet.setHeaderRow(['Name', 'Phone Number', 'Email', 'Date', 'Time', 'Reason', 'Submitted At']);
+                }
+            }
+
+            // Add row with available data, marking Date/Time as Quick Request
+            await sheet.addRow({
+                Name: sanitize(data.name),
+                'Phone Number': sanitize(data.phone),
+                Email: '', // Not collected in quick form
+                Date: 'Quick Request', // Placeholder
+                Time: 'ASAP', // Placeholder
+                Reason: sanitize(data.message || ''),
                 'Submitted At': new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
             });
         }
