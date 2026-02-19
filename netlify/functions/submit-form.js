@@ -58,9 +58,9 @@ function validateAppointment(data) {
         }
     }
 
-    // Email: required, valid format
-    if (!data.email || typeof data.email !== 'string' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email.trim())) {
-        errors.push('A valid email address is required.');
+    // Email: optional, but validate format if provided
+    if (data.email && typeof data.email === 'string' && data.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email.trim())) {
+        errors.push('Please enter a valid email address.');
     }
 
     // Date: required, valid format

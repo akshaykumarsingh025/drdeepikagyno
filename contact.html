@@ -72,7 +72,13 @@
                     "@type": "OpeningHoursSpecification",
                     "dayOfWeek": "Saturday",
                     "opens": "10:00",
-                    "closes": "17:00"
+                    "closes": "20:00"
+                },
+                {
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": "Sunday",
+                    "opens": "10:00",
+                    "closes": "18:00"
                 }
             ]
         }
@@ -89,7 +95,7 @@
 
     <div id="app">
         <!-- Navigation -->
-        <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-lg border-b border-slate-100 shadow-sm transition-all duration-300"
+        <nav class="fixed-nav fixed w-full z-50 bg-white/95 backdrop-blur-lg border-b border-slate-100 shadow-sm transition-all duration-300"
             role="navigation" aria-label="Main navigation">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between h-20 items-center">
@@ -193,7 +199,8 @@
                                 <div class="p-6 text-center">
                                     <h3 class="font-bold text-lg font-display text-slate-900">Dr. Deepika Singh</h3>
                                     <p class="text-primary text-sm font-medium">MD (AIIMS) · FCLS · MCCOG</p>
-                                    <p class="text-slate-500 text-xs mt-1">Unit Head, Sarvodaya Hospital</p>
+                                    <p class="text-slate-500 text-xs mt-1">Senior Obstetrician & Gynecologist,
+                                        Laparoscopic Surgeon & Fertility Expert</p>
                                 </div>
                             </div>
 
@@ -296,9 +303,10 @@
                                         <label for="email"
                                             class="text-sm font-semibold text-slate-700 ml-1 flex items-center gap-1.5">
                                             <i class="fa-solid fa-envelope text-primary text-xs" aria-hidden="true"></i>
-                                            Email Address <span class="text-red-400">*</span>
+                                            Email Address <span
+                                                class="text-slate-400 text-xs font-normal">(Optional)</span>
                                         </label>
-                                        <input type="email" id="email" x-model="appointmentForm.email" required
+                                        <input type="email" id="email" x-model="appointmentForm.email"
                                             @blur="touchField('email')" @input="onFieldInput('email')"
                                             :class="{'border-red-400 focus:border-red-400 focus:ring-red-100': appointmentErrors.email && appointmentTouched.email, 'border-slate-200 focus:border-primary focus:ring-primary/10': !(appointmentErrors.email && appointmentTouched.email)}"
                                             class="w-full px-4 py-3 rounded-xl border focus:ring-4 transition-all bg-white/70 backdrop-blur-sm placeholder:text-slate-400"
@@ -358,13 +366,13 @@
                                             class="text-sm font-semibold text-slate-700 ml-1 flex items-center gap-1.5">
                                             <i class="fa-solid fa-notes-medical text-primary text-xs"
                                                 aria-hidden="true"></i>
-                                            Reason for Visit / Additional Info
+                                            Describe Your Health Concern
                                         </label>
                                         <textarea id="reason" x-model="appointmentForm.reason" rows="3"
                                             @blur="touchField('reason')" @input="onFieldInput('reason')"
                                             :class="{'border-red-400 focus:border-red-400 focus:ring-red-100': appointmentErrors.reason && appointmentTouched.reason, 'border-slate-200 focus:border-primary focus:ring-primary/10': !(appointmentErrors.reason && appointmentTouched.reason)}"
                                             class="w-full px-4 py-3 rounded-xl border focus:ring-4 transition-all bg-white/70 backdrop-blur-sm resize-none placeholder:text-slate-400"
-                                            placeholder="Briefly describe your symptoms or share any relevant info."
+                                            placeholder="E.g., irregular periods, abdominal pain, pregnancy check-up, PCOS symptoms, etc."
                                             :disabled="appointmentStatus.loading"></textarea>
                                         <p x-show="appointmentErrors.reason && appointmentTouched.reason"
                                             x-text="appointmentErrors.reason"
@@ -444,12 +452,13 @@
                                         <span class="font-medium text-slate-700">Saturday</span>
                                         <span
                                             class="font-semibold text-primary bg-teal-50 px-3 py-1 rounded-full text-sm">10:00
-                                            AM - 05:00 PM</span>
+                                            AM - 08:00 PM</span>
                                     </div>
                                     <div class="flex justify-between items-center flex-wrap gap-1 py-3">
                                         <span class="font-medium text-slate-700">Sunday</span>
                                         <span
-                                            class="font-semibold text-rose-500 bg-rose-50 px-3 py-1 rounded-full text-sm">Closed</span>
+                                            class="font-semibold text-primary bg-teal-50 px-3 py-1 rounded-full text-sm">10:00
+                                            AM - 06:00 PM</span>
                                     </div>
                                 </div>
                             </div>
@@ -479,6 +488,26 @@
                 </div>
             </section>
         </main>
+
+        <!-- Floating Call & WhatsApp Icons (Visible on all devices, text hidden on mobile) -->
+        <a href="tel:+918595954095"
+            class="fixed bottom-4 left-4 z-[100] flex items-center gap-2 p-3 sm:px-4 sm:py-3 bg-white text-slate-800 font-semibold rounded-full shadow-2xl border border-slate-200 hover:bg-slate-50 hover:-translate-y-1 transition-all duration-300 group"
+            aria-label="Call Dr. Deepika">
+            <div
+                class="w-10 h-10 sm:w-10 sm:h-10 bg-primary rounded-full flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                <i class="fa-solid fa-phone text-white text-lg"></i>
+            </div>
+            <span class="hidden sm:inline text-sm font-bold">+91 85959 54095</span>
+        </a>
+        <a href="https://wa.me/918595954095" target="_blank" rel="noopener noreferrer"
+            class="fixed bottom-4 right-4 z-[100] flex items-center gap-2 p-3 sm:px-4 sm:py-3 bg-green-500 text-white font-semibold rounded-full shadow-2xl hover:bg-green-600 hover:-translate-y-1 transition-all duration-300 group"
+            aria-label="WhatsApp Dr. Deepika">
+            <div
+                class="w-10 h-10 sm:w-10 sm:h-10 bg-green-600 rounded-full flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                <i class="fa-brands fa-whatsapp text-white text-2xl"></i>
+            </div>
+            <span class="hidden sm:inline text-sm font-bold">WhatsApp Us</span>
+        </a>
 
         <!-- Footer -->
         <footer class="bg-slate-900 text-slate-300 py-12 border-t border-slate-800" role="contentinfo">
@@ -512,8 +541,8 @@
                     <h4 class="text-white font-bold mb-6">Clinic Hours</h4>
                     <ul class="space-y-3 text-slate-400">
                         <li>Mon - Fri: 10:00 AM - 08:00 PM</li>
-                        <li>Saturday: 10:00 AM - 05:00 PM</li>
-                        <li>Sunday: Closed</li>
+                        <li>Saturday: 10:00 AM - 08:00 PM</li>
+                        <li>Sunday: 10:00 AM - 06:00 PM</li>
                     </ul>
                 </div>
                 <div>
@@ -524,7 +553,7 @@
                             class="w-10 h-10 rounded-full bg-slate-800 hover:bg-pink-600 transition-colors flex items-center justify-center">
                             <i class="fa-brands fa-instagram text-xl text-white"></i>
                         </a>
-                        <a href="https://www.facebook.com/profile.php?id=100094918847959" target="_blank"
+                        <a href="https://www.facebook.com/DrDeepikasingh2/" target="_blank"
                             rel="noopener noreferrer"
                             class="w-10 h-10 rounded-full bg-slate-800 hover:bg-blue-600 transition-colors flex items-center justify-center">
                             <i class="fa-brands fa-facebook text-xl text-white"></i>
@@ -532,6 +561,11 @@
                         <a href="https://www.youtube.com/@DeepikaSingh1" target="_blank" rel="noopener noreferrer"
                             class="w-10 h-10 rounded-full bg-slate-800 hover:bg-red-600 transition-colors flex items-center justify-center">
                             <i class="fa-brands fa-youtube text-xl text-white"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/deepika-singh-7200412bb/" target="_blank"
+                            rel="noopener noreferrer"
+                            class="w-10 h-10 rounded-full bg-slate-800 hover:bg-blue-700 transition-colors flex items-center justify-center">
+                            <i class="fa-brands fa-linkedin text-xl text-white"></i>
                         </a>
                     </div>
                 </div>

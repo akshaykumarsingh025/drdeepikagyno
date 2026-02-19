@@ -7,6 +7,13 @@ function createCalendarEvents() {
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Appointments");
   var startRow = 2; 
   var numRows = sheet.getLastRow() - 1; 
+  
+  // Guard: Exit early if there are no data rows (only headers or empty sheet)
+  if (numRows < 1) {
+    console.log("No appointment data found. Skipping.");
+    return;
+  }
+  
   var dataRange = sheet.getRange(startRow, 1, numRows, 8); 
   var data = dataRange.getValues();
   var cal = CalendarApp.getDefaultCalendar();

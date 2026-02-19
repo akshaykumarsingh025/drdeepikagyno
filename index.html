@@ -78,7 +78,13 @@
                 "@type": "OpeningHoursSpecification",
                 "dayOfWeek": "Saturday",
                 "opens": "10:00",
-                "closes": "17:00"
+                "closes": "20:00"
+            },
+            {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": "Sunday",
+                "opens": "10:00",
+                "closes": "18:00"
             }
         ],
         "priceRange": "$$",
@@ -150,7 +156,7 @@
 
     <div id="app">
         <!-- Navigation -->
-        <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-lg border-b border-slate-100 shadow-sm transition-all duration-300"
+        <nav class="fixed-nav fixed w-full z-50 bg-white/95 backdrop-blur-lg border-b border-slate-100 shadow-sm transition-all duration-300"
             role="navigation" aria-label="Main navigation">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between h-20 items-center">
@@ -261,15 +267,20 @@
                             adolescence to menopause, we are here for you.
                         </p>
 
-                        <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                            <a href="/contact.html"
+                        <div class="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
+                            <a href="#booking-form"
                                 class="btn-primary text-center py-4 px-8 text-lg hover:ring-4 hover:ring-primary/20 transition-all">
-                                Book Consultation
+                                <i class="fa-solid fa-calendar-check mr-2" aria-hidden="true"></i>Book Appointment
                             </a>
-                            <a href="/services.html"
-                                class="px-8 py-4 bg-white/50 backdrop-blur-sm text-slate-700 font-semibold rounded-full border border-slate-200 shadow-sm hover:bg-white hover:border-primary/30 transition-all duration-300 flex items-center justify-center gap-2 group">
-                                <i class="fa-solid fa-stethoscope text-primary group-hover:scale-110 transition-transform"
-                                    aria-hidden="true"></i> Our Services
+                            <a href="tel:+918595954095"
+                                class="px-6 py-4 bg-white/50 backdrop-blur-sm text-slate-700 font-semibold rounded-full border border-slate-200 shadow-sm hover:bg-white hover:border-primary/30 transition-all duration-300 flex items-center justify-center gap-2 group">
+                                <i class="fa-solid fa-phone text-primary group-hover:scale-110 transition-transform"
+                                    aria-hidden="true"></i> Call Now
+                            </a>
+                            <a href="https://wa.me/918595954095" target="_blank" rel="noopener noreferrer"
+                                class="px-6 py-4 bg-green-50/80 backdrop-blur-sm text-green-700 font-semibold rounded-full border border-green-200 shadow-sm hover:bg-green-100 hover:border-green-300 transition-all duration-300 flex items-center justify-center gap-2 group">
+                                <i class="fa-brands fa-whatsapp text-green-600 text-xl group-hover:scale-110 transition-transform"
+                                    aria-hidden="true"></i> WhatsApp
                             </a>
                         </div>
                     </div>
@@ -302,6 +313,29 @@
                         <div
                             class="hidden md:block absolute -top-10 -left-10 w-64 h-64 bg-rose-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70">
                         </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quick Booking Strip -->
+            <section class="bg-gradient-to-r from-primary to-teal-600 text-white py-4 relative overflow-hidden">
+                <div class="absolute inset-0 opacity-10 bg-medical-pattern"></div>
+                <div class="max-w-7xl mx-auto px-4 relative z-10">
+                    <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm md:text-base">
+                        <a href="tel:+918595954095"
+                            class="flex items-center gap-2 hover:text-teal-200 transition-colors font-medium">
+                            <i class="fa-solid fa-phone"></i> +91 85959 54095
+                        </a>
+                        <a href="https://wa.me/918595954095" target="_blank" rel="noopener noreferrer"
+                            class="flex items-center gap-2 hover:text-teal-200 transition-colors font-medium">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> WhatsApp Us
+                        </a>
+                        <span class="flex items-center gap-2">
+                            <i class="fa-solid fa-location-dot"></i> F-11, South Extension Part 1, New Delhi
+                        </span>
+                        <span class="flex items-center gap-2">
+                            <i class="fa-solid fa-clock"></i> Mon-Sun: 10 AM - 8 PM
+                        </span>
                     </div>
                 </div>
             </section>
@@ -364,7 +398,7 @@
                             You</h2>
                     </div>
 
-                    <div class="grid md:grid-cols-3 gap-8">
+                    <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
                         <a href="/services.html"
                             class="glass-card p-5 sm:p-8 rounded-2xl group border border-slate-100/50 hover:border-primary/20">
                             <div
@@ -374,9 +408,6 @@
                             <h3 class="text-xl font-bold mb-3 font-display">Pregnancy Care</h3>
                             <p class="text-slate-600 text-sm leading-relaxed">Comprehensive antenatal care for a healthy
                                 journey from conception to delivery, including high-risk pregnancy management.</p>
-                            <div
-                                class="mt-6 flex items-center text-primary font-medium text-sm opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
-                                Learn more <i class="fa-solid fa-arrow-right ml-2"></i></div>
                         </a>
                         <a href="/services.html"
                             class="glass-card p-5 sm:p-8 rounded-2xl group border border-slate-100/50 hover:border-primary/20">
@@ -387,9 +418,6 @@
                             <h3 class="text-xl font-bold mb-3 font-display">Gynaecological Surgeries</h3>
                             <p class="text-slate-600 text-sm leading-relaxed">Advanced surgical solutions including
                                 laparoscopic and hysteroscopic procedures with minimal recovery time.</p>
-                            <div
-                                class="mt-6 flex items-center text-primary font-medium text-sm opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
-                                Learn more <i class="fa-solid fa-arrow-right ml-2"></i></div>
                         </a>
                         <a href="/services.html"
                             class="glass-card p-5 sm:p-8 rounded-2xl group border border-slate-100/50 hover:border-primary/20">
@@ -400,9 +428,36 @@
                             <h3 class="text-xl font-bold mb-3 font-display">Infertility Treatment</h3>
                             <p class="text-slate-600 text-sm leading-relaxed">Expert evaluation and treatment options to
                                 help you start your family, including IVF consultation and support.</p>
+                        </a>
+                        <a href="/services.html"
+                            class="glass-card p-5 sm:p-8 rounded-2xl group border border-slate-100/50 hover:border-primary/20">
                             <div
-                                class="mt-6 flex items-center text-primary font-medium text-sm opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
-                                Learn more <i class="fa-solid fa-arrow-right ml-2"></i></div>
+                                class="w-16 h-16 bg-teal-50 text-primary rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-primary group-hover:text-white transition-all duration-300 shadow-sm group-hover:shadow-primary/30">
+                                <i class="fa-solid fa-venus"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 font-display">PCOS/PCOD Management</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed">Comprehensive management of hormonal
+                                imbalances, thyroid disorders, and PCOS affecting women's health.</p>
+                        </a>
+                        <a href="/services.html"
+                            class="glass-card p-5 sm:p-8 rounded-2xl group border border-slate-100/50 hover:border-primary/20">
+                            <div
+                                class="w-16 h-16 bg-teal-50 text-primary rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-primary group-hover:text-white transition-all duration-300 shadow-sm group-hover:shadow-primary/30">
+                                <i class="fa-solid fa-person-dress"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 font-display">Menopause Clinic</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed">Support and treatment for a smooth
+                                transition through menopause, addressing symptoms and long-term health.</p>
+                        </a>
+                        <a href="/services.html"
+                            class="glass-card p-5 sm:p-8 rounded-2xl group border border-slate-100/50 hover:border-primary/20">
+                            <div
+                                class="w-16 h-16 bg-teal-50 text-primary rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-primary group-hover:text-white transition-all duration-300 shadow-sm group-hover:shadow-primary/30">
+                                <i class="fa-solid fa-ribbon"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 font-display">Cancer Screening</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed">Pap smears, mammograms, and preventive
+                                screenings for early detection and prevention of women's cancers.</p>
                         </a>
                     </div>
 
@@ -528,6 +583,276 @@
                     </div>
                 </div>
             </section>
+
+
+            <!-- Book Appointment Section -->
+            <section id="book-appointment" class="py-12 md:py-24 bg-white relative overflow-hidden"
+                aria-labelledby="booking-heading">
+                <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
+                    <div class="absolute top-20 right-10 w-96 h-96 bg-teal-50 rounded-full blur-3xl opacity-40"></div>
+                    <div class="absolute bottom-20 left-10 w-96 h-96 bg-rose-50 rounded-full blur-3xl opacity-40"></div>
+                </div>
+
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <div class="text-center mb-8 md:mb-12">
+                        <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Book Now</span>
+                        <h2 id="booking-heading"
+                            class="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-slate-900">Schedule Your
+                            Appointment</h2>
+                        <p class="text-slate-600 mt-3 max-w-xl mx-auto">Book your consultation easily — fill the form or
+                            reach out via call/WhatsApp.</p>
+                    </div>
+
+                    <div class="grid lg:grid-cols-5 gap-6 items-start">
+                        <!-- Left Sidebar: Contact Info + Clinic Hours -->
+                        <div class="lg:col-span-2 space-y-6 order-2 lg:order-1">
+                            <!-- Contact Info Card -->
+                            <div
+                                class="glass-card p-6 rounded-2xl border border-white/50 shadow-xl relative overflow-hidden">
+                                <div
+                                    class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-primary to-secondary">
+                                </div>
+                                <h3 class="font-bold text-xl font-display mb-5 text-slate-900">Get in Touch</h3>
+                                <div class="space-y-4">
+                                    <div class="flex items-start gap-4">
+                                        <div
+                                            class="w-11 h-11 rounded-xl bg-teal-50 flex items-center justify-center text-primary shrink-0 shadow-sm">
+                                            <i class="fa-solid fa-location-dot"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-semibold text-slate-900">F-11, South Extension Part 1</p>
+                                            <p class="text-sm text-slate-500 mt-0.5">New Delhi, 110049</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-4">
+                                        <div
+                                            class="w-11 h-11 rounded-xl bg-teal-50 flex items-center justify-center text-primary shrink-0 shadow-sm">
+                                            <i class="fa-solid fa-phone"></i>
+                                        </div>
+                                        <a href="tel:+918595954095"
+                                            class="hover:text-primary transition-colors font-medium">+91 85959 54095</a>
+                                    </div>
+                                    <div class="flex items-center gap-4">
+                                        <div
+                                            class="w-11 h-11 rounded-xl bg-green-50 flex items-center justify-center text-green-600 shrink-0 shadow-sm">
+                                            <i class="fa-brands fa-whatsapp text-lg"></i>
+                                        </div>
+                                        <a href="https://wa.me/918595954095" target="_blank" rel="noopener noreferrer"
+                                            class="hover:text-green-600 transition-colors font-medium">Chat on
+                                            WhatsApp</a>
+                                    </div>
+                                    <div class="flex items-center gap-4">
+                                        <div
+                                            class="w-11 h-11 rounded-xl bg-teal-50 flex items-center justify-center text-primary shrink-0 shadow-sm">
+                                            <i class="fa-solid fa-envelope"></i>
+                                        </div>
+                                        <a href="mailto:drdipikasingh2026@gmail.com"
+                                            class="hover:text-primary transition-colors font-medium text-sm">drdipikasingh2026@gmail.com</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Clinic Hours -->
+                            <div
+                                class="glass-card p-6 rounded-2xl border border-white/50 shadow-xl relative overflow-hidden">
+                                <div
+                                    class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-rose-400 to-secondary">
+                                </div>
+                                <h3 class="font-bold text-lg font-display mb-4 text-slate-900 flex items-center gap-2">
+                                    <i class="fa-solid fa-clock text-primary"></i> Clinic Hours
+                                </h3>
+                                <div class="space-y-0 text-slate-600">
+                                    <div class="flex justify-between items-center py-2.5 border-b border-slate-100">
+                                        <span class="font-medium text-slate-700">Monday - Friday</span>
+                                        <span
+                                            class="font-semibold text-primary bg-teal-50 px-3 py-1 rounded-full text-sm">10AM
+                                            - 8PM</span>
+                                    </div>
+                                    <div class="flex justify-between items-center py-2.5 border-b border-slate-100">
+                                        <span class="font-medium text-slate-700">Saturday</span>
+                                        <span
+                                            class="font-semibold text-primary bg-teal-50 px-3 py-1 rounded-full text-sm">10AM
+                                            - 8PM</span>
+                                    </div>
+                                    <div class="flex justify-between items-center py-2.5">
+                                        <span class="font-medium text-slate-700">Sunday</span>
+                                        <span
+                                            class="font-semibold text-primary bg-teal-50 px-3 py-1 rounded-full text-sm">10AM
+                                            - 6PM</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Urgent Help -->
+                            <div
+                                class="bg-gradient-to-br from-primary to-teal-600 p-6 rounded-2xl shadow-xl text-white relative overflow-hidden">
+                                <div
+                                    class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2">
+                                </div>
+                                <div class="relative z-10">
+                                    <h3 class="font-bold text-xl font-display mb-2">Need Urgent Help?</h3>
+                                    <p class="text-teal-100 text-sm leading-relaxed mb-4">For emergencies or urgent
+                                        consultations, call us directly.</p>
+                                    <a href="tel:+918595954095"
+                                        class="inline-flex items-center gap-2 px-6 py-3 bg-white text-primary font-bold rounded-xl hover:bg-teal-50 transition-colors shadow-lg">
+                                        <i class="fa-solid fa-phone-volume"></i> Call Now
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Booking Form -->
+                        <div id="booking-form"
+                            class="lg:col-span-3 glass-card p-6 sm:p-8 rounded-2xl border border-white/50 shadow-xl relative overflow-hidden order-1 lg:order-2">
+                            <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-primary to-secondary">
+                            </div>
+                            <h3 class="text-2xl font-bold font-display text-slate-900 mb-6">Schedule a Visit</h3>
+
+                            <form @submit.prevent="submitAppointment" class="flex flex-col gap-5">
+                                <div style="position:absolute;left:-9999px" aria-hidden="true">
+                                    <input type="text" name="_honey" x-model="appointmentForm._honey" tabindex="-1"
+                                        autocomplete="off">
+                                </div>
+                                <div class="grid sm:grid-cols-2 gap-5">
+                                    <div class="space-y-1.5">
+                                        <label for="home-name"
+                                            class="text-sm font-semibold text-slate-700 ml-1 flex items-center gap-1.5">
+                                            <i class="fa-solid fa-user text-primary text-xs"></i> Full Name <span
+                                                class="text-red-400">*</span>
+                                        </label>
+                                        <input type="text" id="home-name" x-model="appointmentForm.name" required
+                                            @blur="touchField('name')" @input="onFieldInput('name')"
+                                            :class="{'border-red-400 focus:border-red-400 focus:ring-red-100': appointmentErrors.name && appointmentTouched.name, 'border-slate-200 focus:border-primary focus:ring-primary/10': !(appointmentErrors.name && appointmentTouched.name)}"
+                                            class="w-full px-4 py-3 rounded-xl border focus:ring-4 transition-all bg-white/70 backdrop-blur-sm placeholder:text-slate-400"
+                                            placeholder="Jane Doe" :disabled="appointmentStatus.loading">
+                                        <p x-show="appointmentErrors.name && appointmentTouched.name"
+                                            x-text="appointmentErrors.name"
+                                            class="text-red-500 text-xs font-medium ml-1" x-transition></p>
+                                    </div>
+                                    <div class="space-y-1.5">
+                                        <label for="home-phone"
+                                            class="text-sm font-semibold text-slate-700 ml-1 flex items-center gap-1.5">
+                                            <i class="fa-solid fa-phone text-primary text-xs"></i> Phone Number <span
+                                                class="text-red-400">*</span>
+                                        </label>
+                                        <input type="tel" id="home-phone" x-model="appointmentForm.phone" required
+                                            @blur="touchField('phone')" @input="onFieldInput('phone')"
+                                            :class="{'border-red-400 focus:border-red-400 focus:ring-red-100': appointmentErrors.phone && appointmentTouched.phone, 'border-slate-200 focus:border-primary focus:ring-primary/10': !(appointmentErrors.phone && appointmentTouched.phone)}"
+                                            class="w-full px-4 py-3 rounded-xl border focus:ring-4 transition-all bg-white/70 backdrop-blur-sm placeholder:text-slate-400"
+                                            placeholder="+91 85959 54095" :disabled="appointmentStatus.loading">
+                                        <p x-show="appointmentErrors.phone && appointmentTouched.phone"
+                                            x-text="appointmentErrors.phone"
+                                            class="text-red-500 text-xs font-medium ml-1" x-transition></p>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-1.5">
+                                    <label for="home-email"
+                                        class="text-sm font-semibold text-slate-700 ml-1 flex items-center gap-1.5">
+                                        <i class="fa-solid fa-envelope text-primary text-xs"></i> Email <span
+                                            class="text-slate-400 text-xs font-normal">(Optional)</span>
+                                    </label>
+                                    <input type="email" id="home-email" x-model="appointmentForm.email"
+                                        @blur="touchField('email')" @input="onFieldInput('email')"
+                                        :class="{'border-red-400 focus:border-red-400 focus:ring-red-100': appointmentErrors.email && appointmentTouched.email, 'border-slate-200 focus:border-primary focus:ring-primary/10': !(appointmentErrors.email && appointmentTouched.email)}"
+                                        class="w-full px-4 py-3 rounded-xl border focus:ring-4 transition-all bg-white/70 backdrop-blur-sm placeholder:text-slate-400"
+                                        placeholder="jane@example.com" :disabled="appointmentStatus.loading">
+                                </div>
+
+                                <div class="grid sm:grid-cols-2 gap-5">
+                                    <div class="space-y-1.5">
+                                        <label for="home-date"
+                                            class="text-sm font-semibold text-slate-700 ml-1 flex items-center gap-1.5">
+                                            <i class="fa-solid fa-calendar text-primary text-xs"></i> Preferred Date
+                                            <span class="text-red-400">*</span>
+                                        </label>
+                                        <input type="date" id="home-date" x-model="appointmentForm.date" required
+                                            @blur="touchField('date')" @change="touchField('date')"
+                                            :class="{'border-red-400 focus:border-red-400 focus:ring-red-100': appointmentErrors.date && appointmentTouched.date, 'border-slate-200 focus:border-primary focus:ring-primary/10': !(appointmentErrors.date && appointmentTouched.date)}"
+                                            class="w-full px-4 py-3 rounded-xl border focus:ring-4 transition-all bg-white/70 backdrop-blur-sm"
+                                            :disabled="appointmentStatus.loading">
+                                        <p x-show="appointmentErrors.date && appointmentTouched.date"
+                                            x-text="appointmentErrors.date"
+                                            class="text-red-500 text-xs font-medium ml-1" x-transition></p>
+                                    </div>
+                                    <div class="space-y-1.5">
+                                        <label for="home-time"
+                                            class="text-sm font-semibold text-slate-700 ml-1 flex items-center gap-1.5">
+                                            <i class="fa-solid fa-clock text-primary text-xs"></i> Preferred Time <span
+                                                class="text-red-400">*</span>
+                                        </label>
+                                        <select id="home-time" x-model="appointmentForm.time" required
+                                            @blur="touchField('time')" @change="touchField('time')"
+                                            :class="{'border-red-400 focus:border-red-400 focus:ring-red-100': appointmentErrors.time && appointmentTouched.time, 'border-slate-200 focus:border-primary focus:ring-primary/10': !(appointmentErrors.time && appointmentTouched.time)}"
+                                            class="w-full px-4 py-3 rounded-xl border focus:ring-4 transition-all bg-white/70 backdrop-blur-sm"
+                                            :disabled="appointmentStatus.loading">
+                                            <option value="">Select a time</option>
+                                            <option value="Morning (9:00 AM - 12:00 PM)">Morning (9-12 PM)</option>
+                                            <option value="Afternoon (12:00 PM - 4:00 PM)">Afternoon (12-4 PM)</option>
+                                            <option value="Evening (4:00 PM - 8:00 PM)">Evening (4-8 PM)</option>
+                                        </select>
+                                        <p x-show="appointmentErrors.time && appointmentTouched.time"
+                                            x-text="appointmentErrors.time"
+                                            class="text-red-500 text-xs font-medium ml-1" x-transition></p>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-1.5">
+                                    <label for="home-reason"
+                                        class="text-sm font-semibold text-slate-700 ml-1 flex items-center gap-1.5">
+                                        <i class="fa-solid fa-notes-medical text-primary text-xs"></i> Health Concern
+                                    </label>
+                                    <textarea id="home-reason" x-model="appointmentForm.reason" rows="3"
+                                        @blur="touchField('reason')" @input="onFieldInput('reason')"
+                                        class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all bg-white/70 backdrop-blur-sm resize-none placeholder:text-slate-400"
+                                        placeholder="E.g., irregular periods, pregnancy check-up, PCOS symptoms..."
+                                        :disabled="appointmentStatus.loading"></textarea>
+                                </div>
+
+                                <div x-show="appointmentStatus.message" x-transition
+                                    :class="{'bg-green-50 text-green-800 border-green-200': appointmentStatus.type === 'success', 'bg-red-50 text-red-800 border-red-200': appointmentStatus.type === 'error'}"
+                                    class="p-4 rounded-xl border text-sm font-medium">
+                                    <p x-text="appointmentStatus.message"></p>
+                                </div>
+
+                                <button type="submit" :disabled="appointmentStatus.loading"
+                                    class="w-full px-8 py-4 bg-gradient-to-r from-primary to-teal-500 text-white font-bold text-lg rounded-xl shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-3 disabled:opacity-70 disabled:cursor-not-allowed">
+                                    <i class="fa-solid"
+                                        :class="{'fa-spinner fa-spin': appointmentStatus.loading, 'fa-calendar-check': !appointmentStatus.loading}"></i>
+                                    <span x-text="appointmentStatus.loading ? 'Booking...' : 'Book Appointment'">Book
+                                        Appointment</span>
+                                </button>
+
+                                <div class="pt-4 border-t border-slate-100">
+                                    <div class="flex justify-around items-center bg-teal-50/60 rounded-xl px-4 py-4">
+                                        <div class="text-center">
+                                            <div class="text-2xl mb-1">🏥</div>
+                                            <div class="font-bold text-primary text-base leading-tight">15+</div>
+                                            <div class="text-slate-500 text-[0.65rem] sm:text-xs mt-0.5">Years Exp</div>
+                                        </div>
+                                        <div class="text-center">
+                                            <div class="text-2xl mb-1">👩‍⚕️</div>
+                                            <div class="font-bold text-primary text-base leading-tight">20,000+</div>
+                                            <div class="text-slate-500 text-[0.65rem] sm:text-xs mt-0.5">Patients</div>
+                                        </div>
+                                        <div class="text-center">
+                                            <div class="text-2xl mb-1">⭐</div>
+                                            <div class="font-bold text-primary text-base leading-tight">4.9</div>
+                                            <div class="text-slate-500 text-[0.65rem] sm:text-xs mt-0.5">Google Rating
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Testimonials Section (Moved to Bottom) -->
+
+
+            <!-- Testimonials Section -->
             <section class="py-12 md:py-24 bg-slate-50 relative overflow-hidden mb-8 md:mb-16">
                 <div class="max-w-7xl mx-auto px-4 relative z-10">
                     <div class="text-center mb-8 md:mb-16">
@@ -601,7 +926,7 @@
                     <div class="flex items-center gap-4 mb-6">
                         <div
                             class="w-16 h-16 rounded-full overflow-hidden ring-2 ring-teal-500 shadow-lg shadow-teal-500/30">
-                            <img src="/assets/DrdeepikaPics_drdeepikaInsari.jpg" alt="Dr. Deepika Singh"
+                            <img src="/assets/DrdeepikaNew.jpg" alt="Dr. Deepika Singh"
                                 class="w-full h-full object-cover">
                         </div>
                         <div>
@@ -625,8 +950,8 @@
                     <h4 class="text-white font-bold mb-6">Clinic Hours</h4>
                     <ul class="space-y-3 text-slate-400">
                         <li>Mon - Fri: 10:00 AM - 08:00 PM</li>
-                        <li>Saturday: 10:00 AM - 05:00 PM</li>
-                        <li>Sunday: Closed</li>
+                        <li>Saturday: 10:00 AM - 08:00 PM</li>
+                        <li>Sunday: 10:00 AM - 06:00 PM</li>
                     </ul>
                 </div>
                 <div>
@@ -637,7 +962,7 @@
                             class="w-10 h-10 rounded-full bg-slate-800 hover:bg-pink-600 transition-colors flex items-center justify-center">
                             <i class="fa-brands fa-instagram text-xl text-white"></i>
                         </a>
-                        <a href="https://www.facebook.com/profile.php?id=100094918847959" target="_blank"
+                        <a href="https://www.facebook.com/DrDeepikasingh2/" target="_blank"
                             rel="noopener noreferrer"
                             class="w-10 h-10 rounded-full bg-slate-800 hover:bg-blue-600 transition-colors flex items-center justify-center">
                             <i class="fa-brands fa-facebook text-xl text-white"></i>
@@ -645,6 +970,11 @@
                         <a href="https://www.youtube.com/@DeepikaSingh1" target="_blank" rel="noopener noreferrer"
                             class="w-10 h-10 rounded-full bg-slate-800 hover:bg-red-600 transition-colors flex items-center justify-center">
                             <i class="fa-brands fa-youtube text-xl text-white"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/deepika-singh-7200412bb/" target="_blank"
+                            rel="noopener noreferrer"
+                            class="w-10 h-10 rounded-full bg-slate-800 hover:bg-blue-700 transition-colors flex items-center justify-center">
+                            <i class="fa-brands fa-linkedin text-xl text-white"></i>
                         </a>
                     </div>
                 </div>
@@ -659,6 +989,25 @@
     <!-- Cloudflare Web Analytics -->
     <script defer src='https://static.cloudflareinsights.com/beacon.min.js'
         data-cf-beacon='{"token": "7f7fd67afcde4273818aa68e565f4f61"}'></script><!-- End Cloudflare Web Analytics -->
+    <!-- Floating Call & WhatsApp Icons (Visible on all devices, text hidden on mobile) -->
+    <a href="tel:+918595954095"
+        class="fixed bottom-4 left-4 z-[100] flex items-center gap-2 p-3 sm:px-4 sm:py-3 bg-white text-slate-800 font-semibold rounded-full shadow-2xl border border-slate-200 hover:bg-slate-50 hover:-translate-y-1 transition-all duration-300 group"
+        aria-label="Call Dr. Deepika">
+        <div
+            class="w-10 h-10 sm:w-10 sm:h-10 bg-primary rounded-full flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+            <i class="fa-solid fa-phone text-white text-lg"></i>
+        </div>
+        <span class="hidden sm:inline text-sm font-bold">+91 85959 54095</span>
+    </a>
+    <a href="https://wa.me/918595954095" target="_blank" rel="noopener noreferrer"
+        class="fixed bottom-4 right-4 z-[100] flex items-center gap-2 p-3 sm:px-4 sm:py-3 bg-green-500 text-white font-semibold rounded-full shadow-2xl hover:bg-green-600 hover:-translate-y-1 transition-all duration-300 group"
+        aria-label="WhatsApp Dr. Deepika">
+        <div
+            class="w-10 h-10 sm:w-10 sm:h-10 bg-green-600 rounded-full flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+            <i class="fa-brands fa-whatsapp text-white text-2xl"></i>
+        </div>
+        <span class="hidden sm:inline text-sm font-bold">WhatsApp Us</span>
+    </a>
 </body>
 
 </html>

@@ -132,9 +132,8 @@ document.addEventListener('alpine:init', () => {
                     break;
 
                 case 'email':
-                    if (!value || !value.trim()) {
-                        error = 'Email is required.';
-                    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim())) {
+                    // Email is optional, but validate format if provided
+                    if (value && value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim())) {
                         error = 'Please enter a valid email address.';
                     }
                     break;
@@ -148,8 +147,6 @@ document.addEventListener('alpine:init', () => {
                         today.setHours(0, 0, 0, 0);
                         if (selected < today) {
                             error = 'Date cannot be in the past.';
-                        } else if (selected.getDay() === 0) {
-                            error = 'Clinic is closed on Sundays. Please pick another day.';
                         }
                     }
                     break;
@@ -184,7 +181,7 @@ document.addEventListener('alpine:init', () => {
         },
 
         validateAllFields() {
-            const fields = ['name', 'phone', 'email', 'date', 'time'];
+            const fields = ['name', 'phone', 'date', 'time'];
             let allValid = true;
             fields.forEach(field => {
                 this.appointmentTouched[field] = true;
