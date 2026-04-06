@@ -18,3 +18,16 @@ Thumbs.db
 # Logs
 netlify_output.log
 *.log
+
+node_modules/
+Library/
+Logs/
+Temp/
+UserSettings/
+obj/
+bin/
+.vs/
+.idea/
+Builds/
+venv/
+__pycache__/
