@@ -79,6 +79,7 @@ document.addEventListener('alpine:init', () => {
             date: '',
             time: '',
             reason: '',
+            couponCode: '',
             _honey: ''
         },
         appointmentErrors: {
@@ -102,17 +103,47 @@ document.addEventListener('alpine:init', () => {
             message: '',
             type: '' // 'error' or 'success'
         },
+        appointmentCouponStatus: '', // '', 'valid', 'invalid'
+
+        // Booking confirmation popup
+        showBookingPopup: false,
+        bookingPopupCouponApplied: false,
 
         // Quick Appointment Form (Hero)
         quickForm: {
             name: '',
             phone: '',
-            message: ''
+            message: '',
+            couponCode: ''
         },
         quickStatus: {
             loading: false,
             message: '',
             type: ''
+        },
+        quickCouponStatus: '', // '', 'valid', 'invalid'
+
+        // Valid coupon codes
+        validCoupons: ['AKS500', 'AKSP500'],
+
+        validateCoupon(code) {
+            if (!code || !code.trim()) return '';
+            return this.validCoupons.includes(code.trim().toUpperCase()) ? 'valid' : 'invalid';
+        },
+
+        onAppointmentCouponInput() {
+            const code = this.appointmentForm.couponCode;
+            this.appointmentCouponStatus = this.validateCoupon(code);
+        },
+
+        onQuickCouponInput() {
+            const code = this.quickForm.couponCode;
+            this.quickCouponStatus = this.validateCoupon(code);
+        },
+
+        closeBookingPopup() {
+            this.showBookingPopup = false;
+            this.bookingPopupCouponApplied = false;
         },
 
         validateField(field) {
@@ -242,7 +273,10 @@ document.addEventListener('alpine:init', () => {
                 }
 
                 this.appointmentStatus.type = 'success';
-                this.appointmentStatus.message = 'Appointment booked successfully! We will call you to confirm.';
+                this.appointmentStatus.message = '';
+                // Show booking popup
+                this.bookingPopupCouponApplied = this.appointmentCouponStatus === 'valid';
+                this.showBookingPopup = true;
                 // Reset form and validation state
                 this.appointmentForm = {
                     name: '',
@@ -251,11 +285,12 @@ document.addEventListener('alpine:init', () => {
                     date: '',
                     time: '',
                     reason: '',
+                    couponCode: '',
                     _honey: ''
                 };
+                this.appointmentCouponStatus = '';
                 this.appointmentErrors = { name: '', phone: '', email: '', date: '', time: '', reason: '' };
                 this.appointmentTouched = { name: false, phone: false, email: false, date: false, time: false, reason: false };
-                setTimeout(() => this.appointmentStatus.message = '', 5000);
 
             } catch (error) {
                 this.appointmentStatus.type = 'error';
@@ -306,9 +341,12 @@ document.addEventListener('alpine:init', () => {
                 }
 
                 this.quickStatus.type = 'success';
-                this.quickStatus.message = 'Request submitted! We will call you shortly.';
-                this.quickForm = { name: '', phone: '', message: '' };
-                setTimeout(() => this.quickStatus.message = '', 5000);
+                this.quickStatus.message = '';
+                // Show booking popup
+                this.bookingPopupCouponApplied = this.quickCouponStatus === 'valid';
+                this.showBookingPopup = true;
+                this.quickForm = { name: '', phone: '', message: '', couponCode: '' };
+                this.quickCouponStatus = '';
 
             } catch (error) {
                 this.quickStatus.type = 'error';

@@ -217,7 +217,7 @@ export const handler = async function (event, context) {
         if (type === 'appointment') {
             let sheet = doc.sheetsByTitle['Appointments'];
             if (!sheet) {
-                sheet = await doc.addSheet({ title: 'Appointments', headerValues: ['Name', 'Phone Number', 'Email', 'Date', 'Time', 'Reason', 'Submitted At'] });
+                sheet = await doc.addSheet({ title: 'Appointments', headerValues: ['Name', 'Phone Number', 'Email', 'Date', 'Time', 'Reason', 'Coupon Code', 'Submitted At'] });
             } else {
                 try {
                     await sheet.loadHeaderRow();
@@ -225,7 +225,7 @@ export const handler = async function (event, context) {
                     console.log('No header row found, creating one');
                 }
                 if (!sheet.headerValues || sheet.headerValues.length === 0) {
-                    await sheet.setHeaderRow(['Name', 'Phone Number', 'Email', 'Date', 'Time', 'Reason', 'Submitted At']);
+                    await sheet.setHeaderRow(['Name', 'Phone Number', 'Email', 'Date', 'Time', 'Reason', 'Coupon Code', 'Submitted At']);
                 }
             }
 
@@ -236,6 +236,7 @@ export const handler = async function (event, context) {
                 Date: sanitize(data.date),
                 Time: sanitize(data.time),
                 Reason: sanitize(data.reason || ''),
+                'Coupon Code': sanitize(data.couponCode || ''),
                 'Submitted At': new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
             });
 
@@ -265,7 +266,7 @@ export const handler = async function (event, context) {
 
             // If the sheet doesn't exist, create it with the standard headers (same as successful appointment)
             if (!sheet) {
-                sheet = await doc.addSheet({ title: 'Appointments', headerValues: ['Name', 'Phone Number', 'Email', 'Date', 'Time', 'Reason', 'Submitted At'] });
+                sheet = await doc.addSheet({ title: 'Appointments', headerValues: ['Name', 'Phone Number', 'Email', 'Date', 'Time', 'Reason', 'Coupon Code', 'Submitted At'] });
             } else {
                 // Ensure headers exist
                 try {
@@ -274,7 +275,7 @@ export const handler = async function (event, context) {
                     console.log('No header row found, creating one');
                 }
                 if (!sheet.headerValues || sheet.headerValues.length === 0) {
-                    await sheet.setHeaderRow(['Name', 'Phone Number', 'Email', 'Date', 'Time', 'Reason', 'Submitted At']);
+                    await sheet.setHeaderRow(['Name', 'Phone Number', 'Email', 'Date', 'Time', 'Reason', 'Coupon Code', 'Submitted At']);
                 }
             }
 
@@ -286,6 +287,7 @@ export const handler = async function (event, context) {
                 Date: 'Quick Request', // Placeholder
                 Time: 'ASAP', // Placeholder
                 Reason: sanitize(data.message || ''),
+                'Coupon Code': sanitize(data.couponCode || ''),
                 'Submitted At': new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
             });
         }
