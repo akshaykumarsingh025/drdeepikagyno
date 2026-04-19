@@ -12,6 +12,7 @@ document.addEventListener('alpine:init', () => {
             { label: 'About', href: '/about.html' },
             { label: 'Services', href: '/services.html' },
             { label: 'Testimonials', href: '/testimonials.html' },
+            { label: 'Blog', href: '/blog.html' },
             { label: 'Contact', href: '/contact.html' }
         ],
 
