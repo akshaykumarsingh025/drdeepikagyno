@@ -17,6 +17,15 @@ content: [
                 sans: ['Inter', 'sans-serif'],
                 display: ['Outfit', 'sans-serif'],
             },
+            animation: {
+                'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
+            },
+            keyframes: {
+                'pulse-glow': {
+                    '0%, 100%': { boxShadow: '0 0 8px rgba(13, 148, 136, 0.3)' },
+                    '50%': { boxShadow: '0 0 24px rgba(13, 148, 136, 0.7)' },
+                },
+            },
         },
     },
     plugins: [],

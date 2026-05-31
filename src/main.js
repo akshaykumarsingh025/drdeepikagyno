@@ -11,6 +11,7 @@ document.addEventListener('alpine:init', () => {
             { label: 'Home', href: '/' },
             { label: 'About', href: '/about.html' },
             { label: 'Services', href: '/services.html' },
+            { label: 'Fertility Score', href: '/fertility-score.html' },
             { label: 'Testimonials', href: '/testimonials.html' },
             { label: 'Blog', href: '/blog.html' },
             { label: 'Contact', href: '/contact.html' }
