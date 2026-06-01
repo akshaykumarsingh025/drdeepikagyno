@@ -35,7 +35,14 @@ document.addEventListener('alpine:init', () => {
             pregnancyHistory: '',
             familyHistory: ''
         },
-        basicError: {},
+        basicError: {
+            age: '', menstrualRegularity: '', periodPain: '',
+            height: '', weight: '', smoking: '', stress: '', pregnancyHistory: '', familyHistory: ''
+        },
+        basicTouched: {
+            age: false, menstrualRegularity: false, periodPain: false,
+            height: false, weight: false, smoking: false, stress: false, pregnancyHistory: false, familyHistory: false
+        },
 
         // Step 3 - Advanced Lab Values (all optional)
         lab: {
@@ -185,6 +192,58 @@ document.addEventListener('alpine:init', () => {
             return ''
         },
 
+        validateBasicField(field, value) {
+            switch (field) {
+                case 'age':
+                    if (!value || !value.toString().trim()) return 'Age is required.'
+                    const age = parseInt(value)
+                    if (isNaN(age) || age < 18 || age > 55) return 'Enter a valid age (18–55).'
+                    return ''
+                case 'menstrualRegularity':
+                    if (!value) return 'Please select your menstrual cycle regularity.'
+                    return ''
+                case 'periodPain':
+                    if (!value) return 'Please select your period pain level.'
+                    return ''
+                case 'height':
+                    if (!value || !value.toString().trim()) return ''
+                    const h = parseFloat(value)
+                    if (isNaN(h) || h < 100 || h > 250) return 'Enter a valid height (100–250 cm).'
+                    return ''
+                case 'weight':
+                    if (!value || !value.toString().trim()) return ''
+                    const w = parseFloat(value)
+                    if (isNaN(w) || w < 30 || w > 200) return 'Enter a valid weight (30–200 kg).'
+                    return ''
+                case 'smoking':
+                    if (!value) return 'Please select your smoking status.'
+                    return ''
+                case 'stress':
+                    if (!value) return 'Please select your stress level.'
+                    return ''
+                case 'pregnancyHistory':
+                    if (!value) return 'Please select your pregnancy history.'
+                    return ''
+                case 'familyHistory':
+                    if (!value) return 'Please select your family history.'
+                    return ''
+                default:
+                    return ''
+            }
+        },
+
+        validateBasic() {
+            const fields = ['age', 'menstrualRegularity', 'periodPain', 'height', 'weight', 'smoking', 'stress', 'pregnancyHistory', 'familyHistory']
+            let allValid = true
+            fields.forEach(field => {
+                this.basicTouched[field] = true
+                const err = this.validateBasicField(field, this.basic[field])
+                this.basicError[field] = err
+                if (err) allValid = false
+            })
+            return allValid
+        },
+
         canProceedToStep2() {
             return !this.validateName(this.patient.name) && !this.validatePhone(this.patient.phone)
         },
@@ -197,9 +256,12 @@ document.addEventListener('alpine:init', () => {
                 this.patientError.phone = this.validatePhone(this.patient.phone)
                 if (this.patientError.name || this.patientError.phone) return
             }
-            if (this.currentStep === 2 && this.mode === 'basic') {
-                await this.calculateScore()
-                return
+            if (this.currentStep === 2) {
+                if (!this.validateBasic()) return
+                if (this.mode === 'basic') {
+                    await this.calculateScore()
+                    return
+                }
             }
             if (this.currentStep < this.totalSteps) {
                 this.currentStep++
@@ -830,6 +892,8 @@ document.addEventListener('alpine:init', () => {
                 height: '', weight: '', conditions: [],
                 smoking: '', stress: '', pregnancyHistory: '', familyHistory: ''
             }
+            this.basicError = { age: '', menstrualRegularity: '', periodPain: '', height: '', weight: '', smoking: '', stress: '', pregnancyHistory: '', familyHistory: '' }
+            this.basicTouched = { age: false, menstrualRegularity: false, periodPain: false, height: false, weight: false, smoking: false, stress: false, pregnancyHistory: false, familyHistory: false }
             this.lab = {
                 amh: '', fsh: '', lh: '', tsh: '',
                 prolactin: '', afc: '', vitaminD: '', hemoglobin: ''
