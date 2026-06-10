@@ -1131,6 +1131,73 @@ document.addEventListener('alpine:init', () => {
                 doc.save('Fertility-Report-' + this.pdfSafeName(f.patient.name) + '.pdf')
             } catch (e) { console.error(e); alert('Could not generate PDF. Please try again.') }
             f.pdfGenerating = false
+        },
+
+        // ======================================================================
+        // DIET PLAN REQUEST (shared across all tools)
+        // ======================================================================
+
+        async requestDietPlan(planName) {
+            const currentTool = this.activeTool
+            const toolPatientMap = {
+                pcos: this.pcos, duedate: this.duedate,
+                period: this.period, bmi: this.bmiData, fertility: this.fert
+            }
+            const patient = toolPatientMap[currentTool]
+            if (!patient || !patient.patient || !patient.patient.name || !patient.patient.phone) {
+                alert('Please complete the assessment first to get your diet plan.')
+                return
+            }
+            await this.submitLead('diet_plan_request', {
+                name: patient.patient.name, phone: patient.patient.phone,
+                planName: planName, source: currentTool, _honey: patient.patient._honey || ''
+            })
+            const msg = encodeURIComponent('Hi Dr. Deepika, I would like to receive the ' + planName + '. My name is ' + patient.patient.name + '.')
+            window.open('https://wa.me/918595954095?text=' + msg, '_blank')
+        },
+
+        // ======================================================================
+        // DIET PLAN TOOL (standalone card with WhatsApp redirect)
+        // ======================================================================
+        dietPlan: {
+            step: 0,
+            patient: { name: '', phone: '', _honey: '' },
+            patientError: { name: '', phone: '' },
+            patientTouched: { name: false, phone: false },
+            planType: '',
+            submitting: false
+        },
+
+        dietPlanGoNext() {
+            const d = this.dietPlan
+            d.patientTouched.name = true; d.patientTouched.phone = true
+            d.patientError.name = this.validateName(d.patient.name)
+            d.patientError.phone = this.validatePhone(d.patient.phone)
+            if (d.patientError.name || d.patientError.phone) return
+            d.step = 1; window.scrollTo({ top: 0, behavior: 'smooth' })
+        },
+
+        async dietPlanRequest() {
+            const d = this.dietPlan
+            if (!d.planType) { alert('Please select a diet plan.'); return }
+            d.submitting = true
+            await this.submitLead('diet_plan_request', {
+                name: d.patient.name, phone: d.patient.phone,
+                planName: d.planType, source: 'dietplan', _honey: d.patient._honey
+            })
+            const msg = encodeURIComponent('Hi Dr. Deepika, I would like to receive the ' + d.planType + '. My name is ' + d.patient.name + '.')
+            window.open('https://wa.me/918595954095?text=' + msg, '_blank')
+            d.submitting = false
+            d.step = 2; window.scrollTo({ top: 0, behavior: 'smooth' })
+        },
+
+        dietPlanReset() {
+            const d = this.dietPlan
+            d.step = 0; d.planType = ''
+            d.patient = { name: '', phone: '', _honey: '' }
+            d.patientError = { name: '', phone: '' }
+            d.patientTouched = { name: false, phone: false }
+            window.scrollTo({ top: 0, behavior: 'smooth' })
         }
     }))
 })

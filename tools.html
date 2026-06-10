@@ -24,6 +24,30 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": ["MedicalBusiness", "WebApplication"],
+        "name": "Free Women's Health Tools - Dr. Deepika Singh",
+        "url": "https://drdeepikagyno.com/tools.html",
+        "description": "Free online women's health tools by Dr. Deepika Singh, MD AIIMS. PCOS risk screener, due date calculator, period tracker, BMI calculator and fertility score.",
+        "operatingSystem": "All",
+        "browserRequirements": "Requires JavaScript",
+        "applicationCategory": "HealthApplication",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" },
+        "author": {
+            "@type": "Physician",
+            "name": "Dr. Deepika Singh",
+            "image": "https://drdeepikagyno.com/assets/DrdeepikaNew.jpg",
+            "url": "https://drdeepikagyno.com",
+            "medicalSpecialty": ["Gynecology", "Obstetrics"],
+            "hasCredential": [
+                { "@type": "EducationalOccupationalCredential", "credentialCategory": "degree", "name": "MD (Gynecology & Obstetrics) - AIIMS New Delhi" },
+                { "@type": "EducationalOccupationalCredential", "credentialCategory": "degree", "name": "MBBS - BRD Medical College, Gorakhpur" }
+            ]
+        }
+    }
+    </script>
 </head>
 <body class="font-sans text-slate-800 bg-slate-50 antialiased" x-data="toolsData">
     <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-white px-4 py-2 rounded-lg z-[100]">Skip to main content</a>
@@ -150,6 +174,16 @@
                             <h3 class="text-lg font-bold font-display text-slate-900 mb-2">Fertility Score</h3>
                             <p class="text-slate-500 text-sm leading-relaxed mb-3">Comprehensive fertility wellness assessment with lifestyle, hormonal, and lab value analysis.</p>
                             <span class="inline-flex items-center gap-1.5 text-emerald-500 font-semibold text-sm">Get Score <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i></span>
+                        </button>
+
+                        <!-- Diet Plans Card -->
+                        <button @click="selectTool('dietplan')" class="glass-card p-5 sm:p-6 rounded-2xl border border-slate-100/50 hover:border-orange-200 text-left group transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                            <div class="w-14 h-14 bg-orange-50 text-orange-500 rounded-2xl flex items-center justify-center text-xl mb-4 group-hover:bg-orange-500 group-hover:text-white transition-all duration-300 shadow-sm">
+                                <i class="fa-solid fa-utensils"></i>
+                            </div>
+                            <h3 class="text-lg font-bold font-display text-slate-900 mb-2">Diet Plans</h3>
+                            <p class="text-slate-500 text-sm leading-relaxed mb-3">Choose from PCOS, Pregnancy, Weight Loss &amp; Postnatal diet plans. Get yours on WhatsApp.</p>
+                            <span class="inline-flex items-center gap-1.5 text-orange-500 font-semibold text-sm">Get Plan <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i></span>
                         </button>
 
                         <!-- CTA Card -->
@@ -291,6 +325,9 @@
                                 <button @click="generatePcosPDF()" class="btn-primary flex items-center gap-2 shadow-primary/30 hover:shadow-primary/50" :disabled="pcos.pdfGenerating"><i class="fa-solid" :class="pcos.pdfGenerating ? 'fa-spinner fa-spin' : 'fa-file-pdf'"></i><span x-text="pcos.pdfGenerating ? 'Generating...' : 'Download PDF Report'"></span></button>
                                 <a href="/contact.html" class="px-6 py-2.5 bg-secondary text-white font-medium rounded-full shadow-lg shadow-secondary/30 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-2"><i class="fa-solid fa-calendar-check"></i> Book Consultation</a>
                             </div>
+                            <div class="flex justify-center mt-4">
+                                <button @click="requestDietPlan('PCOS Diet Plan')" class="px-6 py-2.5 bg-green-500 text-white font-medium rounded-full shadow-lg shadow-green-500/30 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-2"><i class="fa-brands fa-whatsapp text-lg"></i> Get PCOS Diet Plan on WhatsApp</button>
+                            </div>
                             <div class="text-center mt-6"><button @click="pcosReset()" class="text-sm text-rose-500 hover:text-rose-700 transition-colors"><i class="fa-solid fa-arrow-left mr-1"></i> Take Again</button></div>
                         </div>
 
@@ -364,6 +401,9 @@
                                 <button @click="generateDueDatePDF()" class="btn-primary flex items-center gap-2" :disabled="duedate.pdfGenerating"><i class="fa-solid" :class="duedate.pdfGenerating ? 'fa-spinner fa-spin' : 'fa-file-pdf'"></i><span x-text="duedate.pdfGenerating ? 'Generating...' : 'Download PDF Report'"></span></button>
                                 <a href="/contact.html" class="px-6 py-2.5 bg-secondary text-white font-medium rounded-full shadow-lg shadow-secondary/30 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-2"><i class="fa-solid fa-calendar-check"></i> Book Antenatal Visit</a>
                             </div>
+                            <div class="flex justify-center mt-4">
+                                <button @click="requestDietPlan('Pregnancy Diet Plan')" class="px-6 py-2.5 bg-green-500 text-white font-medium rounded-full shadow-lg shadow-green-500/30 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-2"><i class="fa-brands fa-whatsapp text-lg"></i> Get Pregnancy Diet Plan on WhatsApp</button>
+                            </div>
                             <div class="text-center mt-6"><button @click="duedateReset()" class="text-sm text-teal-500 hover:text-teal-700 transition-colors"><i class="fa-solid fa-arrow-left mr-1"></i> Calculate Again</button></div>
                         </div>
                         <!-- Nav -->
@@ -427,6 +467,9 @@
                             <div class="flex flex-col sm:flex-row gap-3 justify-center items-center mt-6">
                                 <button @click="generatePeriodPDF()" class="btn-primary flex items-center gap-2" :disabled="period.pdfGenerating"><i class="fa-solid" :class="period.pdfGenerating ? 'fa-spinner fa-spin' : 'fa-file-pdf'"></i><span x-text="period.pdfGenerating ? 'Generating...' : 'Download PDF Report'"></span></button>
                                 <a href="/contact.html" class="px-6 py-2.5 bg-secondary text-white font-medium rounded-full shadow-lg shadow-secondary/30 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-2"><i class="fa-solid fa-calendar-check"></i> Book Consultation</a>
+                            </div>
+                            <div class="flex justify-center mt-4">
+                                <button @click="requestDietPlan('PCOS Diet Plan')" class="px-6 py-2.5 bg-green-500 text-white font-medium rounded-full shadow-lg shadow-green-500/30 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-2"><i class="fa-brands fa-whatsapp text-lg"></i> Get PCOS Diet Plan on WhatsApp</button>
                             </div>
                             <div class="text-center mt-6"><button @click="periodReset()" class="text-sm text-purple-500 hover:text-purple-700 transition-colors"><i class="fa-solid fa-arrow-left mr-1"></i> Track Again</button></div>
                         </div>
@@ -524,6 +567,9 @@
                             <div class="flex flex-col sm:flex-row gap-3 justify-center items-center mt-6">
                                 <button @click="generateBmiPDF()" class="btn-primary flex items-center gap-2" :disabled="bmiData.pdfGenerating"><i class="fa-solid" :class="bmiData.pdfGenerating ? 'fa-spinner fa-spin' : 'fa-file-pdf'"></i><span x-text="bmiData.pdfGenerating ? 'Generating...' : 'Download PDF Report'"></span></button>
                                 <a href="/contact.html" class="px-6 py-2.5 bg-secondary text-white font-medium rounded-full shadow-lg shadow-secondary/30 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-2"><i class="fa-solid fa-calendar-check"></i> Book Consultation</a>
+                            </div>
+                            <div class="flex justify-center mt-4">
+                                <button @click="requestDietPlan('Weight Loss Diet Plan')" class="px-6 py-2.5 bg-green-500 text-white font-medium rounded-full shadow-lg shadow-green-500/30 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-2"><i class="fa-brands fa-whatsapp text-lg"></i> Get Weight Loss Diet Plan on WhatsApp</button>
                             </div>
                             <div class="text-center mt-6"><button @click="bmiReset()" class="text-sm text-amber-500 hover:text-amber-700 transition-colors"><i class="fa-solid fa-arrow-left mr-1"></i> Calculate Again</button></div>
                         </div>
@@ -624,6 +670,9 @@
                                 <button @click="fertGeneratePDF()" class="btn-primary flex items-center gap-2 shadow-primary/30 hover:shadow-primary/50" :disabled="fert.pdfGenerating"><i class="fa-solid" :class="fert.pdfGenerating ? 'fa-spinner fa-spin' : 'fa-file-pdf'"></i><span x-text="fert.pdfGenerating ? 'Generating...' : 'Download PDF Report'"></span></button>
                                 <a href="/contact.html" class="px-6 py-2.5 bg-secondary text-white font-medium rounded-full shadow-lg shadow-secondary/30 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-2"><i class="fa-solid fa-calendar-check"></i> Book Consultation</a>
                             </div>
+                            <div class="flex justify-center mt-4">
+                                <button @click="requestDietPlan('Fertility Boost Diet Plan')" class="px-6 py-2.5 bg-green-500 text-white font-medium rounded-full shadow-lg shadow-green-500/30 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-2"><i class="fa-brands fa-whatsapp text-lg"></i> Get Fertility Diet Plan on WhatsApp</button>
+                            </div>
                             <div class="text-center mt-6"><button @click="fertReset()" class="text-sm text-emerald-600 hover:text-emerald-700 transition-colors"><i class="fa-solid fa-arrow-left mr-1"></i> Take Again</button></div>
                         </div>
 
@@ -638,6 +687,92 @@
                         </div>
                     </div>
                     <div class="mt-6 p-4 bg-amber-50 border border-amber-200 rounded-xl"><div class="flex gap-3"><i class="fa-solid fa-triangle-exclamation text-amber-500 mt-0.5 shrink-0"></i><div><p class="text-sm font-semibold text-amber-800 mb-1">Medical Disclaimer</p><p class="text-xs text-amber-700 leading-relaxed">This calculator provides an <strong>indicative fertility wellness score</strong> for educational and screening purposes only. It is <strong>NOT a medical diagnosis</strong>. Please consult <strong>Dr. Deepika Singh</strong> for a comprehensive fertility evaluation.</p></div></div></div>
+                </div>
+            </section>
+
+            <!-- ================================================================== -->
+            <!-- TOOL: Diet Plans (WhatsApp redirect) -->
+            <!-- ================================================================== -->
+            <section x-show="activeTool === 'dietplan'" x-transition class="py-6 md:py-10 -mt-4 scroll-mt-28" x-cloak>
+                <div class="max-w-3xl mx-auto px-3 sm:px-4">
+                    <button @click="backToTools()" class="flex items-center gap-2 text-sm text-slate-500 hover:text-primary mb-4 transition-colors"><i class="fa-solid fa-arrow-left"></i> All Health Tools</button>
+                    <div class="bg-white rounded-2xl shadow-xl shadow-slate-200/70 border border-slate-100 overflow-hidden">
+                        <div class="px-6 md:px-8 pt-6 md:pt-8 pb-4">
+                            <div class="flex items-center gap-3 mb-2"><div class="w-10 h-10 bg-orange-50 text-orange-500 rounded-xl flex items-center justify-center"><i class="fa-solid fa-utensils"></i></div><h2 class="text-xl md:text-2xl font-display font-bold text-slate-900">Diet Plans</h2></div>
+                            <p class="text-slate-500 text-sm">Choose a diet plan and receive it on WhatsApp from Dr. Deepika Singh.</p>
+                        </div>
+
+                        <!-- Step 0: Lead Form -->
+                        <div x-show="dietPlan.step === 0" class="px-6 md:px-8 py-6">
+                            <div class="text-center mb-5"><h3 class="text-lg font-bold text-slate-900">Get Your Free Diet Plan</h3><p class="text-slate-500 text-sm mt-1">Enter your details to receive your personalized diet plan on WhatsApp</p></div>
+                            <div class="space-y-4 max-w-sm mx-auto">
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-700 mb-1">Full Name <span class="text-secondary">*</span></label>
+                                    <input type="text" x-model="dietPlan.patient.name" class="form-input" placeholder="Enter your full name" :class="dietPlan.patientTouched.name && dietPlan.patientError.name ? 'border-red-300' : ''" @input="dietPlan.patientTouched.name=true; dietPlan.patientError.name=validateName(dietPlan.patient.name)">
+                                    <p x-show="dietPlan.patientTouched.name && dietPlan.patientError.name" x-text="dietPlan.patientError.name" class="text-red-500 text-xs mt-1"></p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-700 mb-1">Phone Number <span class="text-secondary">*</span></label>
+                                    <input type="tel" x-model="dietPlan.patient.phone" class="form-input" placeholder="10-digit phone number" :class="dietPlan.patientTouched.phone && dietPlan.patientError.phone ? 'border-red-300' : ''" @input="dietPlan.patientTouched.phone=true; dietPlan.patientError.phone=validatePhone(dietPlan.patient.phone)">
+                                    <p x-show="dietPlan.patientTouched.phone && dietPlan.patientError.phone" x-text="dietPlan.patientError.phone" class="text-red-500 text-xs mt-1"></p>
+                                </div>
+                                <div class="absolute opacity-0 pointer-events-none" aria-hidden="true"><input type="text" x-model="dietPlan.patient._honey" tabindex="-1" autocomplete="off"></div>
+                                <button @click="dietPlanGoNext()" class="btn-primary w-full">Choose Your Plan <i class="fa-solid fa-arrow-right ml-1"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Step 1: Plan Selection -->
+                        <div x-show="dietPlan.step === 1" class="px-6 md:px-8 py-6">
+                            <div class="text-center mb-6"><h3 class="text-lg font-bold text-slate-900">Select Your Diet Plan</h3><p class="text-slate-500 text-sm mt-1">Choose the plan that matches your health goal</p></div>
+                            <div class="grid grid-cols-2 gap-4 max-w-xl mx-auto mb-6">
+                                <button @click="dietPlan.planType='PCOS Diet Plan'" class="p-4 rounded-2xl border-2 text-left transition-all duration-200" :class="dietPlan.planType==='PCOS Diet Plan' ? 'border-orange-400 bg-orange-50 shadow-md' : 'border-slate-200 bg-white hover:border-orange-200'">
+                                    <div class="w-10 h-10 bg-rose-50 text-rose-500 rounded-xl flex items-center justify-center mb-3"><i class="fa-solid fa-venus"></i></div>
+                                    <h4 class="font-bold text-slate-900 text-sm mb-1">PCOS Diet</h4>
+                                    <p class="text-xs text-slate-500">Low-GI, anti-inflammatory plan for hormonal balance</p>
+                                </button>
+                                <button @click="dietPlan.planType='Pregnancy Diet Plan'" class="p-4 rounded-2xl border-2 text-left transition-all duration-200" :class="dietPlan.planType==='Pregnancy Diet Plan' ? 'border-orange-400 bg-orange-50 shadow-md' : 'border-slate-200 bg-white hover:border-orange-200'">
+                                    <div class="w-10 h-10 bg-teal-50 text-teal-500 rounded-xl flex items-center justify-center mb-3"><i class="fa-solid fa-baby"></i></div>
+                                    <h4 class="font-bold text-slate-900 text-sm mb-1">Pregnancy Diet</h4>
+                                    <p class="text-xs text-slate-500">Nutrient-rich meals for mom &amp; baby through all trimesters</p>
+                                </button>
+                                <button @click="dietPlan.planType='Weight Loss Diet Plan'" class="p-4 rounded-2xl border-2 text-left transition-all duration-200" :class="dietPlan.planType==='Weight Loss Diet Plan' ? 'border-orange-400 bg-orange-50 shadow-md' : 'border-slate-200 bg-white hover:border-orange-200'">
+                                    <div class="w-10 h-10 bg-amber-50 text-amber-500 rounded-xl flex items-center justify-center mb-3"><i class="fa-solid fa-weight-scale"></i></div>
+                                    <h4 class="font-bold text-slate-900 text-sm mb-1">Weight Loss</h4>
+                                    <p class="text-xs text-slate-500">Balanced calorie-deficit plan with high protein</p>
+                                </button>
+                                <button @click="dietPlan.planType='Postnatal Diet Plan'" class="p-4 rounded-2xl border-2 text-left transition-all duration-200" :class="dietPlan.planType==='Postnatal Diet Plan' ? 'border-orange-400 bg-orange-50 shadow-md' : 'border-slate-200 bg-white hover:border-orange-200'">
+                                    <div class="w-10 h-10 bg-purple-50 text-purple-500 rounded-xl flex items-center justify-center mb-3"><i class="fa-solid fa-heart"></i></div>
+                                    <h4 class="font-bold text-slate-900 text-sm mb-1">Postnatal / Wellness</h4>
+                                    <p class="text-xs text-slate-500">Recovery, lactation support &amp; overall wellness</p>
+                                </button>
+                            </div>
+
+                            <!-- Action -->
+                            <div class="text-center">
+                                <button @click="dietPlanRequest()" class="btn-primary px-8 py-3 text-base flex items-center gap-2 mx-auto shadow-orange-300/30 hover:shadow-orange-300/50" :disabled="!dietPlan.planType || dietPlan.submitting">
+                                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                                    <span x-text="dietPlan.submitting ? 'Sending...' : 'Get Plan on WhatsApp'"></span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Done -->
+                        <div x-show="dietPlan.step === 2" class="px-6 md:px-8 py-6 text-center" x-cloak>
+                            <div class="w-16 h-16 bg-green-100 text-green-500 rounded-full flex items-center justify-center text-3xl mx-auto mb-4"><i class="fa-solid fa-check-circle"></i></div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">Request Sent!</h3>
+                            <p class="text-slate-500 text-sm mb-2">Your request for <strong x-text="dietPlan.planType"></strong> has been sent. Check WhatsApp for your diet plan from Dr. Deepika Singh.</p>
+                            <div class="flex flex-col sm:flex-row gap-3 justify-center items-center mt-6">
+                                <a href="https://wa.me/918595954095" target="_blank" rel="noopener noreferrer" class="px-6 py-2.5 bg-green-500 text-white font-medium rounded-full shadow-lg shadow-green-500/30 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-2"><i class="fa-brands fa-whatsapp text-lg"></i> Open WhatsApp</a>
+                                <button @click="dietPlanReset()" class="px-6 py-2.5 bg-white text-slate-600 border border-slate-200 font-medium rounded-full hover:bg-slate-50 transition-all">Choose Another Plan</button>
+                            </div>
+                        </div>
+
+                        <!-- Nav -->
+                        <div x-show="dietPlan.step === 1" class="px-6 md:px-8 pb-6 md:pb-8 flex justify-between items-center border-t border-slate-100 pt-6 min-h-[60px]">
+                            <button @click="dietPlan.step=0" class="px-5 py-2.5 text-sm text-slate-600 hover:text-slate-800 font-medium rounded-full border border-slate-200 bg-white hover:bg-slate-50 transition-all flex items-center gap-1.5"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                        </div>
+                    </div>
+                    <div class="mt-6 p-4 bg-amber-50 border border-amber-200 rounded-xl"><div class="flex gap-3"><i class="fa-solid fa-triangle-exclamation text-amber-500 mt-0.5 shrink-0"></i><div><p class="text-sm font-semibold text-amber-800 mb-1">Medical Disclaimer</p><p class="text-xs text-amber-700 leading-relaxed">These diet plans provide <strong>general nutritional guidance</strong> for educational purposes only. They are <strong>NOT a substitute</strong> for personalized medical advice. Please consult <strong>Dr. Deepika Singh</strong> before starting any new diet.</p></div></div></div>
                 </div>
             </section>
 
