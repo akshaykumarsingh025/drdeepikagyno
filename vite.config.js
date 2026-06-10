@@ -23,6 +23,7 @@ export default defineConfig({
                 'gynecologist-noida-greater-noida': resolve(__dirname, 'gynecologist-noida-greater-noida.html'),
                 'gynecologist-ghaziabad': resolve(__dirname, 'gynecologist-ghaziabad.html'),
                 'fertility-score': resolve(__dirname, 'fertility-score.html'),
+                'tools': resolve(__dirname, 'tools.html'),
             },
         },
         cssCodeSplit: false,

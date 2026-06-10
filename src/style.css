@@ -147,7 +147,7 @@
   }
 
   .glass-card {
-    @apply bg-white/60 backdrop-blur-md border border-white/30 shadow-lg hover:shadow-2xl hover:bg-white/80 transition-all duration-300;
+    @apply bg-white border border-slate-100 shadow-lg hover:shadow-2xl transition-shadow duration-300;
   }
 }
 

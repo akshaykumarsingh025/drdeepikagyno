@@ -194,7 +194,7 @@ export const handler = async function (event, context) {
         }
 
         // Validate type
-        if (!type || !['appointment', 'contact', 'quick_appointment', 'fertility_score'].includes(type)) {
+        if (!type || !['appointment', 'contact', 'quick_appointment', 'fertility_score', 'pcos_screener', 'duedate_calculator', 'period_tracker', 'bmi_pcos_risk'].includes(type)) {
             return {
                 statusCode: 400,
                 headers,
@@ -203,13 +203,16 @@ export const handler = async function (event, context) {
         }
 
         // Server-side validation
+        const toolTypes = ['fertility_score', 'pcos_screener', 'duedate_calculator', 'period_tracker', 'bmi_pcos_risk'];
         const validationErrors = type === 'appointment'
             ? validateAppointment(data)
             : type === 'contact'
                 ? validateContact(data)
                 : type === 'quick_appointment'
                     ? validateQuickAppointment(data)
-                    : validateFertilityScore(data);
+                    : toolTypes.includes(type)
+                        ? validateFertilityScore(data)
+                        : ['Invalid form type.'];
 
         if (validationErrors.length > 0) {
             return {
@@ -342,6 +345,86 @@ export const handler = async function (event, context) {
                 Date: 'Fertility Score',
                 Time: '',
                 Reason: `Fertility Score - ${sanitize(data.tier || '')} (${sanitize(data.score !== null && data.score !== undefined ? String(data.score) : '')}/100)`,
+                'Coupon Code': '',
+                'Submitted At': new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
+            });
+        } else if (type === 'pcos_screener') {
+            let sheet = doc.sheetsByTitle['Appointments'];
+            if (!sheet) {
+                sheet = await doc.addSheet({ title: 'Appointments', headerValues: ['Name', 'Phone Number', 'Email', 'Date', 'Time', 'Reason', 'Coupon Code', 'Submitted At'] });
+            } else {
+                try { await sheet.loadHeaderRow(); } catch (e) {}
+                if (!sheet.headerValues || sheet.headerValues.length === 0) {
+                    await sheet.setHeaderRow(['Name', 'Phone Number', 'Email', 'Date', 'Time', 'Reason', 'Coupon Code', 'Submitted At']);
+                }
+            }
+            await sheet.addRow({
+                Name: sanitize(data.name),
+                'Phone Number': sanitize(data.phone),
+                Email: '',
+                Date: 'PCOS Screener',
+                Time: '',
+                Reason: `PCOS Risk - ${sanitize(data.riskLevel || '')} (${sanitize(data.risk !== null && data.risk !== undefined ? String(data.risk) : '')}%)`,
+                'Coupon Code': '',
+                'Submitted At': new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
+            });
+        } else if (type === 'duedate_calculator') {
+            let sheet = doc.sheetsByTitle['Appointments'];
+            if (!sheet) {
+                sheet = await doc.addSheet({ title: 'Appointments', headerValues: ['Name', 'Phone Number', 'Email', 'Date', 'Time', 'Reason', 'Coupon Code', 'Submitted At'] });
+            } else {
+                try { await sheet.loadHeaderRow(); } catch (e) {}
+                if (!sheet.headerValues || sheet.headerValues.length === 0) {
+                    await sheet.setHeaderRow(['Name', 'Phone Number', 'Email', 'Date', 'Time', 'Reason', 'Coupon Code', 'Submitted At']);
+                }
+            }
+            await sheet.addRow({
+                Name: sanitize(data.name),
+                'Phone Number': sanitize(data.phone),
+                Email: '',
+                Date: 'Due Date Calculator',
+                Time: '',
+                Reason: `EDD: ${sanitize(data.edd || '')} | Week ${sanitize(data.gestWeeks !== null && data.gestWeeks !== undefined ? String(data.gestWeeks) : '')}`,
+                'Coupon Code': '',
+                'Submitted At': new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
+            });
+        } else if (type === 'period_tracker') {
+            let sheet = doc.sheetsByTitle['Appointments'];
+            if (!sheet) {
+                sheet = await doc.addSheet({ title: 'Appointments', headerValues: ['Name', 'Phone Number', 'Email', 'Date', 'Time', 'Reason', 'Coupon Code', 'Submitted At'] });
+            } else {
+                try { await sheet.loadHeaderRow(); } catch (e) {}
+                if (!sheet.headerValues || sheet.headerValues.length === 0) {
+                    await sheet.setHeaderRow(['Name', 'Phone Number', 'Email', 'Date', 'Time', 'Reason', 'Coupon Code', 'Submitted At']);
+                }
+            }
+            await sheet.addRow({
+                Name: sanitize(data.name),
+                'Phone Number': sanitize(data.phone),
+                Email: '',
+                Date: 'Period Tracker',
+                Time: '',
+                Reason: `Next Period: ${sanitize(data.nextPeriod || '')} | Ovulation: ${sanitize(data.ovulation || '')}`,
+                'Coupon Code': '',
+                'Submitted At': new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
+            });
+        } else if (type === 'bmi_pcos_risk') {
+            let sheet = doc.sheetsByTitle['Appointments'];
+            if (!sheet) {
+                sheet = await doc.addSheet({ title: 'Appointments', headerValues: ['Name', 'Phone Number', 'Email', 'Date', 'Time', 'Reason', 'Coupon Code', 'Submitted At'] });
+            } else {
+                try { await sheet.loadHeaderRow(); } catch (e) {}
+                if (!sheet.headerValues || sheet.headerValues.length === 0) {
+                    await sheet.setHeaderRow(['Name', 'Phone Number', 'Email', 'Date', 'Time', 'Reason', 'Coupon Code', 'Submitted At']);
+                }
+            }
+            await sheet.addRow({
+                Name: sanitize(data.name),
+                'Phone Number': sanitize(data.phone),
+                Email: '',
+                Date: 'BMI & PCOS Risk',
+                Time: '',
+                Reason: `BMI: ${sanitize(data.bmi !== null && data.bmi !== undefined ? String(data.bmi) : '')} (${sanitize(data.bmiCategory || '')}) | PCOS Risk: ${sanitize(data.pcosRiskLevel || 'N/A')}`,
                 'Coupon Code': '',
                 'Submitted At': new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
             });
