@@ -438,13 +438,16 @@ export const handler = async function (event, context) {
                     await sheet.setHeaderRow(['Name', 'Phone Number', 'Email', 'Date', 'Time', 'Reason', 'Coupon Code', 'Submitted At']);
                 }
             }
+            const bmiInfo = data.bmi ? 'BMI: ' + sanitize(data.bmi) + ' (' + sanitize(data.bmiCategory || '') + ')' : ''
+            const diabeticInfo = data.diabetic ? 'Diabetic: ' + sanitize(String(data.diabetic)) : ''
+            const conditions = [bmiInfo, diabeticInfo].filter(Boolean).join(' | ')
             await sheet.addRow({
                 Name: sanitize(data.name),
                 'Phone Number': sanitize(data.phone),
                 Email: '',
                 Date: 'Diet Plan Request',
                 Time: '',
-                Reason: sanitize(data.planName || 'Diet Plan'),
+                Reason: sanitize(data.planName || 'Diet Plan') + (conditions ? ' - ' + conditions : ''),
                 'Coupon Code': sanitize(data.source || ''),
                 'Submitted At': new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
             });

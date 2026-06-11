@@ -1,0 +1,587 @@
+============================================================
+WHATSAPP MESSAGES SENT FROM WEBSITE
+============================================================
+Placeholders filled at runtime:
+  {username}  = user's entered name
+  {phone}     = user's phone number
+  {height}    = user's height in cm
+  {weight}    = user's weight in kg
+  {bmi}       = calculated BMI (e.g. 22.5)
+============================================================
+
+
+------------------------------------------------------------
+1. FROM OTHER TOOLS (PCOS Score, Fertility Score, Due Date)
+   Function: requestDietPlan(planName)
+   Dr. Deepika sends the matching PDF from public/diet-plans/
+------------------------------------------------------------
+
+Hi Dr. Deepika, I would like to receive the PCOS Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+
+
+Hi Dr. Deepika, I would like to receive the Pregnancy Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+
+
+Hi Dr. Deepika, I would like to receive the Weight Loss Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+
+
+Hi Dr. Deepika, I would like to receive the Fertility Boost Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+
+
+------------------------------------------------------------
+2. FROM DIET PLAN TOOL (standalone)
+   Function: dietPlanRequest()
+   Message includes BMI category so Dr. Deepika sends the
+   correct one of the 48 PDFs.
+------------------------------------------------------------
+
+--- PCOS Diet Plan ---
+
+Hi Dr. Deepika, I would like to receive the PCOS Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Underweight)
+Diet: Vegetarian
+Status: Non-Diabetic
+>> Send: PCOS-Veg-Underweight.pdf
+
+Hi Dr. Deepika, I would like to receive the PCOS Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Underweight)
+Diet: Vegetarian
+Status: Diabetic
+>> Send: PCOS-Veg-Underweight-Diabetic.pdf
+
+Hi Dr. Deepika, I would like to receive the PCOS Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Normal)
+Diet: Vegetarian
+Status: Non-Diabetic
+>> Send: PCOS-Veg-Normal.pdf
+
+Hi Dr. Deepika, I would like to receive the PCOS Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Normal)
+Diet: Vegetarian
+Status: Diabetic
+>> Send: PCOS-Veg-Normal-Diabetic.pdf
+
+Hi Dr. Deepika, I would like to receive the PCOS Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Overweight)
+Diet: Vegetarian
+Status: Non-Diabetic
+>> Send: PCOS-Veg-Overweight.pdf
+
+Hi Dr. Deepika, I would like to receive the PCOS Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Overweight)
+Diet: Vegetarian
+Status: Diabetic
+>> Send: PCOS-Veg-Overweight-Diabetic.pdf
+
+Hi Dr. Deepika, I would like to receive the PCOS Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Underweight)
+Diet: Non-Vegetarian
+Status: Non-Diabetic
+>> Send: PCOS-NonVeg-Underweight.pdf
+
+Hi Dr. Deepika, I would like to receive the PCOS Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Underweight)
+Diet: Non-Vegetarian
+Status: Diabetic
+>> Send: PCOS-NonVeg-Underweight-Diabetic.pdf
+
+Hi Dr. Deepika, I would like to receive the PCOS Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Normal)
+Diet: Non-Vegetarian
+Status: Non-Diabetic
+>> Send: PCOS-NonVeg-Normal.pdf
+
+Hi Dr. Deepika, I would like to receive the PCOS Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Normal)
+Diet: Non-Vegetarian
+Status: Diabetic
+>> Send: PCOS-NonVeg-Normal-Diabetic.pdf
+
+Hi Dr. Deepika, I would like to receive the PCOS Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Overweight)
+Diet: Non-Vegetarian
+Status: Non-Diabetic
+>> Send: PCOS-NonVeg-Overweight.pdf
+
+Hi Dr. Deepika, I would like to receive the PCOS Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Overweight)
+Diet: Non-Vegetarian
+Status: Diabetic
+>> Send: PCOS-NonVeg-Overweight-Diabetic.pdf
+
+
+--- Pregnancy Diet Plan ---
+
+Hi Dr. Deepika, I would like to receive the Pregnancy Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Underweight)
+Diet: Vegetarian
+Status: Non-Diabetic
+>> Send: Pregnancy-Veg-Underweight.pdf
+
+Hi Dr. Deepika, I would like to receive the Pregnancy Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Underweight)
+Diet: Vegetarian
+Status: Diabetic
+>> Send: Pregnancy-Veg-Underweight-Diabetic.pdf
+
+Hi Dr. Deepika, I would like to receive the Pregnancy Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Normal)
+Diet: Vegetarian
+Status: Non-Diabetic
+>> Send: Pregnancy-Veg-Normal.pdf
+
+Hi Dr. Deepika, I would like to receive the Pregnancy Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Normal)
+Diet: Vegetarian
+Status: Diabetic
+>> Send: Pregnancy-Veg-Normal-Diabetic.pdf
+
+Hi Dr. Deepika, I would like to receive the Pregnancy Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Overweight)
+Diet: Vegetarian
+Status: Non-Diabetic
+>> Send: Pregnancy-Veg-Overweight.pdf
+
+Hi Dr. Deepika, I would like to receive the Pregnancy Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Overweight)
+Diet: Vegetarian
+Status: Diabetic
+>> Send: Pregnancy-Veg-Overweight-Diabetic.pdf
+
+Hi Dr. Deepika, I would like to receive the Pregnancy Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Underweight)
+Diet: Non-Vegetarian
+Status: Non-Diabetic
+>> Send: Pregnancy-NonVeg-Underweight.pdf
+
+Hi Dr. Deepika, I would like to receive the Pregnancy Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Underweight)
+Diet: Non-Vegetarian
+Status: Diabetic
+>> Send: Pregnancy-NonVeg-Underweight-Diabetic.pdf
+
+Hi Dr. Deepika, I would like to receive the Pregnancy Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Normal)
+Diet: Non-Vegetarian
+Status: Non-Diabetic
+>> Send: Pregnancy-NonVeg-Normal.pdf
+
+Hi Dr. Deepika, I would like to receive the Pregnancy Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Normal)
+Diet: Non-Vegetarian
+Status: Diabetic
+>> Send: Pregnancy-NonVeg-Normal-Diabetic.pdf
+
+Hi Dr. Deepika, I would like to receive the Pregnancy Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Overweight)
+Diet: Non-Vegetarian
+Status: Non-Diabetic
+>> Send: Pregnancy-NonVeg-Overweight.pdf
+
+Hi Dr. Deepika, I would like to receive the Pregnancy Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Overweight)
+Diet: Non-Vegetarian
+Status: Diabetic
+>> Send: Pregnancy-NonVeg-Overweight-Diabetic.pdf
+
+
+--- Weight Loss Diet Plan ---
+
+Hi Dr. Deepika, I would like to receive the Weight Loss Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Underweight)
+Diet: Vegetarian
+Status: Non-Diabetic
+>> Send: Weight-Loss-Veg-Underweight.pdf
+
+Hi Dr. Deepika, I would like to receive the Weight Loss Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Underweight)
+Diet: Vegetarian
+Status: Diabetic
+>> Send: Weight-Loss-Veg-Underweight-Diabetic.pdf
+
+Hi Dr. Deepika, I would like to receive the Weight Loss Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Normal)
+Diet: Vegetarian
+Status: Non-Diabetic
+>> Send: Weight-Loss-Veg-Normal.pdf
+
+Hi Dr. Deepika, I would like to receive the Weight Loss Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Normal)
+Diet: Vegetarian
+Status: Diabetic
+>> Send: Weight-Loss-Veg-Normal-Diabetic.pdf
+
+Hi Dr. Deepika, I would like to receive the Weight Loss Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Overweight)
+Diet: Vegetarian
+Status: Non-Diabetic
+>> Send: Weight-Loss-Veg-Overweight.pdf
+
+Hi Dr. Deepika, I would like to receive the Weight Loss Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Overweight)
+Diet: Vegetarian
+Status: Diabetic
+>> Send: Weight-Loss-Veg-Overweight-Diabetic.pdf
+
+Hi Dr. Deepika, I would like to receive the Weight Loss Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Underweight)
+Diet: Non-Vegetarian
+Status: Non-Diabetic
+>> Send: Weight-Loss-NonVeg-Underweight.pdf
+
+Hi Dr. Deepika, I would like to receive the Weight Loss Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Underweight)
+Diet: Non-Vegetarian
+Status: Diabetic
+>> Send: Weight-Loss-NonVeg-Underweight-Diabetic.pdf
+
+Hi Dr. Deepika, I would like to receive the Weight Loss Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Normal)
+Diet: Non-Vegetarian
+Status: Non-Diabetic
+>> Send: Weight-Loss-NonVeg-Normal.pdf
+
+Hi Dr. Deepika, I would like to receive the Weight Loss Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Normal)
+Diet: Non-Vegetarian
+Status: Diabetic
+>> Send: Weight-Loss-NonVeg-Normal-Diabetic.pdf
+
+Hi Dr. Deepika, I would like to receive the Weight Loss Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Overweight)
+Diet: Non-Vegetarian
+Status: Non-Diabetic
+>> Send: Weight-Loss-NonVeg-Overweight.pdf
+
+Hi Dr. Deepika, I would like to receive the Weight Loss Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Overweight)
+Diet: Non-Vegetarian
+Status: Diabetic
+>> Send: Weight-Loss-NonVeg-Overweight-Diabetic.pdf
+
+
+--- Postnatal Diet Plan ---
+
+Hi Dr. Deepika, I would like to receive the Postnatal Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Underweight)
+Diet: Vegetarian
+Status: Non-Diabetic
+>> Send: Postnatal-Veg-Underweight.pdf
+
+Hi Dr. Deepika, I would like to receive the Postnatal Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Underweight)
+Diet: Vegetarian
+Status: Diabetic
+>> Send: Postnatal-Veg-Underweight-Diabetic.pdf
+
+Hi Dr. Deepika, I would like to receive the Postnatal Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Normal)
+Diet: Vegetarian
+Status: Non-Diabetic
+>> Send: Postnatal-Veg-Normal.pdf
+
+Hi Dr. Deepika, I would like to receive the Postnatal Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Normal)
+Diet: Vegetarian
+Status: Diabetic
+>> Send: Postnatal-Veg-Normal-Diabetic.pdf
+
+Hi Dr. Deepika, I would like to receive the Postnatal Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Overweight)
+Diet: Vegetarian
+Status: Non-Diabetic
+>> Send: Postnatal-Veg-Overweight.pdf
+
+Hi Dr. Deepika, I would like to receive the Postnatal Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Overweight)
+Diet: Vegetarian
+Status: Diabetic
+>> Send: Postnatal-Veg-Overweight-Diabetic.pdf
+
+Hi Dr. Deepika, I would like to receive the Postnatal Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Underweight)
+Diet: Non-Vegetarian
+Status: Non-Diabetic
+>> Send: Postnatal-NonVeg-Underweight.pdf
+
+Hi Dr. Deepika, I would like to receive the Postnatal Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Underweight)
+Diet: Non-Vegetarian
+Status: Diabetic
+>> Send: Postnatal-NonVeg-Underweight-Diabetic.pdf
+
+Hi Dr. Deepika, I would like to receive the Postnatal Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Normal)
+Diet: Non-Vegetarian
+Status: Non-Diabetic
+>> Send: Postnatal-NonVeg-Normal.pdf
+
+Hi Dr. Deepika, I would like to receive the Postnatal Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Normal)
+Diet: Non-Vegetarian
+Status: Diabetic
+>> Send: Postnatal-NonVeg-Normal-Diabetic.pdf
+
+Hi Dr. Deepika, I would like to receive the Postnatal Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Overweight)
+Diet: Non-Vegetarian
+Status: Non-Diabetic
+>> Send: Postnatal-NonVeg-Overweight.pdf
+
+Hi Dr. Deepika, I would like to receive the Postnatal Diet Plan.
+
+My name is {username}.
+My phone is {phone}.
+Height: {height} cm
+Weight: {weight} kg
+BMI: {bmi} (Overweight)
+Diet: Non-Vegetarian
+Status: Diabetic
+>> Send: Postnatal-NonVeg-Overweight-Diabetic.pdf

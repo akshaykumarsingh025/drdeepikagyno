@@ -203,12 +203,57 @@ const PLANS = {
   },
 };
 
-const FILE_NAMES = {
-  pcos: { veg: 'PCOS-Diet-Plan-Vegetarian.pdf', nonveg: 'PCOS-Diet-Plan-Non-Vegetarian.pdf' },
-  pregnancy: { veg: 'Pregnancy-Diet-Plan-Vegetarian.pdf', nonveg: 'Pregnancy-Diet-Plan-Non-Vegetarian.pdf' },
-  weightloss: { veg: 'Weight-Loss-Diet-Plan-Vegetarian.pdf', nonveg: 'Weight-Loss-Diet-Plan-Non-Vegetarian.pdf' },
-  postnatal: { veg: 'Postnatal-Diet-Plan-Vegetarian.pdf', nonveg: 'Postnatal-Diet-Plan-Non-Vegetarian.pdf' },
-};
+const FILE_NAMES = {};
+const BMI_CATEGORIES = ['Underweight', 'Normal', 'Overweight'];
+const DIABETIC_OPTIONS = [false, true];
+const PLAN_KEYS = ['pcos', 'pregnancy', 'weightloss', 'postnatal'];
+const DIET_KEYS = ['veg', 'nonveg'];
+
+// Generate all 48 file names
+for (const pk of PLAN_KEYS) {
+  FILE_NAMES[pk] = {};
+  for (const dk of DIET_KEYS) {
+    FILE_NAMES[pk][dk] = {};
+    for (const bmi of BMI_CATEGORIES) {
+      FILE_NAMES[pk][dk][bmi] = {};
+      for (const diag of DIABETIC_OPTIONS) {
+        const dietLabel = dk === 'veg' ? 'Veg' : 'NonVeg';
+        const diagLabel = diag ? '-Diabetic' : '';
+        const prefix = PLANS[pk].title.replace(' Diet Plan', '').replace(/\s+/g, '-');
+        FILE_NAMES[pk][dk][bmi][diag] = `${prefix}-${dietLabel}-${bmi}${diagLabel}.pdf`;
+      }
+    }
+  }
+}
+
+function modifyForConditions(planData, dietData, bmiCategory, isDiabetic) {
+  const modified = JSON.parse(JSON.stringify(dietData));
+  const planModified = JSON.parse(JSON.stringify(planData));
+  const isOverweight = bmiCategory === 'Overweight';
+  const isUnderweight = bmiCategory === 'Underweight';
+
+  if (isDiabetic) {
+    planModified.subtitle += ' | Diabetic-Friendly';
+    planModified.principles.push('Strictly avoid sugar, jaggery, honey, and all sweeteners. Use stevia if needed.');
+    planModified.principles.push('Monitor carbohydrate intake carefully. Stick to measured portions of grains at each meal.');
+    planModified.principles.push('Include bitter gourd (karela), fenugreek, and cinnamon daily to help manage blood sugar.');
+    planModified.principles.push('Never skip meals. Eat at fixed times every 3-4 hours to prevent blood sugar spikes.');
+    modified.avoid = [...modified.avoid, 'Sugar, jaggery, honey, artificial sweeteners (except stevia)', 'White rice, white bread, maida, refined flour products', 'Potatoes, sweet potatoes, corn, yam, tropical fruits (mango, banana)'];
+  }
+
+  if (isOverweight) {
+    planModified.principles.push('Follow a calorie deficit of 300-500 kcal/day. Reduce grain portions by 25%.');
+    planModified.principles.push('Fill half your plate with non-starchy vegetables at every meal.');
+    planModified.principles.push('Limit rice to 1 cup per day. Prefer 2 rotis with extra vegetables instead.');
+  } else if (isUnderweight) {
+    planModified.principles.push('Aim for a calorie surplus of 300-500 kcal/day. Add ghee, nuts, and dried fruits to every meal.');
+    planModified.principles.push('Include 2-3 servings of protein-rich foods daily: eggs, paneer, dal, curd, nuts.');
+    planModified.principles.push('Eat 5-6 small meals daily. Never skip breakfast. Have a bedtime snack with warm milk.');
+    modified.include = [...modified.include, 'Ghee, butter (in moderation), banana shakes, dry fruit laddoos'];
+  }
+
+  return { plan: planModified, diet: modified };
+}
 
 // ============================================
 // PDF HELPERS
@@ -404,18 +449,20 @@ function drawDisclaimer(doc) {
 // GENERATE PDF
 // ============================================
 
-function generatePDF(planKey, dietKey, outputPath) {
+function generatePDF(planKey, dietKey, bmiCategory, isDiabetic, outputPath) {
   return new Promise((resolve, reject) => {
-    const data = PLANS[planKey];
-    const dietData = data[dietKey];
+    const rawData = PLANS[planKey];
+    const rawDiet = rawData[dietKey];
+    const { plan: data, diet: dietData } = modifyForConditions(rawData, rawDiet, bmiCategory, isDiabetic);
     const dietLabel = dietKey === 'veg' ? 'Vegetarian' : 'Non-Vegetarian';
+    const condLabel = bmiCategory + (isDiabetic ? ' | Diabetic' : '');
 
     const doc = new PDFDocument({
       size: 'A4',
       margin: MARGIN,
       compress: true,
       info: {
-        Title: `${data.title} - ${dietLabel}`,
+        Title: `${data.title} - ${dietLabel} - ${condLabel}`,
         Author: CLINIC.doctor,
         Subject: 'Diet Plan',
       },
@@ -428,7 +475,7 @@ function generatePDF(planKey, dietKey, outputPath) {
     doc.on('pageAdded', () => { pageCount++; });
 
     drawHeader(doc);
-    drawTitleBlock(doc, data.title, data.subtitle, dietLabel);
+    drawTitleBlock(doc, data.title + ' (' + condLabel + ')', data.subtitle, dietLabel);
     drawSectionHeading(doc, 'Core Dietary Principles');
     drawPrinciples(doc, data.principles);
     drawSectionHeading(doc, '7-Day Meal Plan');
@@ -456,16 +503,22 @@ async function generateAll() {
     fs.mkdirSync(outputDir, { recursive: true });
   }
 
-  for (const [planKey] of Object.entries(PLANS)) {
-    for (const dietKey of Object.keys(FILE_NAMES[planKey])) {
-      const fileName = FILE_NAMES[planKey][dietKey];
-      const outputPath = path.join(outputDir, fileName);
-      console.log(`Generating: ${fileName}...`);
-      await generatePDF(planKey, dietKey, outputPath);
-      console.log(`  Done (${(fs.statSync(outputPath).size / 1024).toFixed(1)} KB)`);
+  let count = 0;
+  for (const planKey of PLAN_KEYS) {
+    for (const dietKey of DIET_KEYS) {
+      for (const bmi of BMI_CATEGORIES) {
+        for (const diag of DIABETIC_OPTIONS) {
+          const fileName = FILE_NAMES[planKey][dietKey][bmi][diag];
+          const outputPath = path.join(outputDir, fileName);
+          console.log(`Generating: ${fileName}...`);
+          await generatePDF(planKey, dietKey, bmi, diag, outputPath);
+          console.log(`  Done (${(fs.statSync(outputPath).size / 1024).toFixed(1)} KB)`);
+          count++;
+        }
+      }
     }
   }
-  console.log('\nAll 8 PDFs generated successfully!');
+  console.log(`\nAll ${count} PDFs generated successfully!`);
 }
 
 generateAll().catch(console.error);

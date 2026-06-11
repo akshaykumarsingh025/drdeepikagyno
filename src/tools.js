@@ -1148,7 +1148,11 @@ document.addEventListener('alpine:init', () => {
                 alert('Please complete the assessment first to get your diet plan.')
                 return
             }
-            const msg = encodeURIComponent('Hi Dr. Deepika, I would like to receive the ' + planName + '. My name is ' + patient.patient.name + '.')
+            const msg = encodeURIComponent(
+                'Hi Dr. Deepika, I would like to receive the ' + planName + '.\n\n' +
+                'My name is ' + patient.patient.name + '.\n' +
+                'My phone is ' + patient.patient.phone + '.'
+            )
             window.open('https://wa.me/918595954095?text=' + msg, '_blank')
             this.submitLead('diet_plan_request', {
                 name: patient.patient.name, phone: patient.patient.phone,
@@ -1162,8 +1166,12 @@ document.addEventListener('alpine:init', () => {
         dietPlan: {
             step: 0,
             patient: { name: '', phone: '', _honey: '' },
-            patientError: { name: '', phone: '' },
-            patientTouched: { name: false, phone: false },
+            patientError: { name: '', phone: '', height: '', weight: '', diabetic: '', dietType: '' },
+            patientTouched: { name: false, phone: false, height: false, weight: false, diabetic: false, dietType: false },
+            height: '',
+            weight: '',
+            diabetic: 'no',
+            dietType: 'veg',
             planType: '',
             submitting: false
         },
@@ -1171,21 +1179,43 @@ document.addEventListener('alpine:init', () => {
         dietPlanGoNext() {
             const d = this.dietPlan
             d.patientTouched.name = true; d.patientTouched.phone = true
+            d.patientTouched.height = true; d.patientTouched.weight = true
+            d.patientTouched.diabetic = true; d.patientTouched.dietType = true
             d.patientError.name = this.validateName(d.patient.name)
             d.patientError.phone = this.validatePhone(d.patient.phone)
-            if (d.patientError.name || d.patientError.phone) return
+            d.patientError.height = d.height ? (d.height < 100 || d.height > 220 ? 'Enter 100-220 cm' : '') : 'Required'
+            d.patientError.weight = d.weight ? (d.weight < 30 || d.weight > 200 ? 'Enter 30-200 kg' : '') : 'Required'
+            d.patientError.diabetic = d.diabetic ? '' : 'Required'
+            d.patientError.dietType = d.dietType ? '' : 'Required'
+            if (d.patientError.name || d.patientError.phone || d.patientError.height || d.patientError.weight || d.patientError.diabetic || d.patientError.dietType) return
             d.step = 1; window.scrollTo({ top: 0, behavior: 'smooth' })
         },
 
         async dietPlanRequest() {
             const d = this.dietPlan
             if (!d.planType) { alert('Please select a diet plan.'); return }
-            const msg = encodeURIComponent('Hi Dr. Deepika, I would like to receive the ' + d.planType + '. My name is ' + d.patient.name + '.')
+            const bmi = d.weight / ((d.height / 100) ** 2)
+            const bmiCat = bmi < 18.5 ? 'Underweight' : bmi <= 24.9 ? 'Normal' : 'Overweight'
+            const diabetic = d.diabetic === 'yes'
+            const dietLabel = d.dietType === 'veg' ? 'Vegetarian' : 'Non-Vegetarian'
+            const diabeticLabel = diabetic ? 'Diabetic' : 'Non-Diabetic'
+
+            const msg = encodeURIComponent(
+                'Hi Dr. Deepika, I would like to receive the ' + d.planType + '.\n\n' +
+                'My name is ' + d.patient.name + '.\n' +
+                'My phone is ' + d.patient.phone + '.\n' +
+                'Height: ' + d.height + ' cm\n' +
+                'Weight: ' + d.weight + ' kg\n' +
+                'BMI: ' + bmi.toFixed(1) + ' (' + bmiCat + ')\n' +
+                'Diet: ' + dietLabel + '\n' +
+                'Status: ' + diabeticLabel
+            )
             window.open('https://wa.me/918595954095?text=' + msg, '_blank')
             d.submitting = true
             await this.submitLead('diet_plan_request', {
                 name: d.patient.name, phone: d.patient.phone,
-                planName: d.planType, source: 'dietplan', _honey: d.patient._honey
+                planName: d.planType, bmi: bmi.toFixed(1), bmiCategory: bmiCat,
+                diabetic: diabetic, dietType: d.dietType, source: 'dietplan', _honey: d.patient._honey
             })
             d.submitting = false
             d.step = 2; window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -1193,12 +1223,12 @@ document.addEventListener('alpine:init', () => {
 
         dietPlanReset() {
             const d = this.dietPlan
-            d.step = 0; d.planType = ''
+            d.step = 0; d.planType = ''; d.height = ''; d.weight = ''; d.diabetic = 'no'; d.dietType = 'veg'
             d.patient = { name: '', phone: '', _honey: '' }
-            d.patientError = { name: '', phone: '' }
-            d.patientTouched = { name: false, phone: false }
+            d.patientError = { name: '', phone: '', height: '', weight: '', diabetic: '', dietType: '' }
+            d.patientTouched = { name: false, phone: false, height: false, weight: false, diabetic: false, dietType: false }
             window.scrollTo({ top: 0, behavior: 'smooth' })
-        }
+        },
     }))
 })
 

@@ -716,6 +716,46 @@
                                     <input type="tel" x-model="dietPlan.patient.phone" class="form-input" placeholder="10-digit phone number" :class="dietPlan.patientTouched.phone && dietPlan.patientError.phone ? 'border-red-300' : ''" @input="dietPlan.patientTouched.phone=true; dietPlan.patientError.phone=validatePhone(dietPlan.patient.phone)">
                                     <p x-show="dietPlan.patientTouched.phone && dietPlan.patientError.phone" x-text="dietPlan.patientError.phone" class="text-red-500 text-xs mt-1"></p>
                                 </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-slate-700 mb-1">Height (cm) <span class="text-secondary">*</span></label>
+                                        <input type="number" x-model.number="dietPlan.height" class="form-input" placeholder="e.g. 160" min="100" max="220" :class="dietPlan.patientTouched.height && dietPlan.patientError.height ? 'border-red-300' : ''" @input="dietPlan.patientTouched.height=true; dietPlan.patientError.height=dietPlan.height ? (dietPlan.height < 100 || dietPlan.height > 220 ? 'Enter 100-220 cm' : '') : 'Required'">
+                                        <p x-show="dietPlan.patientTouched.height && dietPlan.patientError.height" x-text="dietPlan.patientError.height" class="text-red-500 text-xs mt-1"></p>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-slate-700 mb-1">Weight (kg) <span class="text-secondary">*</span></label>
+                                        <input type="number" x-model.number="dietPlan.weight" class="form-input" placeholder="e.g. 65" min="30" max="200" :class="dietPlan.patientTouched.weight && dietPlan.patientError.weight ? 'border-red-300' : ''" @input="dietPlan.patientTouched.weight=true; dietPlan.patientError.weight=dietPlan.weight ? (dietPlan.weight < 30 || dietPlan.weight > 200 ? 'Enter 30-200 kg' : '') : 'Required'">
+                                        <p x-show="dietPlan.patientTouched.weight && dietPlan.patientError.weight" x-text="dietPlan.patientError.weight" class="text-red-500 text-xs mt-1"></p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-700 mb-2">Are you diabetic? <span class="text-secondary">*</span></label>
+                                    <div class="flex gap-4">
+                                        <label class="flex items-center gap-2 cursor-pointer">
+                                            <input type="radio" x-model="dietPlan.diabetic" value="no" class="w-4 h-4 text-primary border-slate-300 focus:ring-primary">
+                                            <span class="text-sm text-slate-700">No</span>
+                                        </label>
+                                        <label class="flex items-center gap-2 cursor-pointer">
+                                            <input type="radio" x-model="dietPlan.diabetic" value="yes" class="w-4 h-4 text-primary border-slate-300 focus:ring-primary">
+                                            <span class="text-sm text-slate-700">Yes</span>
+                                        </label>
+                                    </div>
+                                    <p x-show="dietPlan.patientTouched.diabetic && dietPlan.patientError.diabetic" x-text="dietPlan.patientError.diabetic" class="text-red-500 text-xs mt-1"></p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-700 mb-2">Diet Preference <span class="text-secondary">*</span></label>
+                                    <div class="flex gap-4">
+                                        <label class="flex items-center gap-2 cursor-pointer">
+                                            <input type="radio" x-model="dietPlan.dietType" value="veg" class="w-4 h-4 text-primary border-slate-300 focus:ring-primary">
+                                            <span class="text-sm text-slate-700">Vegetarian</span>
+                                        </label>
+                                        <label class="flex items-center gap-2 cursor-pointer">
+                                            <input type="radio" x-model="dietPlan.dietType" value="nonveg" class="w-4 h-4 text-primary border-slate-300 focus:ring-primary">
+                                            <span class="text-sm text-slate-700">Non-Vegetarian</span>
+                                        </label>
+                                    </div>
+                                    <p x-show="dietPlan.patientTouched.dietType && dietPlan.patientError.dietType" x-text="dietPlan.patientError.dietType" class="text-red-500 text-xs mt-1"></p>
+                                </div>
                                 <div class="absolute opacity-0 pointer-events-none" aria-hidden="true"><input type="text" x-model="dietPlan.patient._honey" tabindex="-1" autocomplete="off"></div>
                                 <button @click="dietPlanGoNext()" class="btn-primary w-full">Choose Your Plan <i class="fa-solid fa-arrow-right ml-1"></i></button>
                             </div>
