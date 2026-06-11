@@ -1148,12 +1148,12 @@ document.addEventListener('alpine:init', () => {
                 alert('Please complete the assessment first to get your diet plan.')
                 return
             }
-            await this.submitLead('diet_plan_request', {
+            const msg = encodeURIComponent('Hi Dr. Deepika, I would like to receive the ' + planName + '. My name is ' + patient.patient.name + '.')
+            window.open('https://wa.me/918595954095?text=' + msg, '_blank')
+            this.submitLead('diet_plan_request', {
                 name: patient.patient.name, phone: patient.patient.phone,
                 planName: planName, source: currentTool, _honey: patient.patient._honey || ''
             })
-            const msg = encodeURIComponent('Hi Dr. Deepika, I would like to receive the ' + planName + '. My name is ' + patient.patient.name + '.')
-            window.open('https://wa.me/918595954095?text=' + msg, '_blank')
         },
 
         // ======================================================================
@@ -1180,13 +1180,13 @@ document.addEventListener('alpine:init', () => {
         async dietPlanRequest() {
             const d = this.dietPlan
             if (!d.planType) { alert('Please select a diet plan.'); return }
+            const msg = encodeURIComponent('Hi Dr. Deepika, I would like to receive the ' + d.planType + '. My name is ' + d.patient.name + '.')
+            window.open('https://wa.me/918595954095?text=' + msg, '_blank')
             d.submitting = true
             await this.submitLead('diet_plan_request', {
                 name: d.patient.name, phone: d.patient.phone,
                 planName: d.planType, source: 'dietplan', _honey: d.patient._honey
             })
-            const msg = encodeURIComponent('Hi Dr. Deepika, I would like to receive the ' + d.planType + '. My name is ' + d.patient.name + '.')
-            window.open('https://wa.me/918595954095?text=' + msg, '_blank')
             d.submitting = false
             d.step = 2; window.scrollTo({ top: 0, behavior: 'smooth' })
         },

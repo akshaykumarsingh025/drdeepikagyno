@@ -194,7 +194,7 @@ export const handler = async function (event, context) {
         }
 
         // Validate type
-        if (!type || !['appointment', 'contact', 'quick_appointment', 'fertility_score', 'pcos_screener', 'duedate_calculator', 'period_tracker', 'bmi_pcos_risk'].includes(type)) {
+        if (!type || !['appointment', 'contact', 'quick_appointment', 'fertility_score', 'pcos_screener', 'duedate_calculator', 'period_tracker', 'bmi_pcos_risk', 'diet_plan_request'].includes(type)) {
             return {
                 statusCode: 400,
                 headers,
@@ -203,7 +203,7 @@ export const handler = async function (event, context) {
         }
 
         // Server-side validation
-        const toolTypes = ['fertility_score', 'pcos_screener', 'duedate_calculator', 'period_tracker', 'bmi_pcos_risk'];
+        const toolTypes = ['fertility_score', 'pcos_screener', 'duedate_calculator', 'period_tracker', 'bmi_pcos_risk', 'diet_plan_request'];
         const validationErrors = type === 'appointment'
             ? validateAppointment(data)
             : type === 'contact'
@@ -408,7 +408,7 @@ export const handler = async function (event, context) {
                 'Coupon Code': '',
                 'Submitted At': new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
             });
-        } else if (type === 'bmi_pcos_risk') {
+            } else if (type === 'bmi_pcos_risk') {
             let sheet = doc.sheetsByTitle['Appointments'];
             if (!sheet) {
                 sheet = await doc.addSheet({ title: 'Appointments', headerValues: ['Name', 'Phone Number', 'Email', 'Date', 'Time', 'Reason', 'Coupon Code', 'Submitted At'] });
@@ -426,6 +426,26 @@ export const handler = async function (event, context) {
                 Time: '',
                 Reason: `BMI: ${sanitize(data.bmi !== null && data.bmi !== undefined ? String(data.bmi) : '')} (${sanitize(data.bmiCategory || '')}) | PCOS Risk: ${sanitize(data.pcosRiskLevel || 'N/A')}`,
                 'Coupon Code': '',
+                'Submitted At': new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
+            });
+        } else if (type === 'diet_plan_request') {
+            let sheet = doc.sheetsByTitle['Appointments'];
+            if (!sheet) {
+                sheet = await doc.addSheet({ title: 'Appointments', headerValues: ['Name', 'Phone Number', 'Email', 'Date', 'Time', 'Reason', 'Coupon Code', 'Submitted At'] });
+            } else {
+                try { await sheet.loadHeaderRow(); } catch (e) {}
+                if (!sheet.headerValues || sheet.headerValues.length === 0) {
+                    await sheet.setHeaderRow(['Name', 'Phone Number', 'Email', 'Date', 'Time', 'Reason', 'Coupon Code', 'Submitted At']);
+                }
+            }
+            await sheet.addRow({
+                Name: sanitize(data.name),
+                'Phone Number': sanitize(data.phone),
+                Email: '',
+                Date: 'Diet Plan Request',
+                Time: '',
+                Reason: sanitize(data.planName || 'Diet Plan'),
+                'Coupon Code': sanitize(data.source || ''),
                 'Submitted At': new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
             });
         }
