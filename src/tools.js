@@ -1,10 +1,16 @@
 import './style.css'
+import './style-v2.css'
 import Alpine from 'alpinejs'
+import { healthToolEngine } from './health-tools.js'
 
 window.Alpine = Alpine
 
 document.addEventListener('alpine:init', () => {
-    Alpine.data('toolsData', () => ({
+    // The config-driven tools (see health-tool-defs.js) live alongside the
+    // hand-built ones below and share the PDF + lead helpers. They are merged
+    // with defineProperties rather than object spread, because spreading would
+    // evaluate the engine's getters once and freeze them as static values.
+    Alpine.data('toolsData', () => Object.defineProperties({
         activeTool: null,
         mobileMenuOpen: false,
 
@@ -1229,7 +1235,7 @@ document.addEventListener('alpine:init', () => {
             d.patientTouched = { name: false, phone: false, height: false, weight: false, diabetic: false, dietType: false }
             window.scrollTo({ top: 0, behavior: 'smooth' })
         },
-    }))
+    }, Object.getOwnPropertyDescriptors(healthToolEngine())))
 })
 
 Alpine.start()

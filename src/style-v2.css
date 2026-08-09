@@ -1,0 +1,514 @@
+/* ============================================================================
+   WARM & HUMAN THEME
+   ----------------------------------------------------------------------------
+   The site's visual identity. Everything is scoped to [data-theme="warm"],
+   which is set on <html> across all 19 pages.
+
+   The scoping is kept deliberately: removing the attribute from a page drops it
+   back to the previous look instantly, with no other change. That makes this a
+   one-attribute rollback rather than a revert.
+
+   The markup leans on raw Tailwind colour utilities (slate/teal/rose), so those
+   scales are retinted inside the themed subtree instead of rewriting the class
+   names across every page.
+   ========================================================================== */
+
+[data-theme='warm'] {
+    /* Sage-teal — the brand colour, deepened and desaturated */
+    --w-teal-50: #eef6f4;
+    --w-teal-100: #d7eae6;
+    --w-teal-200: #b2d6cf;
+    --w-teal-300: #82bab0;
+    --w-teal-400: #4e9b8f;
+    --w-teal-500: #2f8175;
+    --w-teal-600: #216b61;
+    --w-teal-700: #1a554e;
+    --w-teal-800: #164540;
+    --w-teal-900: #123834;
+
+    /* Warm blush — the accent, softer and less alarming than rose-500 */
+    --w-rose-50: #fdf4f2;
+    --w-rose-100: #fae6e2;
+    --w-rose-200: #f4cec8;
+    --w-rose-300: #ebaba3;
+    --w-rose-400: #de877f;
+    --w-rose-500: #ce6a63;
+    --w-rose-600: #b45450;
+    --w-rose-700: #94433f;
+
+    /* Warm neutrals — replaces cool slate everywhere */
+    --w-n-50: #faf7f3;
+    --w-n-100: #f2eee8;
+    --w-n-200: #e5dfd7;
+    --w-n-300: #cdc6bc;
+    --w-n-400: #8d857b;
+    --w-n-500: #726b62; /* darkened so muted body text clears WCAG AA on cream */
+    --w-n-600: #5c564e;
+    --w-n-700: #46413a;
+    --w-n-800: #2e2a25;
+    --w-n-900: #201d19;
+
+    /* Soft, warm-tinted elevation instead of neutral grey shadow */
+    --w-shadow-sm: 0 1px 2px rgba(32, 29, 25, .04), 0 1px 3px rgba(47, 129, 117, .05);
+    --w-shadow: 0 2px 6px rgba(32, 29, 25, .05), 0 6px 16px rgba(47, 129, 117, .07);
+    --w-shadow-lg: 0 4px 12px rgba(32, 29, 25, .06), 0 16px 36px rgba(47, 129, 117, .10);
+    --w-shadow-xl: 0 8px 20px rgba(32, 29, 25, .07), 0 28px 60px rgba(47, 129, 117, .13);
+}
+
+/* ---------------------------------------------------------------------------
+   1. Page ground
+   ------------------------------------------------------------------------ */
+[data-theme='warm'] body {
+    background-color: var(--w-n-50);
+    color: var(--w-n-700);
+}
+
+[data-theme='warm'] *:focus-visible {
+    outline: 2px solid var(--w-teal-500);
+    outline-offset: 2px;
+}
+
+[data-theme='warm'] ::selection {
+    background: var(--w-teal-100);
+    color: var(--w-teal-900);
+}
+
+/* ---------------------------------------------------------------------------
+   2. Neutral scale remap  (slate -> warm sage-grey)
+   ------------------------------------------------------------------------ */
+[data-theme='warm'] .bg-white { background-color: #fffdfa; }
+
+[data-theme='warm'] .bg-slate-50 { background-color: var(--w-n-50); }
+[data-theme='warm'] .bg-slate-100 { background-color: var(--w-n-100); }
+[data-theme='warm'] .bg-slate-200 { background-color: var(--w-n-200); }
+[data-theme='warm'] .bg-slate-800 { background-color: var(--w-n-800); }
+[data-theme='warm'] .bg-slate-900 { background-color: var(--w-n-900); }
+[data-theme='warm'] .hover\:bg-slate-50:hover { background-color: var(--w-n-100); }
+[data-theme='warm'] .hover\:bg-slate-200:hover { background-color: var(--w-n-200); }
+
+[data-theme='warm'] .text-slate-300 { color: var(--w-n-300); }
+/* slate-400 is used for small helper text ("(Optional)", hints), which failed
+   contrast in the original. Mapped a step darker so it passes AA. */
+[data-theme='warm'] .text-slate-400 { color: var(--w-n-500); }
+[data-theme='warm'] .text-slate-500 { color: var(--w-n-500); }
+[data-theme='warm'] .text-slate-600 { color: var(--w-n-600); }
+[data-theme='warm'] .text-slate-700 { color: var(--w-n-700); }
+[data-theme='warm'] .text-slate-800 { color: var(--w-n-800); }
+[data-theme='warm'] .text-slate-900 { color: var(--w-n-900); }
+[data-theme='warm'] .hover\:text-slate-600:hover { color: var(--w-n-600); }
+[data-theme='warm'] .hover\:text-slate-700:hover { color: var(--w-n-700); }
+[data-theme='warm'] .hover\:text-slate-800:hover { color: var(--w-n-800); }
+
+[data-theme='warm'] .border-slate-100 { border-color: var(--w-n-100); }
+[data-theme='warm'] .border-slate-200 { border-color: var(--w-n-200); }
+[data-theme='warm'] .border-slate-300 { border-color: var(--w-n-300); }
+[data-theme='warm'] .border-slate-800 { border-color: #3b352e; }
+[data-theme='warm'] .hover\:border-slate-300:hover { border-color: var(--w-n-300); }
+[data-theme='warm'] .divide-slate-100 > * + * { border-color: var(--w-n-100); }
+
+/* Gradient overrides deliberately set ONLY their own variable. Touching
+   --tw-gradient-to inside a from-* rule would clobber whatever the paired to-*
+   utility set, and the gradient would fade to transparent. */
+[data-theme='warm'] .from-slate-900 { --tw-gradient-from: var(--w-n-900) var(--tw-gradient-from-position); }
+[data-theme='warm'] .to-slate-800 { --tw-gradient-to: var(--w-n-800) var(--tw-gradient-to-position); }
+
+/* ---------------------------------------------------------------------------
+   3. Brand scale remap  (teal -> deep sage)
+   ------------------------------------------------------------------------ */
+[data-theme='warm'] .bg-teal-50 { background-color: var(--w-teal-50); }
+[data-theme='warm'] .bg-teal-100 { background-color: var(--w-teal-100); }
+[data-theme='warm'] .bg-teal-400 { background-color: var(--w-teal-400); }
+[data-theme='warm'] .bg-teal-500 { background-color: var(--w-teal-500); }
+[data-theme='warm'] .bg-teal-700 { background-color: var(--w-teal-700); }
+[data-theme='warm'] .hover\:bg-teal-50:hover { background-color: var(--w-teal-50); }
+[data-theme='warm'] .hover\:bg-teal-700:hover { background-color: var(--w-teal-700); }
+[data-theme='warm'] .group:hover .group-hover\:bg-teal-500 { background-color: var(--w-teal-500); }
+
+[data-theme='warm'] .text-teal-50 { color: var(--w-teal-50); }
+[data-theme='warm'] .text-teal-100 { color: var(--w-teal-100); }
+[data-theme='warm'] .text-teal-200 { color: var(--w-teal-200); }
+[data-theme='warm'] .text-teal-400 { color: var(--w-teal-400); }
+[data-theme='warm'] .text-teal-500 { color: var(--w-teal-500); }
+[data-theme='warm'] .text-teal-600 { color: var(--w-teal-600); }
+[data-theme='warm'] .text-teal-700 { color: var(--w-teal-700); }
+[data-theme='warm'] .hover\:text-teal-200:hover { color: var(--w-teal-200); }
+[data-theme='warm'] .hover\:text-teal-400:hover { color: var(--w-teal-400); }
+[data-theme='warm'] .hover\:text-teal-700:hover { color: var(--w-teal-700); }
+
+[data-theme='warm'] .border-teal-100 { border-color: var(--w-teal-100); }
+[data-theme='warm'] .border-teal-200 { border-color: var(--w-teal-200); }
+[data-theme='warm'] .hover\:border-teal-300:hover { border-color: var(--w-teal-300); }
+
+[data-theme='warm'] .from-teal-50 { --tw-gradient-from: var(--w-teal-50) var(--tw-gradient-from-position); }
+[data-theme='warm'] .to-teal-400 { --tw-gradient-to: var(--w-teal-400) var(--tw-gradient-to-position); }
+[data-theme='warm'] .to-teal-500 { --tw-gradient-to: var(--w-teal-500) var(--tw-gradient-to-position); }
+[data-theme='warm'] .to-teal-600 { --tw-gradient-to: var(--w-teal-600) var(--tw-gradient-to-position); }
+[data-theme='warm'] .via-teal-400 { --tw-gradient-via: var(--w-teal-400); }
+
+/* Tailwind theme tokens (primary / accent / dark) */
+[data-theme='warm'] .bg-primary { background-color: var(--w-teal-600); }
+[data-theme='warm'] .text-primary { color: var(--w-teal-600); }
+[data-theme='warm'] .border-primary { border-color: var(--w-teal-600); }
+[data-theme='warm'] .from-primary { --tw-gradient-from: var(--w-teal-600) var(--tw-gradient-from-position); }
+[data-theme='warm'] .to-primary { --tw-gradient-to: var(--w-teal-600) var(--tw-gradient-to-position); }
+[data-theme='warm'] .hover\:text-primary:hover { color: var(--w-teal-600); }
+[data-theme='warm'] .bg-accent { background-color: var(--w-teal-50); }
+[data-theme='warm'] .bg-dark { background-color: var(--w-n-900); }
+[data-theme='warm'] .text-dark { color: var(--w-n-900); }
+
+/* ---------------------------------------------------------------------------
+   4. Accent scale remap  (rose -> warm blush)
+   ------------------------------------------------------------------------ */
+[data-theme='warm'] .bg-rose-50 { background-color: var(--w-rose-50); }
+[data-theme='warm'] .bg-rose-100 { background-color: var(--w-rose-100); }
+[data-theme='warm'] .bg-rose-500 { background-color: var(--w-rose-500); }
+[data-theme='warm'] .text-rose-400 { color: var(--w-rose-400); }
+[data-theme='warm'] .text-rose-500 { color: var(--w-rose-500); }
+[data-theme='warm'] .text-rose-600 { color: var(--w-rose-600); }
+[data-theme='warm'] .hover\:text-rose-700:hover { color: var(--w-rose-700); }
+[data-theme='warm'] .border-rose-100 { border-color: var(--w-rose-100); }
+[data-theme='warm'] .hover\:border-rose-300:hover { border-color: var(--w-rose-300); }
+[data-theme='warm'] .from-rose-400 { --tw-gradient-from: var(--w-rose-400) var(--tw-gradient-from-position); }
+[data-theme='warm'] .to-rose-50 { --tw-gradient-to: var(--w-rose-50) var(--tw-gradient-to-position); }
+[data-theme='warm'] .to-rose-500 { --tw-gradient-to: var(--w-rose-500) var(--tw-gradient-to-position); }
+[data-theme='warm'] .bg-secondary { background-color: var(--w-rose-500); }
+[data-theme='warm'] .text-secondary { color: var(--w-rose-500); }
+[data-theme='warm'] .group:hover .group-hover\:bg-rose-500 { background-color: var(--w-rose-500); }
+
+/* ---------------------------------------------------------------------------
+   5. Typography — softer, more generous, less shouty
+   ------------------------------------------------------------------------ */
+[data-theme='warm'] h1,
+[data-theme='warm'] h2,
+[data-theme='warm'] h3 {
+    letter-spacing: -0.022em;
+    color: var(--w-n-900);
+}
+
+[data-theme='warm'] h1 { line-height: 1.08; }
+[data-theme='warm'] h2 { line-height: 1.15; }
+
+[data-theme='warm'] p { line-height: 1.7; }
+
+/* Kept saturated end-to-end — a pale final stop reads as washed-out grey at
+   display sizes rather than as a gradient. */
+[data-theme='warm'] .text-gradient {
+    background-image: linear-gradient(95deg, var(--w-teal-800) 0%, var(--w-teal-500) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Small caps eyebrow used above section headings */
+[data-theme='warm'] .v2-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: .75rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--w-teal-600);
+}
+
+/* ---------------------------------------------------------------------------
+   6. Components
+   ------------------------------------------------------------------------ */
+[data-theme='warm'] .btn-primary {
+    background-image: none;
+    background-color: var(--w-teal-600);
+    border-radius: 9999px;
+    padding: .75rem 1.75rem;
+    font-weight: 600;
+    color: #fff;
+    box-shadow: 0 2px 6px rgba(26, 85, 78, .18), 0 10px 24px rgba(33, 107, 97, .22);
+    transition: transform .25s cubic-bezier(.2, .8, .2, 1), box-shadow .25s, background-color .25s;
+}
+
+[data-theme='warm'] .btn-primary:hover {
+    background-color: var(--w-teal-700);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(26, 85, 78, .2), 0 18px 38px rgba(33, 107, 97, .28);
+}
+
+[data-theme='warm'] .btn-primary:active { transform: translateY(0) scale(.98); }
+
+[data-theme='warm'] .btn-secondary {
+    background-color: #fffdfa;
+    color: var(--w-n-700);
+    border: 1px solid var(--w-n-200);
+    border-radius: 9999px;
+    box-shadow: var(--w-shadow-sm);
+    transition: all .25s cubic-bezier(.2, .8, .2, 1);
+}
+
+[data-theme='warm'] .btn-secondary:hover {
+    background-color: #fff;
+    border-color: var(--w-teal-300);
+    color: var(--w-teal-700);
+    transform: translateY(-2px);
+    box-shadow: var(--w-shadow);
+}
+
+[data-theme='warm'] .card,
+[data-theme='warm'] .glass-card {
+    background-color: #fffdfa;
+    border: 1px solid var(--w-n-200);
+    border-radius: 1.25rem;
+    box-shadow: var(--w-shadow-sm);
+    transition: transform .3s cubic-bezier(.2, .8, .2, 1), box-shadow .3s, border-color .3s;
+}
+
+[data-theme='warm'] .card:hover,
+[data-theme='warm'] .glass-card:hover {
+    border-color: var(--w-teal-200);
+    box-shadow: var(--w-shadow-lg);
+}
+
+[data-theme='warm'] .glass-panel {
+    background-color: rgba(255, 253, 250, .82);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, .6);
+    box-shadow: var(--w-shadow-lg);
+}
+
+[data-theme='warm'] .form-input {
+    background-color: #fffdfa;
+    border: 1px solid var(--w-n-200);
+    border-radius: .9rem;
+    color: var(--w-n-800);
+    transition: border-color .2s, box-shadow .2s, background-color .2s;
+}
+
+[data-theme='warm'] .form-input::placeholder { color: var(--w-n-400); }
+
+[data-theme='warm'] .form-input:focus {
+    background-color: #fff;
+    border-color: var(--w-teal-400);
+    box-shadow: 0 0 0 4px rgba(47, 129, 117, .12);
+    outline: none;
+}
+
+[data-theme='warm'] .nav-link { color: var(--w-n-600); }
+[data-theme='warm'] .nav-link:hover { color: var(--w-teal-600); }
+[data-theme='warm'] .nav-link::after { background-color: var(--w-teal-500); }
+[data-theme='warm'] .nav-link.active { color: var(--w-teal-700); }
+
+[data-theme='warm'] .fixed-nav {
+    background-color: rgba(250, 247, 243, .88);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--w-n-200);
+    box-shadow: none;
+}
+
+/* Soft ambient blobs used behind hero sections */
+[data-theme='warm'] .v2-blob {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(64px);
+    pointer-events: none;
+}
+
+[data-theme='warm'] .v2-blob-teal { background: rgba(130, 186, 176, .28); }
+[data-theme='warm'] .v2-blob-rose { background: rgba(235, 171, 163, .26); }
+[data-theme='warm'] .v2-blob-cream { background: rgba(242, 238, 232, .7); }
+
+/* A softly tinted band to separate alternating sections */
+[data-theme='warm'] .v2-band {
+    background: linear-gradient(180deg, var(--w-n-50) 0%, #fffdfa 45%, var(--w-n-50) 100%);
+}
+
+/* Pill / chip used for credentials and tags */
+[data-theme='warm'] .v2-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    padding: .45rem .9rem;
+    border-radius: 9999px;
+    background-color: #fffdfa;
+    border: 1px solid var(--w-n-200);
+    font-size: .8125rem;
+    font-weight: 600;
+    color: var(--w-n-700);
+    box-shadow: var(--w-shadow-sm);
+}
+
+[data-theme='warm'] .v2-chip i { color: var(--w-teal-500); }
+
+/* ---------------------------------------------------------------------------
+   6b. Structural polish
+   Applied by targeting the shapes the markup already uses, so the redesign
+   reaches all 19 pages without forking their HTML.
+   ------------------------------------------------------------------------ */
+
+/* Icon tiles — soft tinted square with a hairline ring instead of a flat chip */
+[data-theme='warm'] .bg-teal-50.rounded-lg,
+[data-theme='warm'] .bg-teal-50.rounded-xl,
+[data-theme='warm'] .bg-teal-50.rounded-2xl,
+[data-theme='warm'] .bg-primary\/10.rounded-xl,
+[data-theme='warm'] .bg-primary\/10.rounded-2xl {
+    background-color: var(--w-teal-50);
+    box-shadow: inset 0 0 0 1px var(--w-teal-100);
+}
+
+/* Photography — warm frame, softer corners, gentle depth */
+[data-theme='warm'] img.rounded-2xl,
+[data-theme='warm'] img.rounded-3xl,
+[data-theme='warm'] .rounded-2xl > img,
+[data-theme='warm'] .rounded-3xl > img {
+    border-radius: 1.4rem;
+}
+
+[data-theme='warm'] .shadow-2xl { box-shadow: var(--w-shadow-xl); }
+[data-theme='warm'] .shadow-xl { box-shadow: var(--w-shadow-lg); }
+[data-theme='warm'] .shadow-lg { box-shadow: var(--w-shadow); }
+[data-theme='warm'] .shadow-sm,
+[data-theme='warm'] .shadow-md { box-shadow: var(--w-shadow-sm); }
+
+/* The section eyebrows already in the markup ("WHY US", "OUR SERVICES") */
+[data-theme='warm'] .uppercase.tracking-wider,
+[data-theme='warm'] .uppercase.tracking-widest {
+    letter-spacing: .14em;
+    font-weight: 700;
+}
+
+/* Rounded pills used for credentials and tags */
+[data-theme='warm'] .rounded-full.border {
+    border-color: var(--w-n-200);
+}
+
+/* Dark sections (footer, CTA bands) — warm charcoal rather than blue-black */
+[data-theme='warm'] .bg-slate-800,
+[data-theme='warm'] .bg-slate-900 {
+    color: var(--w-n-200);
+}
+
+[data-theme='warm'] .bg-slate-800 h1,
+[data-theme='warm'] .bg-slate-800 h2,
+[data-theme='warm'] .bg-slate-800 h3,
+[data-theme='warm'] .bg-slate-900 h1,
+[data-theme='warm'] .bg-slate-900 h2,
+[data-theme='warm'] .bg-slate-900 h3 {
+    color: #fffdfa;
+}
+
+/* The brand teal is tuned for light backgrounds; on the dark footer it needs
+   to step up several stops to stay readable. */
+[data-theme='warm'] .bg-slate-800 .text-primary,
+[data-theme='warm'] .bg-slate-900 .text-primary,
+[data-theme='warm'] .bg-slate-800 .text-teal-600,
+[data-theme='warm'] .bg-slate-900 .text-teal-600,
+[data-theme='warm'] .bg-slate-800 .text-teal-500,
+[data-theme='warm'] .bg-slate-900 .text-teal-500 {
+    color: var(--w-teal-300);
+}
+
+[data-theme='warm'] .bg-slate-800 .text-slate-400,
+[data-theme='warm'] .bg-slate-900 .text-slate-400 { color: var(--w-n-300); }
+
+[data-theme='warm'] .bg-slate-800 .hover\:text-primary:hover,
+[data-theme='warm'] .bg-slate-900 .hover\:text-primary:hover { color: var(--w-teal-200); }
+
+/* Tables and dividers pick up the warm neutrals */
+[data-theme='warm'] hr { border-color: var(--w-n-200); }
+
+/* Small print inside dark sections must go lighter, not darker */
+[data-theme='warm'] .bg-slate-800 .text-slate-500,
+[data-theme='warm'] .bg-slate-900 .text-slate-500,
+[data-theme='warm'] .bg-slate-800 .text-slate-600,
+[data-theme='warm'] .bg-slate-900 .text-slate-600 { color: var(--w-n-300); }
+
+/* The hero photo caption was white text on a light frosted panel, which is
+   unreadable over a pale photograph. Turned into a dark scrim instead. */
+[data-theme='warm'] .backdrop-blur-md.bg-white\/10 {
+    background-color: rgba(32, 29, 25, .52);
+    border-color: rgba(255, 255, 255, .16);
+}
+
+[data-theme='warm'] .from-slate-900\/40 { --tw-gradient-from: rgba(32, 29, 25, .6) var(--tw-gradient-from-position); }
+
+/* WhatsApp green fails contrast with white text at its brand value. Stepped to
+   WhatsApp's own darker green, which passes AA and suits the sage palette. */
+[data-theme='warm'] .bg-green-500 { background-color: #0e7f73; }
+[data-theme='warm'] .hover\:bg-green-600:hover { background-color: #0b675d; }
+[data-theme='warm'] .text-green-600 { color: #15803d; }
+[data-theme='warm'] .text-green-500 { color: #15803d; }
+[data-theme='warm'] .shadow-green-500\/30 { --tw-shadow-color: rgba(14, 127, 115, .3); }
+
+/* Contrast-safe accents.
+   The -500 shades read well as fills but fail AA as small text on cream, and
+   as backgrounds behind white 12px chip labels. Each is stepped to the darkest
+   value that still reads as the same hue. */
+[data-theme='warm'] .text-rose-500 { color: var(--w-rose-600); }
+[data-theme='warm'] .text-red-500,
+[data-theme='warm'] .text-red-600 { color: #b91c1c; }
+[data-theme='warm'] .text-amber-500,
+[data-theme='warm'] .text-amber-600 { color: #b45309; }
+[data-theme='warm'] .text-orange-500 { color: #c2410c; }
+[data-theme='warm'] .text-emerald-500,
+[data-theme='warm'] .text-emerald-600 { color: #047857; }
+[data-theme='warm'] .text-purple-500 { color: #7e22ce; }
+[data-theme='warm'] .text-violet-500 { color: #6d28d9; }
+[data-theme='warm'] .text-pink-500 { color: #be185d; }
+[data-theme='warm'] .text-cyan-500 { color: #0e7490; }
+[data-theme='warm'] .text-sky-500 { color: #0369a1; }
+[data-theme='warm'] .text-indigo-500 { color: #4338ca; }
+
+/* Chip / badge fills that carry white text */
+[data-theme='warm'] .bg-secondary { background-color: var(--w-rose-600); }
+[data-theme='warm'] .bg-rose-500 { background-color: var(--w-rose-600); }
+[data-theme='warm'] .bg-amber-500 { background-color: #b45309; }
+[data-theme='warm'] .bg-emerald-500 { background-color: #047857; }
+[data-theme='warm'] .bg-purple-500 { background-color: #7e22ce; }
+[data-theme='warm'] .bg-orange-500 { background-color: #c2410c; }
+[data-theme='warm'] .bg-blue-500 { background-color: #1d4ed8; }
+[data-theme='warm'] .bg-pink-500 { background-color: #be185d; }
+
+/* The floating call pill collides with the hero CTAs on desktop, where the
+   number is already in the top strip, the nav and the footer. Keep it for
+   mobile, where it earns its place. */
+@media (min-width: 1024px) {
+    [data-theme='warm'] a.fixed[href^='tel:'] { display: none; }
+}
+
+/* ---------------------------------------------------------------------------
+   7. Motion — gentle, never bouncy
+   ------------------------------------------------------------------------ */
+@keyframes v2-rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+[data-theme='warm'] .v2-rise { animation: v2-rise .6s cubic-bezier(.2, .8, .2, 1) both; }
+[data-theme='warm'] .v2-delay-1 { animation-delay: .08s; }
+[data-theme='warm'] .v2-delay-2 { animation-delay: .16s; }
+[data-theme='warm'] .v2-delay-3 { animation-delay: .24s; }
+
+[data-theme='warm'] .animate-pulse-glow {
+    animation: none;
+    box-shadow: 0 10px 30px rgba(33, 107, 97, .22);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    [data-theme='warm'] .v2-rise { animation: none; }
+    [data-theme='warm'] * { transition-duration: .01ms !important; }
+}
+
+/* ---------------------------------------------------------------------------
+   8. Mobile refinements
+   ------------------------------------------------------------------------ */
+@media (max-width: 640px) {
+    [data-theme='warm'] h1 { letter-spacing: -0.03em; }
+
+    /* Comfortable tap targets throughout */
+    [data-theme='warm'] .btn-primary,
+    [data-theme='warm'] .btn-secondary { min-height: 48px; }
+
+    [data-theme='warm'] .form-input {
+        min-height: 48px;
+        font-size: 16px; /* stops iOS zooming the page on focus */
+    }
+
+    [data-theme='warm'] .card,
+    [data-theme='warm'] .glass-card { border-radius: 1rem; }
+}
