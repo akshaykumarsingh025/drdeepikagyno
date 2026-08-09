@@ -194,7 +194,7 @@ export const handler = async function (event, context) {
         }
 
         // Validate type
-        if (!type || !['appointment', 'contact', 'quick_appointment', 'fertility_score', 'pcos_screener', 'duedate_calculator', 'period_tracker', 'bmi_pcos_risk', 'diet_plan_request'].includes(type)) {
+        if (!type || !['appointment', 'contact', 'quick_appointment', 'fertility_score', 'pcos_screener', 'duedate_calculator', 'period_tracker', 'bmi_pcos_risk', 'diet_plan_request', 'health_tool'].includes(type)) {
             return {
                 statusCode: 400,
                 headers,
@@ -203,7 +203,7 @@ export const handler = async function (event, context) {
         }
 
         // Server-side validation
-        const toolTypes = ['fertility_score', 'pcos_screener', 'duedate_calculator', 'period_tracker', 'bmi_pcos_risk', 'diet_plan_request'];
+        const toolTypes = ['fertility_score', 'pcos_screener', 'duedate_calculator', 'period_tracker', 'bmi_pcos_risk', 'diet_plan_request', 'health_tool'];
         const validationErrors = type === 'appointment'
             ? validateAppointment(data)
             : type === 'contact'
@@ -449,6 +449,29 @@ export const handler = async function (event, context) {
                 Time: '',
                 Reason: sanitize(data.planName || 'Diet Plan') + (conditions ? ' - ' + conditions : ''),
                 'Coupon Code': sanitize(data.source || ''),
+                'Submitted At': new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
+            });
+        } else if (type === 'health_tool') {
+            // Single branch for every config-driven tool in health-tool-defs.js.
+            // The tool identifies itself via toolName; the scored outcome
+            // arrives pre-summarised in `summary`.
+            let sheet = doc.sheetsByTitle['Appointments'];
+            if (!sheet) {
+                sheet = await doc.addSheet({ title: 'Appointments', headerValues: ['Name', 'Phone Number', 'Email', 'Date', 'Time', 'Reason', 'Coupon Code', 'Submitted At'] });
+            } else {
+                try { await sheet.loadHeaderRow(); } catch (e) {}
+                if (!sheet.headerValues || sheet.headerValues.length === 0) {
+                    await sheet.setHeaderRow(['Name', 'Phone Number', 'Email', 'Date', 'Time', 'Reason', 'Coupon Code', 'Submitted At']);
+                }
+            }
+            await sheet.addRow({
+                Name: sanitize(data.name),
+                'Phone Number': sanitize(data.phone),
+                Email: '',
+                Date: sanitize(data.toolName || 'Health Tool').slice(0, 60),
+                Time: '',
+                Reason: sanitize(data.summary || '').slice(0, 500),
+                'Coupon Code': sanitize(data.toolId || ''),
                 'Submitted At': new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
             });
         }
