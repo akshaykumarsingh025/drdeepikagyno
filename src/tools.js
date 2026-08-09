@@ -1,4 +1,5 @@
 import './style.css'
+import './style-v2.css'
 import Alpine from 'alpinejs'
 import { healthToolEngine } from './health-tools.js'
 

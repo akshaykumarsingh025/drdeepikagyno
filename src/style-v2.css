@@ -1,14 +1,16 @@
 /* ============================================================================
-   WARM & HUMAN THEME  —  redesign preview
+   WARM & HUMAN THEME
    ----------------------------------------------------------------------------
-   Everything here is scoped to [data-theme="warm"], which is set on <html> in
-   the /redesign/ pages only. The original site shares the same CSS bundle and
-   is deliberately left untouched so the two can be compared side by side.
+   The site's visual identity. Everything is scoped to [data-theme="warm"],
+   which is set on <html> across all 19 pages.
 
-   The site's markup leans on raw Tailwind colour utilities (slate/teal/rose),
-   so rather than editing 19 pages by hand we retint those scales inside the
-   themed subtree. Structural changes then only need to happen where a section
-   genuinely benefits from new markup.
+   The scoping is kept deliberately: removing the attribute from a page drops it
+   back to the previous look instantly, with no other change. That makes this a
+   one-attribute rollback rather than a revert.
+
+   The markup leans on raw Tailwind colour utilities (slate/teal/rose), so those
+   scales are retinted inside the themed subtree instead of rewriting the class
+   names across every page.
    ========================================================================== */
 
 [data-theme='warm'] {
