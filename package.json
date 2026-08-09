@@ -6,6 +6,7 @@
     "scripts": {
         "dev": "netlify dev",
         "dev:vite": "vite",
+        "redesign": "node scripts/build-redesign.js",
         "build": "vite build",
         "preview": "vite preview"
     },
